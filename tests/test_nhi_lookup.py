@@ -1,7 +1,9 @@
 import csv
 import importlib.util
+import json
 import tempfile
 import unittest
+import zipfile
 from datetime import date
 from pathlib import Path
 
@@ -102,6 +104,55 @@ class NhiLookupTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             UPDATE_MODULE.checked_url("https://example.com/items.csv")
 
+    def test_tfda_official_download_url_is_allowed(self):
+        url = "https://data.fda.gov.tw/data/opendata/export/37/json"
+        self.assertEqual(UPDATE_MODULE.checked_url(url), url)
+
+    def test_tfda_zip_is_deduplicated_and_cancelled_license_is_excluded(self):
+        rows = [
+            {
+                "許可證字號": "衛部菌疫輸字第001245號",
+                "註銷狀態": "",
+                "中文品名": "衛癌瑪注射液",
+                "英文品名": "Vegzelma",
+                "主成分略述": "BEVACIZUMAB",
+                "劑型": "注射液劑",
+                "有效日期": "2029/01/09",
+            },
+            {
+                "許可證字號": "衛部菌疫輸字第001245號",
+                "註銷狀態": "",
+                "中文品名": "衛癌瑪注射液",
+                "英文品名": "Vegzelma",
+                "主成分略述": "BEVACIZUMAB",
+                "劑型": "注射液劑",
+                "有效日期": "2029/01/09",
+            },
+            {
+                "許可證字號": "衛部藥製字第999999號",
+                "註銷狀態": "已註銷",
+                "中文品名": "停用品項",
+                "英文品名": "CANCELLED",
+                "主成分略述": "TEST",
+                "劑型": "錠劑",
+                "有效日期": "2020/01/01",
+            },
+        ]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source = Path(temp_dir) / "tfda.zip"
+            with zipfile.ZipFile(source, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+                archive.writestr("37.json", json.dumps(rows, ensure_ascii=False))
+            original_minimum = MODULE.MIN_TFDA_RECORDS
+            MODULE.MIN_TFDA_RECORDS = 1
+            try:
+                labels, stats = MODULE.load_tfda_labels(source)
+            finally:
+                MODULE.MIN_TFDA_RECORDS = original_minimum
+        self.assertEqual([item["license"] for item in labels], ["衛部菌疫輸字第001245號"])
+        self.assertIn("%E8%A1%9B%E9%83%A8%E8%8F%8C%E7%96%AB%E8%BC%B8%E5%AD%97", labels[0]["url"])
+        self.assertEqual(stats["duplicate"], 1)
+        self.assertEqual(stats["cancelled"], 1)
+
     def test_official_download_filename_version_is_normalized(self):
         match = UPDATE_MODULE.re.search(
             r"(?<!\d)(\d{3})(\d{2})(\d{2})(?!\d)",
@@ -114,6 +165,9 @@ class NhiLookupTest(unittest.TestCase):
         template = MODULE.DEFAULT_TEMPLATE.read_text(encoding="utf-8")
         self.assertIn("logicalRuleBlocks", template)
         self.assertIn("ruleUrlFor", template)
+        self.assertIn("__LABELS_JSON__", template)
+        self.assertIn("TFDA 電子仿單", template)
+        self.assertIn("rule-details", template)
         self.assertNotIn("mark-bio", template)
         self.assertNotIn("<mark", template)
 

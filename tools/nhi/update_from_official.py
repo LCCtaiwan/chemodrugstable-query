@@ -23,7 +23,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 BUILD_SCRIPT = HERE / "build_nhi_lookup.py"
-ALLOWED_HOSTS = {"www.nhi.gov.tw", "info.nhi.gov.tw"}
+ALLOWED_HOSTS = {"www.nhi.gov.tw", "info.nhi.gov.tw", "data.fda.gov.tw"}
 USER_AGENT = "ChemoDrugStable-NHI-Updater/1.0 (+GitHub-Actions)"
 
 
@@ -155,6 +155,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--as-of", help="有效品項基準日 YYYY-MM-DD；預設為執行當日")
     parser.add_argument("--items-url", default=None)
+    parser.add_argument("--tfda-licenses-url", default=None)
     parser.add_argument("--rules-page", default=None)
     parser.add_argument("--rules-pdf-url", help="指定健保署整份給付規定 PDF；排程建議使用")
     parser.add_argument("--expected-rules-version", help="預期規定版本，例如 115.7.23；不符時停止發布")
@@ -165,10 +166,12 @@ def main() -> None:
     args = parse_args()
     builder = load_builder()
     items_url = args.items_url or builder.OFFICIAL_ITEMS_URL
+    tfda_licenses_url = args.tfda_licenses_url or builder.OFFICIAL_TFDA_LICENSES_URL
     rules_page = args.rules_page or builder.OFFICIAL_RULES_PAGE
     with tempfile.TemporaryDirectory(prefix="nhi-lookup-") as temp_dir:
         temp = Path(temp_dir)
         csv_path = temp / "items.csv"
+        tfda_path = temp / "tfda_licenses.zip"
         pdf_path = temp / "rules.pdf"
         if args.rules_pdf_url:
             pdf_url = checked_url(args.rules_pdf_url)
@@ -179,6 +182,7 @@ def main() -> None:
                 page_path.read_text(encoding="utf-8", errors="replace"), rules_page
             )
         download(items_url, csv_path)
+        download(tfda_licenses_url, tfda_path)
         final_pdf_url, pdf_source_name = download(pdf_url, pdf_path)
         version = detect_rules_version(pdf_path, pdf_source_name)
         if args.expected_rules_version and version != args.expected_rules_version:
@@ -187,6 +191,7 @@ def main() -> None:
             )
         build_args = argparse.Namespace(
             csv=csv_path,
+            tfda_licenses=tfda_path,
             rules_pdf=pdf_path,
             rules_text=None,
             rules_version=version,
@@ -195,7 +200,12 @@ def main() -> None:
             output=args.output,
         )
         report = builder.build(build_args)
-        report["sources"] = {"items": items_url, "rulesPage": rules_page, "rulesPdf": final_pdf_url}
+        report["sources"] = {
+            "items": items_url,
+            "tfdaLicenses": tfda_licenses_url,
+            "rulesPage": rules_page,
+            "rulesPdf": final_pdf_url,
+        }
         version_file = args.output.with_name("data_version.json")
         version_file.write_text(
             json.dumps({"meta": report["meta"], "sources": report["sources"]}, ensure_ascii=False, indent=2),
