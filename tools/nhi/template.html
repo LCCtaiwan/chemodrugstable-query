@@ -101,7 +101,7 @@ function renderGroup(chapter,items){
   const ruleUrl=ruleUrlFor(items,chapter);
   const links=`<div class="links">${ruleUrl?`<a href="${esc(safeUrl(ruleUrl))}" target="_blank" rel="noopener">開啟健保署章節 PDF</a>`:''}<a href="${esc(META.officialItemSearch)}" target="_blank" rel="noopener">健保署即時品項查詢</a></div>`;
   const ruleBody=chapter
-    ? `<details class="rule-details"><summary>展開健保給付條文${chapter?`（${esc(chapter)}）`:''}</summary><div class="rule-details-body">${rule?`<p class="rule-note">依條款層級重新排版；文字內容保留健保署原文。</p><div class="rule-text">${formatRuleText(rule.text)}</div>`:`<div class="rule-missing">此章節未能從整份規定精確解析，請直接開啟健保署官方章節。</div>`}${links}</div></details>`
+    ? `<details class="rule-details" open><summary>健保給付條文${chapter?`（${esc(chapter)}）`:''}</summary><div class="rule-details-body">${rule?`<p class="rule-note">依條款層級重新排版；文字內容保留健保署原文。</p><div class="rule-text">${formatRuleText(rule.text)}</div>`:`<div class="rule-missing">此章節未能從整份規定精確解析，請直接開啟健保署官方章節。</div>`}${links}</div></details>`
     : `<div class="rule-missing">未列特殊給付章節不等於沒有其他通則或申報限制，仍須依最新官方規定核對。</div>${links}`;
   return `<article class="group"><div class="group-head">${chapter?`<span class="chapter">${esc(chapter)}</span>`:''}<div><h2>${esc(title)}</h2><p>${items.length} 個符合品項</p></div></div><div class="rule">${ruleBody}</div><div class="items"><details><summary>查看對應健保品項（${items.length}）</summary>${itemTable(items)}</details></div></article>`;
 }

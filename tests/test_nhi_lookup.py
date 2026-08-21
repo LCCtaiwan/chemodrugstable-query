@@ -235,6 +235,7 @@ Pages: 422
         self.assertIn("__LABELS_JSON__", template)
         self.assertIn("TFDA 電子仿單", template)
         self.assertIn("rule-details", template)
+        self.assertIn('class="rule-details" open', template)
         self.assertNotIn("mark-bio", template)
         self.assertNotIn("<mark", template)
 
