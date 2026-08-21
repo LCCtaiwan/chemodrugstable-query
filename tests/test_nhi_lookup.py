@@ -110,6 +110,13 @@ class NhiLookupTest(unittest.TestCase):
         self.assertIsNotNone(match)
         self.assertEqual(UPDATE_MODULE.normalize_version_match(match.groups()), "115.7.23")
 
+    def test_template_uses_structural_layout_without_keyword_highlights(self):
+        template = MODULE.DEFAULT_TEMPLATE.read_text(encoding="utf-8")
+        self.assertIn("logicalRuleBlocks", template)
+        self.assertIn("ruleUrlFor", template)
+        self.assertNotIn("mark-bio", template)
+        self.assertNotIn("<mark", template)
+
 
 if __name__ == "__main__":
     unittest.main()
