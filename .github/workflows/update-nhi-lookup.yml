@@ -81,7 +81,10 @@ jobs:
           assert meta["rulesPdfPages"] >= 300, meta
           assert meta["rulesPdfBytes"] >= 2000000, meta
           assert len(meta["rulesPdfSha256"]) == 64, meta
-          assert meta["sourceVerification"] == "automatic-cross-check", meta
+          assert meta["rulesSource"] == "docx", meta
+          assert meta["rulesDocxBytes"] >= 2000000, meta
+          assert len(meta["rulesDocxSha256"]) == 64, meta
+          assert meta["sourceVerification"] == "word-primary-pdf-secondary", meta
           page = Path("_site/nhi/index.html").read_text()
           assert "Pemetrexed" in page
           assert "https://www.nhi.gov.tw/" in page
