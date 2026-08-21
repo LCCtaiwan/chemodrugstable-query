@@ -112,7 +112,7 @@ def normalize_version_match(match: tuple[str, str, str]) -> str:
 def detect_rules_version(pdf_path: Path, source_name: str = "") -> str:
     try:
         result = subprocess.run(
-            ["pdftotext", "-f", "1", "-l", "5", "-layout", str(pdf_path), "-"],
+            ["pdftotext", "-f", "1", "-l", "60", "-layout", str(pdf_path), "-"],
             check=True,
             capture_output=True,
             timeout=120,
@@ -138,7 +138,7 @@ def detect_rules_version(pdf_path: Path, source_name: str = "") -> str:
     )
     if versions:
         return normalize_version_match(versions[0])
-    raise RuntimeError("無法從給付規定 PDF 或官方下載檔名辨識版本日期")
+    raise RuntimeError("無法從給付規定 PDF 前 60 頁或官方下載檔名辨識版本日期")
 
 
 def load_builder():
