@@ -102,6 +102,14 @@ class NhiLookupTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             UPDATE_MODULE.checked_url("https://example.com/items.csv")
 
+    def test_official_download_filename_version_is_normalized(self):
+        match = UPDATE_MODULE.re.search(
+            r"(?<!\d)(\d{3})(\d{2})(\d{2})(?!\d)",
+            "attachment; filename*=UTF-8''完整給付規定1150723.pdf",
+        )
+        self.assertIsNotNone(match)
+        self.assertEqual(UPDATE_MODULE.normalize_version_match(match.groups()), "115.7.23")
+
 
 if __name__ == "__main__":
     unittest.main()
