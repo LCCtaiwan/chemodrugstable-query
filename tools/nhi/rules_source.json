@@ -1,6 +1,7 @@
 {
   "rulesPage": "https://www.nhi.gov.tw/ch/np-2508-1.html",
   "rulesPdf": "https://www.nhi.gov.tw/ch/dl-100717-e456d68a6e9d4085b4ab7a2c7e37296a-1.pdf",
-  "expectedVersion": "115.7.23",
-  "verifiedOn": "2026-08-21"
+  "rulesDocx": "https://www.nhi.gov.tw/ch/dl-100715-bf570bf75d5949b38d2370733a94f4d6-1.docx",
+  "previousVersionUrl": "https://lcctaiwan.github.io/chemodrugstable-query/nhi/data_version.json",
+  "verification": "自動比對健保署 Word 修改日期、PDF 內文日期、PDF 完整性及線上既有版本"
 }

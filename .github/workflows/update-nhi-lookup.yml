@@ -10,7 +10,7 @@ on:
       - "index.html"
       - ".nojekyll"
   schedule:
-    - cron: "17 18 * * 0"
+    - cron: "17 18 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,6 +24,8 @@ concurrency:
 
 jobs:
   build:
+    outputs:
+      ready: ${{ steps.source.outputs.ready }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -35,17 +37,36 @@ jobs:
       - name: Read verified official source
         run: |
           echo "RULES_PDF_URL=$(jq -r .rulesPdf tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
-          echo "RULES_VERSION=$(jq -r .expectedVersion tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
+          echo "RULES_DOCX_URL=$(jq -r .rulesDocx tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
+          echo "PREVIOUS_VERSION_URL=$(jq -r .previousVersionUrl tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
       - name: Download, clean and build
+        id: source
         run: |
-          mkdir -p _site/nhi
+          mkdir -p _site/nhi _status
           cp index.html .nojekyll _site/
           python3 tools/nhi/update_from_official.py \
             --output _site/nhi/index.html \
             --as-of "$(TZ=Asia/Taipei date +%F)" \
             --rules-pdf-url "$RULES_PDF_URL" \
-            --expected-rules-version "$RULES_VERSION"
+            --rules-docx-url "$RULES_DOCX_URL" \
+            --previous-version-url "$PREVIOUS_VERSION_URL" \
+            --status-file _status/source_status.json
+          STATUS=$(jq -r .status _status/source_status.json)
+          MESSAGE=$(jq -r .message _status/source_status.json)
+          if [ "$STATUS" = "ready" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::$MESSAGE"
+          fi
+          {
+            echo "## 健保給付條文來源檢查"
+            echo
+            echo "- 狀態：$STATUS"
+            echo "- 說明：$MESSAGE"
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Verify build metadata
+        if: steps.source.outputs.ready == 'true'
         run: |
           python3 - <<'PY'
           import json
@@ -56,7 +77,11 @@ jobs:
           assert meta["chapterCount"] > 0, meta
           assert meta["missingChapterCount"] == 0, meta
           assert meta["tfdaRecordCount"] > 10000, meta
-          assert meta["rulesVersion"] == "${{ env.RULES_VERSION }}", meta
+          assert meta["rulesVersion"] == meta["rulesOfficialVersion"], meta
+          assert meta["rulesPdfPages"] >= 300, meta
+          assert meta["rulesPdfBytes"] >= 2000000, meta
+          assert len(meta["rulesPdfSha256"]) == 64, meta
+          assert meta["sourceVerification"] == "automatic-cross-check", meta
           page = Path("_site/nhi/index.html").read_text()
           assert "Pemetrexed" in page
           assert "https://www.nhi.gov.tw/" in page
@@ -65,11 +90,14 @@ jobs:
           print(json.dumps(meta, ensure_ascii=False, indent=2))
           PY
       - uses: actions/configure-pages@v6
+        if: steps.source.outputs.ready == 'true'
       - uses: actions/upload-pages-artifact@v5
+        if: steps.source.outputs.ready == 'true'
         with:
           path: _site
 
   deploy:
+    if: needs.build.outputs.ready == 'true'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
