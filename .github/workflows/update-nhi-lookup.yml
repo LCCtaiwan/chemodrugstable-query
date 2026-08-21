@@ -1,0 +1,78 @@
+name: Update NHI lookup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-nhi-lookup.yml"
+      - "tools/nhi/**"
+      - "tests/test_nhi_lookup.py"
+      - "index.html"
+      - ".nojekyll"
+  schedule:
+    - cron: "17 18 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF tools
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Run cleaner tests
+        run: python3 -m unittest tests/test_nhi_lookup.py
+      - name: Read verified official source
+        run: |
+          echo "RULES_PDF_URL=$(jq -r .rulesPdf tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
+          echo "RULES_VERSION=$(jq -r .expectedVersion tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
+      - name: Download, clean and build
+        run: |
+          mkdir -p _site/nhi
+          cp index.html .nojekyll _site/
+          python3 tools/nhi/update_from_official.py \
+            --output _site/nhi/index.html \
+            --as-of "$(TZ=Asia/Taipei date +%F)" \
+            --rules-pdf-url "$RULES_PDF_URL" \
+            --expected-rules-version "$RULES_VERSION"
+      - name: Verify build metadata
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("_site/nhi/data_version.json").read_text())
+          meta = data["meta"]
+          assert meta["recordCount"] > 0, meta
+          assert meta["chapterCount"] > 0, meta
+          assert meta["missingChapterCount"] == 0, meta
+          assert meta["rulesVersion"] == "${{ env.RULES_VERSION }}", meta
+          page = Path("_site/nhi/index.html").read_text()
+          assert "Pemetrexed" in page
+          assert "https://www.nhi.gov.tw/" in page
+          print(json.dumps(meta, ensure_ascii=False, indent=2))
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

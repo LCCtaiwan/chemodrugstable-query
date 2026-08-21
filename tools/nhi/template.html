@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+<title>健保給付條件查詢</title>
+<style>
+:root{--ink:#15313a;--teal:#176575;--teal2:#0c4e5a;--pale:#eaf4f5;--line:#c8d5d9;--muted:#5d6b70;--paper:#fff;--warn:#7a5100;--warnbg:#fff5d8;--bad:#98231d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f3;color:#1e292d;font:15px/1.6 "Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif}
+header{background:var(--ink);color:#fff;border-bottom:5px solid var(--teal);padding:18px 24px}header h1{font-size:22px;margin:0}header p{margin:3px 0 0;color:#c8d7dc}
+main{max-width:1120px;margin:22px auto;padding:0 18px 54px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:20px;box-shadow:0 2px 10px #15313a0c;margin-bottom:16px}
+.notice{border-left:4px solid #c68a13;background:var(--warnbg);padding:11px 14px;color:#5d480f}.notice b{color:var(--warn)}
+.search{display:grid;grid-template-columns:1fr auto;gap:10px}.search input{width:100%;border:2px solid #9fb3b9;border-radius:7px;padding:12px 14px;font:inherit;font-size:17px}.search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px #d9edef}.search button,.official{border:1px solid var(--teal);border-radius:6px;background:var(--teal);color:#fff;font:inherit;font-weight:700;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.search button:hover,.official:hover{background:var(--teal2)}
+.help{margin-top:8px;color:var(--muted);font-size:13px}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pill{border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--muted);font-size:12px;background:#f7f9f9}
+#summary{margin:0 0 12px;color:var(--muted)}.empty{text-align:center;padding:44px 20px;color:var(--muted)}.empty h2{color:var(--ink);font-size:19px;margin:0 0 5px}
+.group{background:#fff;border:1px solid var(--line);border-radius:9px;margin:0 0 14px;overflow:hidden}.group-head{background:var(--pale);padding:13px 17px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}.chapter{font:700 13px/1.5 Consolas,monospace;color:var(--teal2);background:#fff;border:1px solid #9cbfc4;border-radius:4px;padding:2px 7px;white-space:nowrap}.group-head h2{font-size:16px;margin:0;color:var(--ink)}.group-head p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.rule{padding:15px 17px;border-bottom:1px solid var(--line)}.rule-legend{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 9px;color:var(--muted);font-size:12px}.rule-text{font:14px/1.72 "Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;overflow-wrap:anywhere;max-height:520px;overflow:auto;background:#fbfcfc;border:1px solid #e1e8ea;border-radius:6px;padding:10px 13px}.rule-line{white-space:pre-wrap;padding:2px 5px;border-left:2px solid transparent}.rule-line.heading{font-weight:750;color:var(--ink);background:#f0f5f6;border-left-color:var(--teal);margin:5px 0}.rule-line.blank{height:8px;padding:0}.rule-text mark{padding:0 2px;border-radius:2px}.mark-bio{background:#e8dcfb;color:#512681}.mark-step{background:#ddecfa;color:#173e75}.mark-limit{background:#ffe2dd;color:#8a2019}.mark-number{background:#fff0bd;color:#694b00}.rule-missing{color:var(--bad);background:#fff2f0;border-left:3px solid var(--bad);padding:10px 12px}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.links a{color:var(--teal2);font-weight:650}.items{padding:0 17px 14px}.items details{border-top:1px solid #e2e8ea;padding-top:10px}.items summary{cursor:pointer;color:var(--teal2);font-weight:700}.tablewrap{overflow:auto;margin-top:8px}table{border-collapse:collapse;width:100%;min-width:790px;font-size:12.5px}th,td{border:1px solid #d7e0e2;padding:7px 8px;text-align:left;vertical-align:top}th{background:#f2f6f7;color:#38525a;white-space:nowrap}.code{font-family:Consolas,monospace;white-space:nowrap}.drugname b{display:block}.drugname span{color:var(--muted)}
+footer{color:var(--muted);font-size:12px;line-height:1.7;padding:3px 2px}footer a{color:var(--teal2)}
+@media(max-width:680px){header{padding:15px 16px}main{padding:0 10px 35px}.panel{padding:14px}.search{grid-template-columns:1fr}.group-head{display:block}.chapter{display:inline-block;margin-bottom:6px}.rule,.items{padding-left:12px;padding-right:12px}}
+</style>
+</head>
+<body>
+<header><h1>健保給付條件查詢</h1><p>官方資料清洗後的 GitHub Pages 查詢頁</p></header>
+<main>
+  <section class="panel">
+    <div class="notice"><b>核對提醒：</b>本頁只呈現健保署品項資料與給付規定原文，不會判斷個別病人是否符合給付。申報或臨床使用前，仍須查閱最新公告並依院內流程核對。</div>
+    <div class="search" style="margin-top:15px">
+      <input id="q" type="search" placeholder="輸入成分、中文／英文品名、健保碼或 ATC 碼" autocomplete="off" spellcheck="false">
+      <button id="searchBtn" type="button">查詢</button>
+    </div>
+    <div class="help">至少輸入 2 個字元；網址中的 <code>?q=</code> 可由化療藥品頁自動帶入。</div>
+    <div class="meta" id="meta"></div>
+  </section>
+  <div id="summary"></div>
+  <section id="results"><div class="panel empty"><h2>請輸入查詢條件</h2><p>本頁由 GitHub Actions 定期依健保署公開資料重新產生。</p></div></section>
+  <footer id="footer"></footer>
+</main>
+<script>
+const META=__META_JSON__;
+const RECORDS=__RECORDS_JSON__;
+const RULES=__RULES_JSON__;
+const $=id=>document.getElementById(id);
+const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const safeUrl=value=>{try{const url=new URL(value);return url.protocol==='https:'&&(url.hostname==='nhi.gov.tw'||url.hostname.endsWith('.nhi.gov.tw'))?url.href:'#'}catch{return '#'}};
+const chapterTokens=value=>(value||'').split(/[,;，；、]/).map(x=>x.replace(/\s/g,'').replace(/\.$/,'')).filter(x=>/^\d{1,2}(?:\.\d{1,3}){1,5}$/.test(x));
+RECORDS.forEach(r=>r._search=[r.code,r.en,r.zh,r.ingredient,r.atc].join(' ').toLowerCase());
+
+function markedLine(line){
+  let value=esc(line);
+  value=value.replace(/\b(EGFR|ALK|ROS1|BRAF|HER2|PD-L1|KRAS|NTRK|BRCA1?|BRCA2|MSI-H|dMMR|FGFR[1-4]?|RET|MET)\b/gi,'<mark class="mark-bio">$1</mark>');
+  value=value.replace(/(第[一二三四五六七八九十\d]+線|先前治療|先前已接受|治療失敗|無法耐受|併用|單獨使用|單一療法)/g,'<mark class="mark-step">$1</mark>');
+  value=value.replace(/(不得|不予給付|停止給付|停止治療|限用|限於|須符合|必須|不得併用)/g,'<mark class="mark-limit">$1</mark>');
+  value=value.replace(/(\d+(?:\.\d+)?\s*(?:%|mg\/m2|mg\/m²|mg\/kg|mg|mL|ml|週|月|年|次))/gi,'<mark class="mark-number">$1</mark>');
+  return value;
+}
+function formatRuleText(text){
+  return String(text||'').split('\n').map(line=>{
+    if(!line.trim())return '<div class="rule-line blank"></div>';
+    const heading=/^\s*(?:\d+(?:\.\d+){1,5}\.?|\(\d+\)|（\d+）|[A-Z][.)]|[一二三四五六七八九十]+、)/.test(line);
+    return `<div class="rule-line${heading?' heading':''}">${markedLine(line)}</div>`;
+  }).join('');
+}
+
+function itemTable(items){
+  const rows=items.map(r=>`<tr><td class="code"><a href="${esc(safeUrl(r.drugUrl))}" target="_blank" rel="noopener">${esc(r.code)}</a></td><td class="drugname"><b>${esc(r.zh||'—')}</b><span>${esc(r.en||'—')}</span></td><td>${esc(r.ingredient||'—')}</td><td>${esc(r.spec||r.form||'—')}</td><td>${esc(r.price||'—')}${Number(r.price)===0?'<br><small>支付價為 0，請到官網核對</small>':''}</td><td>${esc(r.start||'—')}</td><td>${esc(r.end||'—')}</td></tr>`).join('');
+  return `<div class="tablewrap"><table><thead><tr><th>健保碼</th><th>藥品名稱</th><th>成分</th><th>規格／劑型</th><th>支付價</th><th>有效起日</th><th>有效迄日</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function renderGroup(chapter,items){
+  const rule=chapter?RULES[chapter]:null;
+  const matchedNote=rule?.matchedChapter?`（原文以父章節 ${esc(rule.matchedChapter)} 對應）`:'';
+  const title=(rule?.title||(chapter?'給付規定原文章節':'品項資料未列特殊給付章節'))+matchedNote;
+  const ruleUrl=items.find(x=>x.ruleUrl)?.ruleUrl||'';
+  const ruleBody=chapter
+    ? (rule?`<div class="rule-legend"><span>閱讀提示：</span><span><mark class="mark-bio">生物標記</mark></span><span><mark class="mark-step">治療順序</mark></span><span><mark class="mark-limit">限制／停止</mark></span><span><mark class="mark-number">數值／期間</mark></span><span>只標示原文，不改寫條件。</span></div><div class="rule-text">${formatRuleText(rule.text)}</div>`:`<div class="rule-missing">此章節未能從整份規定精確解析，請直接開啟健保署官方章節。</div>`)
+    : `<div class="rule-missing">未列特殊給付章節不等於沒有其他通則或申報限制，仍須依最新官方規定核對。</div>`;
+  const links=`<div class="links">${ruleUrl?`<a href="${esc(safeUrl(ruleUrl))}" target="_blank" rel="noopener">開啟健保署章節 PDF</a>`:''}<a href="${esc(META.officialItemSearch)}" target="_blank" rel="noopener">健保署即時品項查詢</a></div>`;
+  return `<article class="group"><div class="group-head">${chapter?`<span class="chapter">${esc(chapter)}</span>`:''}<div><h2>${esc(title)}</h2><p>${items.length} 個符合品項</p></div></div><div class="rule">${ruleBody}${links}</div><div class="items"><details><summary>查看對應品項（${items.length}）</summary>${itemTable(items)}</details></div></article>`;
+}
+
+function search(){
+  const raw=$('q').value.trim();
+  const keyword=raw.toLowerCase();
+  const results=$('results');
+  if(keyword.length<2){$('summary').textContent='';results.innerHTML='<div class="panel empty"><h2>請至少輸入 2 個字元</h2><p>可搜尋成分、品名、健保碼或 ATC 碼。</p></div>';return;}
+  const matched=RECORDS.filter(r=>r._search.includes(keyword));
+  const shown=matched.slice(0,300);
+  const groups=new Map();
+  shown.forEach(item=>{
+    const chapters=chapterTokens(item.chapter);
+    const keys=chapters.length?chapters:[''];
+    keys.forEach(key=>{if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item);});
+  });
+  $('summary').textContent=`找到 ${matched.length} 個目前有效品項${matched.length>300?'；先顯示前 300 筆':''}，整理為 ${groups.size} 個給付章節。`;
+  results.innerHTML=groups.size?[...groups.entries()].map(([chapter,items])=>renderGroup(chapter,items)).join(''):'<div class="panel empty"><h2>查無符合品項</h2><p>可改用英文成分、商品名或健保碼重試。</p></div>';
+  const url=new URL(location.href);url.searchParams.set('q',raw);history.replaceState(null,'',url);
+}
+
+$('meta').innerHTML=[`目前有效 ${META.recordCount.toLocaleString()} 筆`,`規定版本 ${META.rulesVersion}`,`有效基準 ${META.asOf}`,`已解析 ${META.chapterCount} 章`].map(x=>`<span class="pill">${esc(x)}</span>`).join('');
+$('footer').innerHTML=`資料來源：<a href="${esc(META.officialRulesPage)}" target="_blank" rel="noopener">衛生福利部中央健康保險署藥品給付規定</a>及<a href="${esc(META.officialItemsUrl)}" target="_blank" rel="noopener">健保用藥品項開放資料</a>。資料建置時間 ${esc(META.generatedAt)}。本頁未經院內人工核對，不取代最新公告、醫師判斷、申報規範或院內簽核。`;
+$('searchBtn').onclick=search;$('q').addEventListener('keydown',event=>{if(event.key==='Enter')search();});
+const initial=new URLSearchParams(location.search).get('q')||'';$('q').value=initial;if(initial)search();else $('q').focus();
+</script>
+</body>
+</html>
