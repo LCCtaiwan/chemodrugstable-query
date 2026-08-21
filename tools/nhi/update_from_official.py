@@ -55,16 +55,17 @@ def checked_url(value: str) -> str:
     return value
 
 
-def download(url: str, target: Path, timeout: int = 240) -> str:
+def download(url: str, target: Path, timeout: int = 240) -> tuple[str, str]:
     request = urllib.request.Request(checked_url(url), headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=timeout) as response:
         final_url = checked_url(response.geturl())
+        content_disposition = response.headers.get("Content-Disposition", "")
         with target.open("wb") as handle:
             while chunk := response.read(1024 * 1024):
                 handle.write(chunk)
     if not target.stat().st_size:
         raise RuntimeError(f"下載結果為空：{final_url}")
-    return final_url
+    return final_url, content_disposition
 
 
 def find_whole_rules_pdf(page_html: str, page_url: str) -> str:
@@ -88,7 +89,12 @@ def find_whole_rules_pdf(page_html: str, page_url: str) -> str:
     return candidates[0][1]
 
 
-def detect_rules_version(pdf_path: Path) -> str:
+def normalize_version_match(match: tuple[str, str, str]) -> str:
+    year, month, day = match
+    return f"{int(year)}.{int(month)}.{int(day)}"
+
+
+def detect_rules_version(pdf_path: Path, source_name: str = "") -> str:
     try:
         result = subprocess.run(
             ["pdftotext", "-f", "1", "-l", "5", "-layout", str(pdf_path), "-"],
@@ -101,13 +107,22 @@ def detect_rules_version(pdf_path: Path) -> str:
     except subprocess.CalledProcessError as exc:
         raise RuntimeError("PDF 無法轉成文字") from exc
     text = result.stdout.decode("utf-8", "replace")
-    versions = re.findall(r"[\(（]\s*(\d{3})[.\uff0e](\d{1,2})[.\uff0e](\d{1,2})\s*更新\s*[\)）]", text)
+    versions = re.findall(
+        r"[\(（]\s*(\d{3})\s*[.\uff0e]\s*(\d{1,2})\s*[.\uff0e]\s*(\d{1,2})\s*更新\s*[\)）]",
+        text,
+    )
     if not versions:
-        versions = re.findall(r"(?<!\d)(\d{3})[.\uff0e](\d{1,2})[.\uff0e](\d{1,2})(?:\s*更新)?", text)
-    if not versions:
-        raise RuntimeError("無法從給付規定 PDF 前 5 頁辨識版本日期")
-    year, month, day = versions[0]
-    return f"{int(year)}.{int(month)}.{int(day)}"
+        versions = re.findall(
+            r"(?<!\d)(\d{3})\s*[.\uff0e]\s*(\d{1,2})\s*[.\uff0e]\s*(\d{1,2})(?:\s*更新)?",
+            text,
+        )
+    if versions:
+        return normalize_version_match(versions[0])
+    decoded_name = urllib.parse.unquote(source_name)
+    compact = re.search(r"(?<!\d)(\d{3})(\d{2})(\d{2})(?!\d)", decoded_name)
+    if compact:
+        return normalize_version_match(compact.groups())
+    raise RuntimeError("無法從給付規定 PDF 或官方下載檔名辨識版本日期")
 
 
 def load_builder():
@@ -148,8 +163,8 @@ def main() -> None:
                 page_path.read_text(encoding="utf-8", errors="replace"), rules_page
             )
         download(items_url, csv_path)
-        download(pdf_url, pdf_path)
-        version = detect_rules_version(pdf_path)
+        final_pdf_url, pdf_source_name = download(pdf_url, pdf_path)
+        version = detect_rules_version(pdf_path, pdf_source_name)
         if args.expected_rules_version and version != args.expected_rules_version:
             raise RuntimeError(
                 f"給付規定版本不符：PDF 為 {version}，設定為 {args.expected_rules_version}；停止發布"
@@ -164,7 +179,7 @@ def main() -> None:
             output=args.output,
         )
         report = builder.build(build_args)
-        report["sources"] = {"items": items_url, "rulesPage": rules_page, "rulesPdf": pdf_url}
+        report["sources"] = {"items": items_url, "rulesPage": rules_page, "rulesPdf": final_pdf_url}
         version_file = args.output.with_name("data_version.json")
         version_file.write_text(
             json.dumps({"meta": report["meta"], "sources": report["sources"]}, ensure_ascii=False, indent=2),
