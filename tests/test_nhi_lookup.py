@@ -120,9 +120,38 @@ class NhiLookupTest(unittest.TestCase):
             version = UPDATE_MODULE.detect_docx_modified_version(source)
         self.assertEqual(version, "115.8.21")
 
-    def test_page_ahead_of_unchanged_pdf_is_pending(self):
-        with self.assertRaises(UPDATE_MODULE.SourcePendingError):
-            UPDATE_MODULE.assess_source_versions("115.8.21", "115.7.23", "115.7.23")
+    def test_docx_text_is_extracted_in_paragraph_order(self):
+        document = """<?xml version="1.0" encoding="UTF-8"?>
+        <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+          <w:body>
+            <w:p><w:r><w:t>9.37.Bevacizumab</w:t></w:r></w:p>
+            <w:p><w:r><w:t>第一段</w:t></w:r><w:r><w:tab/><w:t>給付條文</w:t></w:r></w:p>
+          </w:body>
+        </w:document>"""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source = Path(temp_dir) / "rules.docx"
+            with zipfile.ZipFile(source, "w") as archive:
+                archive.writestr("word/document.xml", document)
+            original_minimum = MODULE.MIN_RULES_TEXT_CHARS
+            MODULE.MIN_RULES_TEXT_CHARS = 1
+            try:
+                text = MODULE.extract_docx_text(source)
+            finally:
+                MODULE.MIN_RULES_TEXT_CHARS = original_minimum
+        self.assertEqual(text, "9.37.Bevacizumab\n第一段\t給付條文")
+
+    def test_pdf_metadata_date_is_converted_to_roc_version(self):
+        info = """CreationDate: Fri Aug 21 16:51:56 2026 CST
+ModDate: Fri Aug 21 16:51:56 2026 CST
+Pages: 422
+"""
+        self.assertEqual(UPDATE_MODULE.detect_pdf_metadata_version(info), "115.8.21")
+
+    def test_newer_word_can_be_primary_while_pdf_header_lags(self):
+        self.assertEqual(
+            UPDATE_MODULE.assess_source_versions("115.8.21", "115.7.23", "115.7.23"),
+            "ready",
+        )
 
     def test_matching_page_and_pdf_are_ready(self):
         self.assertEqual(
@@ -130,7 +159,7 @@ class NhiLookupTest(unittest.TestCase):
             "ready",
         )
 
-    def test_pdf_version_must_not_go_backwards(self):
+    def test_word_version_must_not_go_backwards(self):
         with self.assertRaises(RuntimeError):
             UPDATE_MODULE.assess_source_versions("115.7.23", "115.7.23", "115.8.21")
 

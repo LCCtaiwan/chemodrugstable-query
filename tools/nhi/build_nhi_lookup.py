@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""將健保署藥品品項 CSV 與給付規定 PDF 清洗成單一靜態查詢 HTML。"""
+"""將健保署藥品品項 CSV 與給付規定 Word／PDF 清洗成單一靜態查詢 HTML。"""
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ import subprocess
 import sys
 import urllib.parse
 import zipfile
+import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
@@ -30,6 +31,7 @@ OFFICIAL_ITEM_SEARCH = "https://info.nhi.gov.tw/INAE3000/INAE3000S01?type=app"
 OFFICIAL_TFDA_LICENSES_URL = "https://data.fda.gov.tw/data/opendata/export/37/json"
 OFFICIAL_TFDA_INSERT_BASE = "https://mcp.fda.gov.tw/im_detail_1/"
 MIN_TFDA_RECORDS = 10000
+MIN_RULES_TEXT_CHARS = 500_000
 
 REQUIRED_COLUMNS = {
     "藥品代號",
@@ -255,6 +257,36 @@ def extract_pdf_text(pdf_path: Path) -> str:
     return result.stdout.decode("utf-8", "replace")
 
 
+def extract_docx_text(docx_path: Path) -> str:
+    try:
+        with zipfile.ZipFile(docx_path) as archive:
+            document = archive.read("word/document.xml")
+    except (OSError, KeyError, zipfile.BadZipFile) as exc:
+        raise RuntimeError("健保署 Word 檔結構異常，無法讀取條文") from exc
+    try:
+        root = ET.fromstring(document)
+    except ET.ParseError as exc:
+        raise RuntimeError("健保署 Word 內文 XML 損壞") from exc
+    word_ns = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+    lines: list[str] = []
+    for paragraph in root.iter(f"{word_ns}p"):
+        parts: list[str] = []
+        for node in paragraph.iter():
+            if node.tag == f"{word_ns}t":
+                parts.append(node.text or "")
+            elif node.tag == f"{word_ns}tab":
+                parts.append("\t")
+            elif node.tag in {f"{word_ns}br", f"{word_ns}cr"}:
+                parts.append("\n")
+        value = "".join(parts).strip()
+        if value:
+            lines.extend(part.strip() for part in value.splitlines() if part.strip())
+    text = "\n".join(lines).strip()
+    if len(text) < MIN_RULES_TEXT_CHARS:
+        raise RuntimeError(f"健保署 Word 條文文字過少：{len(text):,} 字元")
+    return text
+
+
 def normalize_pdf_text(text: str) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = text.replace("\f", "\n")
@@ -365,8 +397,13 @@ def build(args: argparse.Namespace) -> dict[str, object]:
     records, stats = load_current_records(args.csv, as_of)
     labels, tfda_stats = load_tfda_labels(args.tfda_licenses)
     expected = {token for row in records for token in chapter_tokens(row["chapter"])}
-    pdf_text = args.rules_text.read_text(encoding="utf-8") if args.rules_text else extract_pdf_text(args.rules_pdf)
-    chapters, missing = extract_chapters(pdf_text, expected)
+    if args.rules_text:
+        rules_text = args.rules_text.read_text(encoding="utf-8")
+    elif getattr(args, "rules_docx", None):
+        rules_text = extract_docx_text(args.rules_docx)
+    else:
+        rules_text = extract_pdf_text(args.rules_pdf)
+    chapters, missing = extract_chapters(rules_text, expected)
     meta: dict[str, object] = {
         "generatedAt": datetime.now().astimezone().isoformat(timespec="seconds"),
         "asOf": as_of.isoformat(),
@@ -392,6 +429,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tfda-licenses", type=Path, required=True, help="TFDA 第 37 號許可證 JSON 或官方 ZIP")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--rules-pdf", type=Path, help="健保署最新版藥品給付規定 PDF")
+    source.add_argument("--rules-docx", type=Path, help="健保署最新版藥品給付規定 Word")
     source.add_argument("--rules-text", type=Path, help="測試用 pdftotext 純文字")
     parser.add_argument("--rules-version", required=True, help="例：115.7.23")
     parser.add_argument("--as-of", default=date.today().isoformat(), help="有效品項基準日 YYYY-MM-DD")

@@ -34,10 +34,7 @@ ALLOWED_HOSTS = {
 USER_AGENT = "ChemoDrugStable-NHI-Updater/1.0 (+GitHub-Actions)"
 MIN_RULES_PDF_BYTES = 2_000_000
 MIN_RULES_PDF_PAGES = 300
-
-
-class SourcePendingError(RuntimeError):
-    """健保署官方文件已公告新版，但 PDF 尚未同步完成。"""
+MIN_RULES_DOCX_BYTES = 2_000_000
 
 
 class LinkParser(HTMLParser):
@@ -194,6 +191,27 @@ def detect_rules_version(pdf_path: Path, source_name: str = "") -> str:
     raise RuntimeError("無法從給付規定 PDF 前 60 頁或官方下載檔名辨識版本日期")
 
 
+def detect_pdf_metadata_version(info_text: str) -> str:
+    metadata_versions: list[tuple[int, int, int]] = []
+    months = {
+        name: index for index, name in enumerate(
+            ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
+            start=1,
+        )
+    }
+    for month, day, year in re.findall(
+        r"^(?:CreationDate|ModDate):\s+\w{3}\s+([A-Z][a-z]{2})\s+(\d{1,2})\s+.*\s+(\d{4})(?:\s|$)",
+        info_text,
+        re.MULTILINE,
+    ):
+        if month in months and int(year) > 1911:
+            metadata_versions.append((int(year) - 1911, months[month], int(day)))
+    if not metadata_versions:
+        return ""
+    year, month, day = max(metadata_versions)
+    return f"{year}.{month}.{day}"
+
+
 def inspect_rules_pdf(pdf_path: Path) -> dict[str, object]:
     size = pdf_path.stat().st_size
     if size < MIN_RULES_PDF_BYTES:
@@ -214,30 +232,45 @@ def inspect_rules_pdf(pdf_path: Path) -> dict[str, object]:
     pages = int(page_match.group(1))
     if pages < MIN_RULES_PDF_PAGES:
         raise RuntimeError(f"給付規定 PDF 頁數異常：{pages} 頁")
+    metadata_version = detect_pdf_metadata_version(result.stdout)
     return {
         "bytes": size,
         "pages": pages,
         "sha256": hashlib.sha256(pdf_path.read_bytes()).hexdigest(),
+        "metadataVersion": metadata_version,
     }
 
 
-def assess_source_versions(page_version: str, pdf_version: str, previous_version: str) -> str:
-    page_key = version_key(page_version)
-    pdf_key = version_key(pdf_version)
+def inspect_rules_docx(docx_path: Path) -> dict[str, object]:
+    size = docx_path.stat().st_size
+    if size < MIN_RULES_DOCX_BYTES:
+        raise RuntimeError(f"給付規定 Word 過小：{size:,} bytes")
+    version = detect_docx_modified_version(docx_path)
+    try:
+        with zipfile.ZipFile(docx_path) as archive:
+            if "word/document.xml" not in archive.namelist():
+                raise RuntimeError("給付規定 Word 缺少 document.xml")
+    except zipfile.BadZipFile as exc:
+        raise RuntimeError("給付規定 Word 不是有效 DOCX") from exc
+    return {
+        "bytes": size,
+        "sha256": hashlib.sha256(docx_path.read_bytes()).hexdigest(),
+        "modifiedVersion": version,
+    }
+
+
+def assess_source_versions(official_version: str, pdf_file_version: str, previous_version: str) -> str:
+    official_key = version_key(official_version)
     previous_key = version_key(previous_version)
-    if pdf_key < previous_key:
+    if official_key < previous_key:
         raise RuntimeError(
-            f"官方 PDF 版本倒退：PDF {pdf_version}，線上既有版本 {previous_version}"
+            f"官方 Word 版本倒退：Word {official_version}，線上既有版本 {previous_version}"
         )
-    if page_key == pdf_key:
-        return "ready"
-    if page_key > pdf_key and pdf_key == previous_key:
-        raise SourcePendingError(
-            f"健保署官方文件已更新為 {page_version}，但 PDF 仍為 {pdf_version}；保留既有線上版本，等待官網同步"
+    if pdf_file_version and version_key(pdf_file_version) > official_key:
+        raise RuntimeError(
+            f"PDF 檔案日期 {pdf_file_version} 新於官方 Word {official_version}，停止自動發布"
         )
-    raise RuntimeError(
-        f"健保署來源版本無法確認：官方文件 {page_version}、PDF {pdf_version}、線上既有版本 {previous_version}"
-    )
+    return "ready"
 
 
 def load_previous_meta(url: str, target: Path) -> dict[str, object]:
@@ -278,10 +311,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tfda-licenses-url", default=None)
     parser.add_argument("--rules-page", default=None)
     parser.add_argument("--rules-pdf-url", help="指定健保署整份給付規定 PDF")
-    parser.add_argument("--rules-docx-url", help="健保署整份給付規定 Word；用修改日期交叉確認 PDF")
+    parser.add_argument("--rules-docx-url", help="健保署整份給付規定 Word；作為條文主來源及版本依據")
     parser.add_argument("--expected-rules-version", help="預期規定版本，例如 115.7.23；不符時停止發布")
     parser.add_argument("--previous-version-url", help="線上既有 data_version.json；自動判斷最新版時必填")
-    parser.add_argument("--status-file", type=Path, help="輸出 ready／pending 狀態供 GitHub Actions 判斷")
+    parser.add_argument("--status-file", type=Path, help="輸出來源檢查狀態供 GitHub Actions 判斷")
     return parser.parse_args()
 
 
@@ -299,11 +332,13 @@ def main() -> None:
         docx_path = temp / "rules.docx"
         page_version = ""
         final_docx_url = ""
+        docx_facts: dict[str, object] = {}
         if args.rules_pdf_url:
             pdf_url = checked_url(args.rules_pdf_url)
             if args.rules_docx_url:
                 final_docx_url, _ = download(args.rules_docx_url, docx_path)
-                page_version = detect_docx_modified_version(docx_path)
+                docx_facts = inspect_rules_docx(docx_path)
+                page_version = str(docx_facts["modifiedVersion"])
         else:
             page_path = temp / "rules.html"
             download(rules_page, page_path)
@@ -314,33 +349,30 @@ def main() -> None:
             )
         final_pdf_url, pdf_source_name = download(pdf_url, pdf_path)
         pdf_facts = inspect_rules_pdf(pdf_path)
-        version = detect_rules_version(pdf_path, pdf_source_name)
+        printed_pdf_version = detect_rules_version(pdf_path, pdf_source_name)
+        pdf_file_version = str(pdf_facts["metadataVersion"] or printed_pdf_version)
+        version = page_version or pdf_file_version
         if args.expected_rules_version and version != args.expected_rules_version:
             raise RuntimeError(
-                f"給付規定版本不符：PDF 為 {version}，設定為 {args.expected_rules_version}；停止發布"
+                f"給付規定版本不符：官方來源為 {version}，設定為 {args.expected_rules_version}；停止發布"
             )
         previous_meta: dict[str, object] = {}
         if args.previous_version_url:
             previous_meta = load_previous_meta(args.previous_version_url, temp / "previous.json")
             previous_version = str(previous_meta["rulesVersion"])
             if page_version:
-                try:
-                    assess_source_versions(page_version, version, previous_version)
-                except SourcePendingError as exc:
-                    write_status(
-                        args.status_file,
-                        "pending",
-                        str(exc),
-                        officialVersion=page_version,
-                        pdfVersion=version,
-                        previousVersion=previous_version,
-                        rulesPdf=final_pdf_url,
-                    )
-                    print(f"等待：{exc}")
-                    return
+                assess_source_versions(page_version, pdf_file_version, previous_version)
             previous_hash = str(previous_meta.get("rulesPdfSha256") or "")
             if version == previous_version and previous_hash and previous_hash != pdf_facts["sha256"]:
                 raise RuntimeError("官方 PDF 在版本日期不變時內容雜湊已改變，停止自動發布")
+            previous_docx_hash = str(previous_meta.get("rulesDocxSha256") or "")
+            if (
+                final_docx_url
+                and version == previous_version
+                and previous_docx_hash
+                and previous_docx_hash != docx_facts["sha256"]
+            ):
+                raise RuntimeError("官方 Word 在版本日期不變時內容雜湊已改變，停止自動發布")
         elif page_version:
             raise RuntimeError("自動尋找最新版時必須提供 --previous-version-url")
         download(items_url, csv_path)
@@ -348,7 +380,8 @@ def main() -> None:
         build_args = argparse.Namespace(
             csv=csv_path,
             tfda_licenses=tfda_path,
-            rules_pdf=pdf_path,
+            rules_pdf=None if final_docx_url else pdf_path,
+            rules_docx=docx_path if final_docx_url else None,
             rules_text=None,
             rules_version=version,
             as_of=args.as_of or date.today().isoformat(),
@@ -361,7 +394,12 @@ def main() -> None:
             "rulesPdfSha256": pdf_facts["sha256"],
             "rulesPdfBytes": pdf_facts["bytes"],
             "rulesPdfPages": pdf_facts["pages"],
-            "sourceVerification": "automatic-cross-check",
+            "rulesPdfFileVersion": pdf_file_version,
+            "rulesPdfPrintedVersion": printed_pdf_version,
+            "rulesDocxSha256": docx_facts["sha256"] if final_docx_url else "",
+            "rulesDocxBytes": docx_facts["bytes"] if final_docx_url else 0,
+            "rulesSource": "docx" if final_docx_url else "pdf",
+            "sourceVerification": "word-primary-pdf-secondary",
         })
         report["sources"] = {
             "items": items_url,
@@ -379,9 +417,10 @@ def main() -> None:
         write_status(
             args.status_file,
             "ready",
-            f"健保署官方文件與 PDF 版本一致：{version}",
+            f"官方 Word 主來源已通過完整性檢查：{version}",
             officialVersion=page_version or version,
-            pdfVersion=version,
+            pdfFileVersion=pdf_file_version,
+            pdfPrintedVersion=printed_pdf_version,
             previousVersion=previous_meta.get("rulesVersion", ""),
             rulesPdf=final_pdf_url,
         )
