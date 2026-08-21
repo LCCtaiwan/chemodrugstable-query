@@ -55,10 +55,13 @@ jobs:
           assert meta["recordCount"] > 0, meta
           assert meta["chapterCount"] > 0, meta
           assert meta["missingChapterCount"] == 0, meta
+          assert meta["tfdaRecordCount"] > 10000, meta
           assert meta["rulesVersion"] == "${{ env.RULES_VERSION }}", meta
           page = Path("_site/nhi/index.html").read_text()
           assert "Pemetrexed" in page
           assert "https://www.nhi.gov.tw/" in page
+          assert "https://mcp.fda.gov.tw/im_detail_1/" in page
+          assert "TFDA 電子仿單" in page
           print(json.dumps(meta, ensure_ascii=False, indent=2))
           PY
       - uses: actions/configure-pages@v6

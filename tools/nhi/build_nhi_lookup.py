@@ -10,6 +10,8 @@ import json
 import re
 import subprocess
 import sys
+import urllib.parse
+import zipfile
 from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
@@ -25,6 +27,9 @@ OFFICIAL_ITEMS_URL = (
 )
 OFFICIAL_RULES_PAGE = "https://www.nhi.gov.tw/ch/np-2508-1.html"
 OFFICIAL_ITEM_SEARCH = "https://info.nhi.gov.tw/INAE3000/INAE3000S01?type=app"
+OFFICIAL_TFDA_LICENSES_URL = "https://data.fda.gov.tw/data/opendata/export/37/json"
+OFFICIAL_TFDA_INSERT_BASE = "https://mcp.fda.gov.tw/im_detail_1/"
+MIN_TFDA_RECORDS = 10000
 
 REQUIRED_COLUMNS = {
     "藥品代號",
@@ -40,6 +45,14 @@ REQUIRED_COLUMNS = {
     "給付規定章節",
     "藥品代碼超連結",
     "給付規定章節連結",
+}
+
+TFDA_REQUIRED_COLUMNS = {
+    "許可證字號",
+    "註銷狀態",
+    "中文品名",
+    "英文品名",
+    "主成分略述",
 }
 
 
@@ -154,6 +167,69 @@ def load_current_records(csv_path: Path, as_of: date) -> tuple[list[dict[str, st
     return records, dict(stats)
 
 
+def read_tfda_json(source_path: Path) -> list[dict[str, object]]:
+    if zipfile.is_zipfile(source_path):
+        with zipfile.ZipFile(source_path) as archive:
+            candidates = [
+                info for info in archive.infolist()
+                if not info.is_dir() and info.filename.lower().endswith(".json")
+            ]
+            if len(candidates) != 1:
+                raise RuntimeError(f"TFDA 壓縮檔應只有一個 JSON，實際為 {len(candidates)} 個")
+            info = candidates[0]
+            if info.file_size > 200 * 1024 * 1024:
+                raise RuntimeError("TFDA JSON 解壓後超過 200 MB，停止建置")
+            raw = archive.read(info).decode("utf-8-sig")
+    else:
+        raw = source_path.read_text(encoding="utf-8-sig")
+    payload = json.loads(raw)
+    if not isinstance(payload, list) or not payload:
+        raise RuntimeError("TFDA 許可證資料不是非空陣列")
+    if not isinstance(payload[0], dict):
+        raise RuntimeError("TFDA 許可證資料列格式不正確")
+    missing = TFDA_REQUIRED_COLUMNS - set(payload[0])
+    if missing:
+        raise RuntimeError("TFDA 許可證資料缺少欄位：" + "、".join(sorted(missing)))
+    return payload
+
+
+def load_tfda_labels(source_path: Path) -> tuple[list[dict[str, str]], dict[str, int]]:
+    rows = read_tfda_json(source_path)
+    by_license: dict[str, dict[str, str]] = {}
+    stats = Counter(source=len(rows))
+    for row in rows:
+        license_number = clean(row.get("許可證字號"))
+        if not license_number:
+            stats["missing_license"] += 1
+            continue
+        if clean(row.get("註銷狀態")):
+            stats["cancelled"] += 1
+            continue
+        record = {
+            "license": license_number,
+            "zh": clean(row.get("中文品名")),
+            "en": clean(row.get("英文品名")),
+            "ingredient": clean(row.get("主成分略述")),
+            "form": clean(row.get("劑型")),
+            "validUntil": clean(row.get("有效日期")),
+            "url": OFFICIAL_TFDA_INSERT_BASE + urllib.parse.quote(license_number, safe=""),
+        }
+        previous = by_license.get(license_number)
+        if previous is None:
+            by_license[license_number] = record
+            continue
+        stats["duplicate"] += 1
+        for field in ("zh", "en", "ingredient", "form", "validUntil"):
+            if not previous[field] and record[field]:
+                previous[field] = record[field]
+
+    labels = sorted(by_license.values(), key=lambda item: item["license"])
+    if len(labels) < MIN_TFDA_RECORDS:
+        raise RuntimeError(f"TFDA 未註銷許可證只有 {len(labels)} 筆，疑似來源異常")
+    stats["current_unique"] = len(labels)
+    return labels, dict(stats)
+
+
 def chapter_tokens(value: str) -> list[str]:
     tokens: list[str] = []
     for raw in re.split(r"[,;，；、]", value or ""):
@@ -266,10 +342,11 @@ def render_html(
     output_path: Path,
     records: list[dict[str, str]],
     chapters: dict[str, dict[str, str]],
+    labels: list[dict[str, str]],
     meta: dict[str, object],
 ) -> None:
     template = template_path.read_text(encoding="utf-8")
-    required = ("__META_JSON__", "__RECORDS_JSON__", "__RULES_JSON__")
+    required = ("__META_JSON__", "__RECORDS_JSON__", "__RULES_JSON__", "__LABELS_JSON__")
     missing = [key for key in required if key not in template]
     if missing:
         raise RuntimeError("HTML 模板缺少標記：" + "、".join(missing))
@@ -277,6 +354,7 @@ def render_html(
         template.replace("__META_JSON__", safe_json(meta))
         .replace("__RECORDS_JSON__", safe_json(records))
         .replace("__RULES_JSON__", safe_json(chapters))
+        .replace("__LABELS_JSON__", safe_json(labels))
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(output, encoding="utf-8", newline="\n")
@@ -285,6 +363,7 @@ def render_html(
 def build(args: argparse.Namespace) -> dict[str, object]:
     as_of = date.fromisoformat(args.as_of)
     records, stats = load_current_records(args.csv, as_of)
+    labels, tfda_stats = load_tfda_labels(args.tfda_licenses)
     expected = {token for row in records for token in chapter_tokens(row["chapter"])}
     pdf_text = args.rules_text.read_text(encoding="utf-8") if args.rules_text else extract_pdf_text(args.rules_pdf)
     chapters, missing = extract_chapters(pdf_text, expected)
@@ -295,18 +374,22 @@ def build(args: argparse.Namespace) -> dict[str, object]:
         "recordCount": len(records),
         "chapterCount": len(chapters),
         "missingChapterCount": len(missing),
+        "tfdaRecordCount": len(labels),
         "officialItemsUrl": OFFICIAL_ITEMS_URL,
         "officialRulesPage": OFFICIAL_RULES_PAGE,
         "officialItemSearch": OFFICIAL_ITEM_SEARCH,
+        "officialTfdaLicensesUrl": OFFICIAL_TFDA_LICENSES_URL,
         "stats": stats,
+        "tfdaStats": tfda_stats,
     }
-    render_html(args.template, args.output, records, chapters, meta)
+    render_html(args.template, args.output, records, chapters, labels, meta)
     return {"output": str(args.output), "meta": meta, "missingChapters": missing}
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--csv", type=Path, required=True, help="健保署藥品品項 CSV")
+    parser.add_argument("--tfda-licenses", type=Path, required=True, help="TFDA 第 37 號許可證 JSON 或官方 ZIP")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--rules-pdf", type=Path, help="健保署最新版藥品給付規定 PDF")
     source.add_argument("--rules-text", type=Path, help="測試用 pdftotext 純文字")
