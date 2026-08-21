@@ -100,12 +100,50 @@ class NhiLookupTest(unittest.TestCase):
         )
         self.assertEqual(result, "https://www.nhi.gov.tw/ch/dl-whole.pdf")
 
+    def test_latest_page_version_is_selected_when_old_heading_remains(self):
+        page = """
+        <h1>最新版藥品給付規定內容(整份帶走)-115.07.23更新</h1>
+        <div>最新版藥品給付規定內容(整份帶走)-115.8.21更新</div>
+        <div>更新日期 115-08-21</div>
+        """
+        self.assertEqual(UPDATE_MODULE.detect_page_version(page), "115.8.21")
+
+    def test_docx_modified_date_is_converted_to_roc_version(self):
+        core = """<?xml version="1.0"?>
+        <cp:coreProperties xmlns:cp="x" xmlns:dcterms="y">
+          <dcterms:modified xsi:type="dcterms:W3CDTF" xmlns:xsi="z">2026-08-21T08:03:00Z</dcterms:modified>
+        </cp:coreProperties>"""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source = Path(temp_dir) / "rules.docx"
+            with zipfile.ZipFile(source, "w") as archive:
+                archive.writestr("docProps/core.xml", core)
+            version = UPDATE_MODULE.detect_docx_modified_version(source)
+        self.assertEqual(version, "115.8.21")
+
+    def test_page_ahead_of_unchanged_pdf_is_pending(self):
+        with self.assertRaises(UPDATE_MODULE.SourcePendingError):
+            UPDATE_MODULE.assess_source_versions("115.8.21", "115.7.23", "115.7.23")
+
+    def test_matching_page_and_pdf_are_ready(self):
+        self.assertEqual(
+            UPDATE_MODULE.assess_source_versions("115.8.21", "115.8.21", "115.7.23"),
+            "ready",
+        )
+
+    def test_pdf_version_must_not_go_backwards(self):
+        with self.assertRaises(RuntimeError):
+            UPDATE_MODULE.assess_source_versions("115.7.23", "115.7.23", "115.8.21")
+
     def test_non_nhi_download_url_is_rejected(self):
         with self.assertRaises(RuntimeError):
             UPDATE_MODULE.checked_url("https://example.com/items.csv")
 
     def test_tfda_official_download_url_is_allowed(self):
         url = "https://data.fda.gov.tw/data/opendata/export/37/json"
+        self.assertEqual(UPDATE_MODULE.checked_url(url), url)
+
+    def test_own_pages_metadata_url_is_allowed(self):
+        url = "https://lcctaiwan.github.io/chemodrugstable-query/nhi/data_version.json"
         self.assertEqual(UPDATE_MODULE.checked_url(url), url)
 
     def test_tfda_zip_is_deduplicated_and_cancelled_license_is_excluded(self):
