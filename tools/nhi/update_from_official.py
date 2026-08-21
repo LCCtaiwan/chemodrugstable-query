@@ -5,11 +5,15 @@ from __future__ import annotations
 
 import argparse
 import html
+import http.client
 import importlib.util
 import json
 import re
 import subprocess
+import sys
 import tempfile
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date
@@ -55,17 +59,28 @@ def checked_url(value: str) -> str:
     return value
 
 
-def download(url: str, target: Path, timeout: int = 240) -> tuple[str, str]:
-    request = urllib.request.Request(checked_url(url), headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        final_url = checked_url(response.geturl())
-        content_disposition = response.headers.get("Content-Disposition", "")
-        with target.open("wb") as handle:
-            while chunk := response.read(1024 * 1024):
-                handle.write(chunk)
-    if not target.stat().st_size:
-        raise RuntimeError(f"下載結果為空：{final_url}")
-    return final_url, content_disposition
+def download(url: str, target: Path, timeout: int = 240, attempts: int = 5) -> tuple[str, str]:
+    checked = checked_url(url)
+    for attempt in range(1, attempts + 1):
+        request = urllib.request.Request(checked, headers={"User-Agent": USER_AGENT})
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                final_url = checked_url(response.geturl())
+                content_disposition = response.headers.get("Content-Disposition", "")
+                with target.open("wb") as handle:
+                    while chunk := response.read(1024 * 1024):
+                        handle.write(chunk)
+            if not target.stat().st_size:
+                raise RuntimeError(f"下載結果為空：{final_url}")
+            return final_url, content_disposition
+        except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException) as exc:
+            target.unlink(missing_ok=True)
+            if attempt == attempts:
+                raise
+            delay = min(5 * (2 ** (attempt - 1)), 60)
+            print(f"下載中斷，第 {attempt}/{attempts} 次；{delay} 秒後重試：{exc}", file=sys.stderr)
+            time.sleep(delay)
+    raise RuntimeError(f"下載失敗：{checked}")
 
 
 def find_whole_rules_pdf(page_html: str, page_url: str) -> str:
