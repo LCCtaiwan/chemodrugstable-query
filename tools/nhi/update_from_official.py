@@ -126,17 +126,18 @@ def detect_rules_version(pdf_path: Path, source_name: str = "") -> str:
         r"[\(（]\s*(\d{3})\s*[.\uff0e]\s*(\d{1,2})\s*[.\uff0e]\s*(\d{1,2})\s*更新\s*[\)）]",
         text,
     )
-    if not versions:
-        versions = re.findall(
-            r"(?<!\d)(\d{3})\s*[.\uff0e]\s*(\d{1,2})\s*[.\uff0e]\s*(\d{1,2})(?:\s*更新)?",
-            text,
-        )
     if versions:
         return normalize_version_match(versions[0])
     decoded_name = urllib.parse.unquote(source_name)
     compact = re.search(r"(?<!\d)(\d{3})(\d{2})(\d{2})(?!\d)", decoded_name)
     if compact:
         return normalize_version_match(compact.groups())
+    versions = re.findall(
+        r"(?<!\d)(\d{3})\s*[.\uff0e]\s*(\d{1,2})\s*[.\uff0e]\s*(\d{1,2})(?:\s*更新)?",
+        text,
+    )
+    if versions:
+        return normalize_version_match(versions[0])
     raise RuntimeError("無法從給付規定 PDF 或官方下載檔名辨識版本日期")
 
 
