@@ -1,0 +1,43 @@
+name: Electronic insert pilot
+on:
+  schedule:
+    - cron: '43 18 * * 6' # Sunday 02:43 Taiwan time
+  workflow_dispatch:
+  pull_request:
+    paths: ['tools/inserts/**', 'tests/test_inserts.py', '.github/workflows/update-electronic-inserts.yml']
+permissions:
+  contents: read
+concurrency:
+  group: electronic-inserts-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - run: python3 -m pip install -r tools/inserts/requirements.txt
+      - name: Verify update safeguards
+        run: python3 -m unittest discover -s tests -p test_inserts.py
+      - name: Download and structure up to 100 electronic PDFs
+        run: python3 tools/inserts/update.py --limit 100
+      - name: Save successful scheduled update
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/inserts/documents.json data/inserts/last_run.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: refresh electronic insert pilot'
+            git push
+          fi
+      - name: Keep downloadable results even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: electronic-insert-results
+          path: data/inserts/
+          retention-days: 30
+          if-no-files-found: warn
