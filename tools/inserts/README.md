@@ -18,7 +18,7 @@ PR 會跑單元測試及 100 份下載測試，結果在 workflow 的 `electroni
 
 合併 main 後才啟用每週排程；可由 Actions → Electronic insert pilot → Run workflow 手動啟動。成功的 main 執行將 JSON commit 回 repo，提供持久版本紀錄；artifact 只保留 30 日，不作主資料庫。若分支保護禁止 bot 寫入，push 會失敗，該次結果仍保留在 artifact，需改採資料 PR 流程。
 
-此階段不修改健保頁或 Pages 部署。先驗證下載與更新後，再將可用原文接到搜尋頁。原始 PDF 不寫進 Git。
+搜尋頁位於 `/inserts/`，依許可證整理命中的頁面原文，可匯出 CSV。既有 Pages 工作會在健保來源驗證成功時一併發布電子仿單頁；健保來源失敗時整站保留上一版。每週資料 commit 使用 GITHUB_TOKEN 不會再次觸發 push workflow，網頁由下一次每日 Pages 排程發布，並非即時更新。原始 PDF 不寫進 Git。
 
 ## 本機
 
