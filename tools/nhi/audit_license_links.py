@@ -26,9 +26,9 @@ def main():
     (args.output / 'summary.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     with (args.output / 'links.csv').open('w', encoding='utf-8-sig', newline='') as handle:
         writer = csv.writer(handle)
-        writer.writerow(['健保碼','品名','官方識別碼','對應許可證','狀態','官方來源'])
+        writer.writerow(['健保碼','品名','官方識別碼','對應許可證','狀態','對應方法','官方來源'])
         for r in records:
-            writer.writerow([r['code'], r['zh'], r['licenseId'], ';'.join(r['licenseCandidates']),r['licenseStatus'],r['drugUrl']])
+            writer.writerow([r['code'], r['zh'], r['licenseId'], ';'.join(r['licenseCandidates']),r['licenseStatus'],r['licenseMethod'],r['drugUrl']])
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 
