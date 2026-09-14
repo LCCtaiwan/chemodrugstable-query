@@ -63,7 +63,7 @@ $('export').addEventListener('click',()=>{
  documents=data.documents.map(d=>({...d,pages:Array.isArray(d.pages)?d.pages:[]}));
  const searchable=documents.filter(d=>d.status==='text_available').length;
  const stale=documents.filter(d=>d.last_check_status==='error').length;
- $('coverage').textContent=`追蹤 ${data.documents.length} 份文件｜可全文搜尋 ${searchable} 份｜其中 ${stale} 份最近檢查失敗、保留舊版｜資料檢查：${data.checked_at}`;
+ $('coverage').textContent=`追蹤 ${data.documents.length} 份文件｜可全文搜尋 ${searchable} 份｜其中 ${stale} 份最近檢查失敗｜資料檢查：${data.checked_at}`;
  $('q').disabled=$('submit').disabled=documents.length===0;$('status').textContent=documents.length?'輸入字詞以整理符合的藥品；無文字者請切換藥名／許可證查詢。':'目前尚無可搜尋原文，不能解讀成沒有符合藥品。';
  }catch{$('coverage').textContent='尚未取得可用的電子仿單資料。';$('status').textContent='請先確認 GitHub Actions 的電子仿單下載結果。';}})();
 </script>
