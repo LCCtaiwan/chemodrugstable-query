@@ -214,6 +214,7 @@ def load_tfda_labels(source_path: Path) -> tuple[list[dict[str, str]], dict[str,
             "ingredient": clean(row.get("主成分略述")),
             "form": clean(row.get("劑型")),
             "validUntil": clean(row.get("有效日期")),
+            "indications": clean(row.get("適應症")),
             "url": OFFICIAL_TFDA_INSERT_BASE + urllib.parse.quote(license_number, safe=""),
         }
         previous = by_license.get(license_number)
@@ -221,7 +222,7 @@ def load_tfda_labels(source_path: Path) -> tuple[list[dict[str, str]], dict[str,
             by_license[license_number] = record
             continue
         stats["duplicate"] += 1
-        for field in ("zh", "en", "ingredient", "form", "validUntil"):
+        for field in ("zh", "en", "ingredient", "form", "validUntil", "indications"):
             if not previous[field] and record[field]:
                 previous[field] = record[field]
 
@@ -230,6 +231,56 @@ def load_tfda_labels(source_path: Path) -> tuple[list[dict[str, str]], dict[str,
         raise RuntimeError(f"TFDA 未註銷許可證只有 {len(labels)} 筆，疑似來源異常")
     stats["current_unique"] = len(labels)
     return labels, dict(stats)
+
+
+def official_license_id(url: str) -> str:
+    """Only accept the license identifier explicitly supplied by NHI's FDA link."""
+    try:
+        parsed = urllib.parse.urlsplit(url)
+        ids = urllib.parse.parse_qs(parsed.query).get("licId", [])
+        if (parsed.scheme == "https" and parsed.hostname == "lmspiq.fda.gov.tw"
+                and parsed.path == "/web/DRPIQ/DRPIQ1000Result"
+                and len(ids) == 1 and re.fullmatch(r"[0-9]{8}", ids[0])):
+            return ids[0]
+    except ValueError:
+        pass
+    return ""
+
+
+def customs_license_id(row: dict) -> str:
+    """Normalize TFDA's customs identifier; require its serial to match the license.
+
+    DHY001048092xx -> 01048092. Unknown/S-prefixed formats remain unlinked.
+    This is identifier normalization, never a formula applied to the NHI code.
+    """
+    customs = re.fullmatch(r"DH[AY]0([0-9]{2})([0-9]{6})[0-9]{2}",
+                           clean(row.get("通關簽審文件編號")))
+    serial = re.search(r"第([0-9]{6})號$", clean(row.get("許可證字號")))
+    if customs and serial and customs[2] == serial[1]:
+        return customs[1] + customs[2]
+    return ""
+
+
+def link_nhi_licenses(records: list[dict], labels: list[dict], source_path: Path) -> dict:
+    # Keep cancelled entries in the crosswalk so they cannot silently match an active license.
+    by_id: dict[str, set[str]] = {}
+    for row in read_tfda_json(source_path):
+        identifier = customs_license_id(row)
+        if identifier:
+            by_id.setdefault(identifier, set()).add(clean(row.get("許可證字號")))
+    active = {label["license"] for label in labels}
+    counts = Counter(total=len(records))
+    for record in records:
+        identifier = official_license_id(record["drugUrl"])
+        candidates = sorted(by_id.get(identifier, set()))
+        status = ("missing_official_id" if not identifier else
+                  "unresolved" if not candidates else
+                  "ambiguous" if len(candidates) > 1 else
+                  "inactive" if candidates[0] not in active else "matched")
+        record.update(licenseId=identifier, licenseCandidates=candidates,
+                      licenses=candidates if status == "matched" else [], licenseStatus=status)
+        counts[status] += 1
+    return dict(counts)
 
 
 def chapter_tokens(value: str) -> list[str]:
@@ -396,6 +447,7 @@ def build(args: argparse.Namespace) -> dict[str, object]:
     as_of = date.fromisoformat(args.as_of)
     records, stats = load_current_records(args.csv, as_of)
     labels, tfda_stats = load_tfda_labels(args.tfda_licenses)
+    linkage_stats = link_nhi_licenses(records, labels, args.tfda_licenses)
     expected = {token for row in records for token in chapter_tokens(row["chapter"])}
     if args.rules_text:
         rules_text = args.rules_text.read_text(encoding="utf-8")
@@ -418,6 +470,7 @@ def build(args: argparse.Namespace) -> dict[str, object]:
         "officialTfdaLicensesUrl": OFFICIAL_TFDA_LICENSES_URL,
         "stats": stats,
         "tfdaStats": tfda_stats,
+        "linkageStats": linkage_stats,
     }
     render_html(args.template, args.output, records, chapters, labels, meta)
     return {"output": str(args.output), "meta": meta, "missingChapters": missing}
