@@ -6,7 +6,7 @@ on:
     paths:
       - ".github/workflows/update-nhi-lookup.yml"
       - "tools/nhi/**"
-      - "tests/test_nhi_lookup.py"
+      - "tests/test_nhi*.py"
       - "index.html"
       - ".nojekyll"
       - "inserts/**"
@@ -94,7 +94,11 @@ jobs:
           assert "Pemetrexed" in page
           assert "https://www.nhi.gov.tw/" in page
           assert "https://mcp.fda.gov.tw/im_detail_1/" in page
-          assert "TFDA 電子仿單" in page
+          assert "TFDA 藥證／仿單入口" in page
+          links = meta["linkageStats"]
+          assert links["total"] == meta["recordCount"], links
+          assert sum(links.get(k, 0) for k in ("matched", "inactive", "unresolved", "missing_official_id", "ambiguous")) == links["total"], links
+          assert links.get("confirmed", 0) == links.get("matched", 0) + links.get("inactive", 0), links
           print(json.dumps(meta, ensure_ascii=False, indent=2))
           PY
       - name: Include electronic insert search
