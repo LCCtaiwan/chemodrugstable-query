@@ -46,11 +46,11 @@ const RULES=__RULES_JSON__;
 const LABELS=__LABELS_JSON__;
 const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const safeUrl=value=>{try{const url=new URL(value);return url.protocol==='https:'&&(url.hostname==='nhi.gov.tw'||url.hostname.endsWith('.nhi.gov.tw'))?url.href:'#'}catch{return '#'}};
+const safeUrl=value=>{try{const url=new URL(value);return url.protocol==='https:'&&(url.hostname==='nhi.gov.tw'||url.hostname.endsWith('.nhi.gov.tw')||url.hostname==='lmspiq.fda.gov.tw')?url.href:'#'}catch{return '#'}};
 const safeTfdaUrl=value=>{try{const url=new URL(value);return url.protocol==='https:'&&url.hostname==='mcp.fda.gov.tw'?url.href:'#'}catch{return '#'}};
 const chapterTokens=value=>(value||'').split(/[,;，；、]/).map(x=>x.replace(/\s/g,'').replace(/\.$/,'')).filter(x=>/^\d{1,2}(?:\.\d{1,3}){1,5}$/.test(x));
-RECORDS.forEach(r=>r._search=[r.code,r.en,r.zh,r.ingredient,r.atc].join(' ').toLowerCase());
-LABELS.forEach(r=>r._search=[r.license,r.en,r.zh,r.ingredient,r.form].join(' ').toLowerCase());
+RECORDS.forEach(r=>r._search=[r.code,r.en,r.zh,r.ingredient,r.atc,...(r.licenses||[])].join(' ').toLowerCase());
+LABELS.forEach(r=>r._search=[r.license,r.en,r.zh,r.ingredient,r.form,r.indications].join(' ').toLowerCase());
 
 function ruleLineKind(line){
   if(/^\d+(?:\.\d+){1,5}\.?/.test(line))return 'chapter-title';
@@ -89,9 +89,15 @@ function ruleUrlFor(items,chapter){
   return urls.find(value=>{try{const name=new URL(value).searchParams.get('DurgFileName')||'';return name.startsWith(`${chapter}.`)||name.startsWith(`${chapter}_`)}catch{return false}})||urls[0]||'';
 }
 
+const LABEL_BY_LICENSE=new Map(LABELS.map(r=>[r.license,r]));
+function linkedLicenseCell(r){
+  const labels=(r.licenses||[]).map(x=>LABEL_BY_LICENSE.get(x)).filter(Boolean);
+  if(!labels.length)return '<span>尚未確認對應許可證</span>';
+  return labels.map(x=>`<b>${esc(x.license)}</b><p>TFDA 核准適應症：${esc(x.indications||'來源未提供')}</p><a href="${esc(safeTfdaUrl(x.url))}" target="_blank" rel="noopener">官方仿單入口</a>`).join('<hr>');
+}
 function itemTable(items){
-  const rows=items.map(r=>`<tr><td class="code"><a href="${esc(safeUrl(r.drugUrl))}" target="_blank" rel="noopener">${esc(r.code)}</a></td><td class="drugname"><b>${esc(r.zh||'—')}</b><span>${esc(r.en||'—')}</span></td><td>${esc(r.ingredient||'—')}</td><td>${esc(r.spec||r.form||'—')}</td><td>${esc(r.price||'—')}${Number(r.price)===0?'<br><small>支付價為 0，請到官網核對</small>':''}</td><td>${esc(r.start||'—')}</td><td>${esc(r.end||'—')}</td></tr>`).join('');
-  return `<div class="tablewrap"><table><thead><tr><th>健保碼</th><th>藥品名稱</th><th>成分</th><th>規格／劑型</th><th>支付價</th><th>有效起日</th><th>有效迄日</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  const rows=items.map(r=>`<tr><td class="code"><a href="${esc(safeUrl(r.drugUrl))}" target="_blank" rel="noopener">${esc(r.code)}</a></td><td class="drugname"><b>${esc(r.zh||'—')}</b><span>${esc(r.en||'—')}</span></td><td>${linkedLicenseCell(r)}</td><td>${esc(r.ingredient||'—')}</td><td>${esc(r.spec||r.form||'—')}</td><td>${esc(r.price||'—')}${Number(r.price)===0?'<br><small>支付價為 0，請到官網核對</small>':''}</td><td>${esc(r.start||'—')}</td><td>${esc(r.end||'—')}</td></tr>`).join('');
+  return `<div class="tablewrap"><table><thead><tr><th>健保碼</th><th>藥品名稱</th><th>許可證／核准適應症</th><th>成分</th><th>規格／劑型</th><th>支付價</th><th>有效起日</th><th>有效迄日</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function renderGroup(chapter,items){
@@ -108,8 +114,8 @@ function renderGroup(chapter,items){
 
 function renderLabels(labels,total){
   const note=total>labels.length?`找到 ${total} 張，先顯示前 ${labels.length} 張。`:`找到 ${total} 張。`;
-  const rows=labels.map(item=>`<div class="label-row"><div class="label-name"><b>${esc(item.zh||'—')}</b><span>${esc(item.en||'—')}</span><div class="label-meta">${esc(item.license)}${item.form?` · ${esc(item.form)}`:''}</div></div><a class="insert-link" href="${esc(safeTfdaUrl(item.url))}" target="_blank" rel="noopener">開啟官方仿單</a></div>`).join('');
-  return `<article class="labels"><div class="labels-head"><div><h2>TFDA 電子仿單</h2><p>依實際品項與許可證開啟食藥署官方頁面</p></div><span class="source-tag">TFDA</span></div><div class="label-body"><p class="source-note">${esc(note)}同一學名可能有不同廠牌，請選擇實際使用品項。</p>${rows?`<div class="label-list">${rows}</div>`:'<div class="empty"><h2>查無對應電子仿單品項</h2><p>可改用完整學名、中文或英文商品名重試。</p></div>'}</div></article>`;
+  const rows=labels.map(item=>`<div class="label-row"><div class="label-name"><b>${esc(item.zh||'—')}</b><span>${esc(item.en||'—')}</span><div class="label-meta">${esc(item.license)}${item.form?` · ${esc(item.form)}`:''}</div><p>TFDA 核准適應症：${esc(item.indications||'來源未提供')}</p></div><a class="insert-link" href="${esc(safeTfdaUrl(item.url))}" target="_blank" rel="noopener">官方仿單入口</a></div>`).join('');
+  return `<article class="labels"><div class="labels-head"><div><h2>TFDA 藥證／仿單入口</h2><p>依實際品項與許可證開啟食藥署官方頁面</p></div><span class="source-tag">TFDA</span></div><div class="label-body"><p class="source-note">${esc(note)}核准適應症與健保給付條件不同，請分別查看。入口不代表已取得電子仿單全文。</p>${rows?`<div class="label-list">${rows}</div>`:'<div class="empty"><h2>查無對應電子仿單品項</h2><p>可改用完整學名、中文或英文商品名重試。</p></div>'}</div></article>`;
 }
 
 function search(){
@@ -117,9 +123,12 @@ function search(){
   const keyword=raw.toLowerCase();
   const results=$('results');
   if(keyword.length<2){$('summary').textContent='';results.innerHTML='<div class="panel empty"><h2>請至少輸入 2 個字元</h2><p>可搜尋成分、品名、健保碼、許可證或 ATC 碼。</p></div>';return;}
-  const matched=RECORDS.filter(r=>r._search.includes(keyword));
+  const textLabels=LABELS.filter(r=>r._search.includes(keyword));
+  const textLicenses=new Set(textLabels.map(r=>r.license));
+  const matched=RECORDS.filter(r=>r._search.includes(keyword)||(r.licenses||[]).some(x=>textLicenses.has(x)));
   const shown=matched.slice(0,300);
-  const matchedLabels=LABELS.filter(r=>r._search.includes(keyword));
+  const linkedLicenses=new Set(matched.flatMap(r=>r.licenses||[]));
+  const matchedLabels=LABELS.filter(r=>textLicenses.has(r.license)||linkedLicenses.has(r.license));
   const shownLabels=matchedLabels.slice(0,50);
   const groups=new Map();
   shown.forEach(item=>{
@@ -127,13 +136,13 @@ function search(){
     const keys=chapters.length?chapters:[''];
     keys.forEach(key=>{if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item);});
   });
-  $('summary').textContent=`健保目前有效品項 ${matched.length} 筆${matched.length>300?'（先顯示前 300 筆）':''}、給付章節 ${groups.size} 個；TFDA 電子仿單品項 ${matchedLabels.length} 張。`;
-  const nhiHtml=groups.size?[...groups.entries()].map(([chapter,items])=>renderGroup(chapter,items)).join(''):'<div class="panel empty"><h2>查無健保給付品項</h2><p>仍可查看下方 TFDA 電子仿單，或改用英文成分、商品名或健保碼重試。</p></div>';
+  $('summary').textContent=`健保目前有效品項 ${matched.length} 筆${matched.length>300?'（先顯示前 300 筆）':''}、給付章節 ${groups.size} 個；TFDA 藥證／仿單入口品項 ${matchedLabels.length} 張。`;
+  const nhiHtml=groups.size?[...groups.entries()].map(([chapter,items])=>renderGroup(chapter,items)).join(''):'<div class="panel empty"><h2>查無健保給付品項</h2><p>仍可查看下方 TFDA 藥證／仿單入口，或改用英文成分、商品名或健保碼重試。</p></div>';
   results.innerHTML=nhiHtml+renderLabels(shownLabels,matchedLabels.length);
   const url=new URL(location.href);url.searchParams.set('q',raw);history.replaceState(null,'',url);
 }
 
-$('meta').innerHTML=[`健保目前有效 ${META.recordCount.toLocaleString()} 筆`,`TFDA 許可證 ${META.tfdaRecordCount.toLocaleString()} 張`,`規定版本 ${META.rulesVersion}`,`有效基準 ${META.asOf}`,`已解析 ${META.chapterCount} 章`].map(x=>`<span class="pill">${esc(x)}</span>`).join('');
+$('meta').innerHTML=[`健保目前有效 ${META.recordCount.toLocaleString()} 筆`,`TFDA 許可證 ${META.tfdaRecordCount.toLocaleString()} 張`,`規定版本 ${META.rulesVersion}`,`有效基準 ${META.asOf}`,`已解析 ${META.chapterCount} 章`,`健保碼已對應許可證 ${META.linkageStats?.matched||0} 筆`].map(x=>`<span class="pill">${esc(x)}</span>`).join('');
 $('footer').innerHTML=`資料來源：<a href="${esc(META.officialRulesPage)}" target="_blank" rel="noopener">衛生福利部中央健康保險署藥品給付規定</a>、<a href="${esc(META.officialItemsUrl)}" target="_blank" rel="noopener">健保用藥品項開放資料</a>及<a href="${esc(META.officialTfdaLicensesUrl)}" target="_blank" rel="noopener">TFDA 未註銷藥品許可證資料集</a>。資料建置時間 ${esc(META.generatedAt)}。本頁未經院內人工核對，不取代最新公告、醫師判斷、申報規範或院內簽核。`;
 $('searchBtn').onclick=search;$('q').addEventListener('keydown',event=>{if(event.key==='Enter')search();});
 const initial=new URLSearchParams(location.search).get('q')||'';$('q').value=initial;if(initial)search();else $('q').focus();
