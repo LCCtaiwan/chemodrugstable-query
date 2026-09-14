@@ -9,6 +9,8 @@ on:
       - "tests/test_nhi_lookup.py"
       - "index.html"
       - ".nojekyll"
+      - "inserts/**"
+      - "data/inserts/documents.json"
   schedule:
     - cron: "17 18 * * *"
   workflow_dispatch:
@@ -95,6 +97,14 @@ jobs:
           assert "TFDA 電子仿單" in page
           print(json.dumps(meta, ensure_ascii=False, indent=2))
           PY
+      - name: Include electronic insert search
+        if: steps.source.outputs.ready == 'true'
+        run: |
+          mkdir -p _site/inserts
+          cp inserts/index.html _site/inserts/index.html
+          if [ -f data/inserts/documents.json ]; then
+            cp data/inserts/documents.json _site/inserts/documents.json
+          fi
       - uses: actions/configure-pages@v6
         if: steps.source.outputs.ready == 'true'
       - uses: actions/upload-pages-artifact@v5
