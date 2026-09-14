@@ -1,0 +1,19 @@
+{
+  "asOf": "2026-09-14",
+  "stats": {
+    "total": 45179,
+    "matched": 28638,
+    "unresolved": 16183,
+    "missing_official_id": 358
+  },
+  "nhiSourceStats": {
+    "source": 224811,
+    "historical_or_future": 179632,
+    "current_unique": 45179,
+    "with_chapter": 17450
+  },
+  "sourceSha256": {
+    "nhi": "ae652960d9b7b139d514eafb57fcb4d13d45e4a631cc5e839f495ff53006340f",
+    "tfda": "f65a43a8ae1a3f4db4b1f27001b36f1de91b5b680bd4cd09aa100a327c88699b"
+  }
+}

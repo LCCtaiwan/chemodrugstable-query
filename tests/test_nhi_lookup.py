@@ -299,7 +299,7 @@ Pages: 422
         self.assertIn("logicalRuleBlocks", template)
         self.assertIn("ruleUrlFor", template)
         self.assertIn("__LABELS_JSON__", template)
-        self.assertIn("TFDA 電子仿單", template)
+        self.assertIn("TFDA 藥證／仿單入口", template)
         self.assertIn("rule-details", template)
         self.assertIn('class="rule-details" open', template)
         self.assertNotIn("mark-bio", template)

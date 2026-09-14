@@ -33,7 +33,7 @@ jobs:
       - name: Install PDF tools
         run: sudo apt-get update && sudo apt-get install -y poppler-utils poppler-data
       - name: Run cleaner tests
-        run: python3 -m unittest tests/test_nhi_lookup.py
+        run: python3 -m unittest discover -s tests -p 'test_nhi*.py'
       - name: Read verified official source
         run: |
           echo "RULES_PDF_URL=$(jq -r .rulesPdf tools/nhi/rules_source.json)" >> "$GITHUB_ENV"
