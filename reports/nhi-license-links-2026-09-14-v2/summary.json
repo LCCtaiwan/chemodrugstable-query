@@ -1,0 +1,23 @@
+{
+  "asOf": "2026-09-14",
+  "stats": {
+    "total": 45179,
+    "matched": 30247,
+    "confirmed": 44777,
+    "method_customs_id": 42890,
+    "inactive": 14530,
+    "method_license_type_normalization": 1887,
+    "unresolved": 45,
+    "missing_official_id": 357
+  },
+  "nhiSourceStats": {
+    "source": 224811,
+    "historical_or_future": 179632,
+    "current_unique": 45179,
+    "with_chapter": 17450
+  },
+  "sourceSha256": {
+    "nhi": "ae652960d9b7b139d514eafb57fcb4d13d45e4a631cc5e839f495ff53006340f",
+    "tfda": "0b31742f1d86e3c8cefc6f8ccb32e752ec731ba3412d36b830e95f57198f7100"
+  }
+}
