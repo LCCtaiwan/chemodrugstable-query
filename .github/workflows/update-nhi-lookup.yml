@@ -7,6 +7,8 @@ on:
       - ".github/workflows/update-nhi-lookup.yml"
       - "tools/nhi/**"
       - "tests/test_nhi*.py"
+      - "inserts/**"
+      - "data/inserts/**"
       - "index.html"
       - ".nojekyll"
       - "inserts/**"
