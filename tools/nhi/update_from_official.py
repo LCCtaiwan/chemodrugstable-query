@@ -37,6 +37,10 @@ MIN_RULES_PDF_PAGES = 300
 MIN_RULES_DOCX_BYTES = 2_000_000
 
 
+class TransientDownloadError(RuntimeError):
+    """官方來源暫時無法下載；可安全跳過本次發布。"""
+
+
 class LinkParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -69,6 +73,12 @@ def checked_url(value: str) -> str:
     return value
 
 
+def is_transient_download_error(exc: BaseException) -> bool:
+    if isinstance(exc, urllib.error.HTTPError):
+        return exc.code in {408, 425, 429} or 500 <= exc.code < 600
+    return True
+
+
 def download(url: str, target: Path, timeout: int = 240, attempts: int = 5) -> tuple[str, str]:
     checked = checked_url(url)
     for attempt in range(1, attempts + 1):
@@ -85,8 +95,12 @@ def download(url: str, target: Path, timeout: int = 240, attempts: int = 5) -> t
             return final_url, content_disposition
         except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException) as exc:
             target.unlink(missing_ok=True)
-            if attempt == attempts:
+            if not is_transient_download_error(exc):
                 raise
+            if attempt == attempts:
+                raise TransientDownloadError(
+                    f"官方來源下載失敗（已重試 {attempts} 次）：{checked}；{exc}"
+                ) from exc
             delay = min(5 * (2 ** (attempt - 1)), 60)
             print(f"下載中斷，第 {attempt}/{attempts} 次；{delay} 秒後重試：{exc}", file=sys.stderr)
             time.sleep(delay)
@@ -318,8 +332,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main() -> None:
-    args = parse_args()
+def run_update(args: argparse.Namespace) -> None:
     builder = load_builder()
     items_url = args.items_url or builder.OFFICIAL_ITEMS_URL
     tfda_licenses_url = args.tfda_licenses_url or builder.OFFICIAL_TFDA_LICENSES_URL
@@ -425,6 +438,16 @@ def main() -> None:
             rulesPdf=final_pdf_url,
         )
         print(json.dumps(report, ensure_ascii=False, indent=2))
+
+
+def main() -> None:
+    args = parse_args()
+    try:
+        run_update(args)
+    except TransientDownloadError as exc:
+        message = f"{exc}；本次不發布，保留線上既有版本"
+        write_status(args.status_file, "unavailable", message)
+        print(message, file=sys.stderr)
 
 
 if __name__ == "__main__":

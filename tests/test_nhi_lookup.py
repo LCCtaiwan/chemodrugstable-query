@@ -4,8 +4,10 @@ import json
 import tempfile
 import unittest
 import zipfile
+from argparse import Namespace
 from datetime import date
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -174,6 +176,70 @@ Pages: 422
     def test_own_pages_metadata_url_is_allowed(self):
         url = "https://lcctaiwan.github.io/chemodrugstable-query/nhi/data_version.json"
         self.assertEqual(UPDATE_MODULE.checked_url(url), url)
+
+    def test_exhausted_download_retries_raise_transient_error(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            target = Path(temp_dir) / "source.dat"
+            with (
+                mock.patch.object(
+                    UPDATE_MODULE.urllib.request,
+                    "urlopen",
+                    side_effect=UPDATE_MODULE.http.client.RemoteDisconnected(
+                        "Remote end closed connection without response"
+                    ),
+                ) as urlopen,
+                mock.patch.object(UPDATE_MODULE.time, "sleep"),
+            ):
+                with self.assertRaises(UPDATE_MODULE.TransientDownloadError):
+                    UPDATE_MODULE.download(
+                        "https://www.nhi.gov.tw/source.dat", target, attempts=2
+                    )
+        self.assertEqual(urlopen.call_count, 2)
+        self.assertFalse(target.exists())
+
+    def test_permanent_http_error_is_not_downgraded(self):
+        error = UPDATE_MODULE.urllib.error.HTTPError(
+            "https://www.nhi.gov.tw/missing", 404, "Not Found", {}, None
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            target = Path(temp_dir) / "source.dat"
+            with (
+                mock.patch.object(
+                    UPDATE_MODULE.urllib.request, "urlopen", side_effect=error
+                ) as urlopen,
+                mock.patch.object(UPDATE_MODULE.time, "sleep") as sleep,
+            ):
+                with self.assertRaises(UPDATE_MODULE.urllib.error.HTTPError):
+                    UPDATE_MODULE.download(
+                        "https://www.nhi.gov.tw/missing", target, attempts=5
+                    )
+        self.assertEqual(urlopen.call_count, 1)
+        sleep.assert_not_called()
+
+    def test_transient_download_failure_writes_unavailable_status(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            status_file = Path(temp_dir) / "source_status.json"
+            args = Namespace(status_file=status_file)
+            error = UPDATE_MODULE.TransientDownloadError("官方來源暫時中斷")
+            with (
+                mock.patch.object(UPDATE_MODULE, "parse_args", return_value=args),
+                mock.patch.object(UPDATE_MODULE, "run_update", side_effect=error),
+            ):
+                UPDATE_MODULE.main()
+            status = json.loads(status_file.read_text(encoding="utf-8"))
+        self.assertEqual(status["status"], "unavailable")
+        self.assertIn("保留線上既有版本", status["message"])
+
+    def test_non_download_error_still_fails(self):
+        args = Namespace(status_file=None)
+        with (
+            mock.patch.object(UPDATE_MODULE, "parse_args", return_value=args),
+            mock.patch.object(
+                UPDATE_MODULE, "run_update", side_effect=RuntimeError("資料格式異常")
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "資料格式異常"):
+                UPDATE_MODULE.main()
 
     def test_tfda_zip_is_deduplicated_and_cancelled_license_is_excluded(self):
         rows = [

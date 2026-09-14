@@ -64,6 +64,9 @@ jobs:
             echo
             echo "- 狀態：$STATUS"
             echo "- 說明：$MESSAGE"
+            if [ "$STATUS" != "ready" ]; then
+              echo "- 發布：已跳過，GitHub Pages 保留既有版本"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Verify build metadata
         if: steps.source.outputs.ready == 'true'
