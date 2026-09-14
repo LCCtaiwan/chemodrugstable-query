@@ -28,7 +28,7 @@ OFFICIAL_ITEMS_URL = (
 )
 OFFICIAL_RULES_PAGE = "https://www.nhi.gov.tw/ch/np-2508-1.html"
 OFFICIAL_ITEM_SEARCH = "https://info.nhi.gov.tw/INAE3000/INAE3000S01?type=app"
-OFFICIAL_TFDA_LICENSES_URL = "https://data.fda.gov.tw/data/opendata/export/37/json"
+OFFICIAL_TFDA_LICENSES_URL = "https://data.fda.gov.tw/data/opendata/export/36/json"
 OFFICIAL_TFDA_INSERT_BASE = "https://mcp.fda.gov.tw/im_detail_1/"
 MIN_TFDA_RECORDS = 10000
 MIN_RULES_TEXT_CHARS = 500_000
@@ -240,7 +240,7 @@ def official_license_id(url: str) -> str:
         ids = urllib.parse.parse_qs(parsed.query).get("licId", [])
         if (parsed.scheme == "https" and parsed.hostname == "lmspiq.fda.gov.tw"
                 and parsed.path == "/web/DRPIQ/DRPIQ1000Result"
-                and len(ids) == 1 and re.fullmatch(r"[0-9]{8}", ids[0])):
+                and len(ids) == 1 and re.fullmatch(r"[0-9]{2}(?:[0-9]{6}|R[0-9]{5})", ids[0])):
             return ids[0]
     except ValueError:
         pass
@@ -250,24 +250,46 @@ def official_license_id(url: str) -> str:
 def customs_license_id(row: dict) -> str:
     """Normalize TFDA's customs identifier; require its serial to match the license.
 
-    DHY001048092xx -> 01048092. Unknown/S-prefixed formats remain unlinked.
+    DHY001048092xx -> 01048092. S prefixes and R serials are preserved; other formats remain unlinked.
     This is identifier normalization, never a formula applied to the NHI code.
     """
-    customs = re.fullmatch(r"DH[AY]0([0-9]{2})([0-9]{6})[0-9]{2}",
+    customs = re.fullmatch(r"DH[AY][0S]([0-9]{2})([0-9]{6}|R[0-9]{5})[0-9]{2}",
                            clean(row.get("通關簽審文件編號")))
-    serial = re.search(r"第([0-9]{6})號$", clean(row.get("許可證字號")))
+    serial = re.search(r"第([0-9]{6}|R[0-9]{5})號$", clean(row.get("許可證字號")))
     if customs and serial and customs[2] == serial[1]:
         return customs[1] + customs[2]
     return ""
 
 
 def link_nhi_licenses(records: list[dict], labels: list[dict], source_path: Path) -> dict:
-    # Keep cancelled entries in the crosswalk so they cannot silently match an active license.
-    by_id: dict[str, set[str]] = {}
-    for row in read_tfda_json(source_path):
+    # Learn the license-type encoding only from serial-consistent official customs IDs.
+    rows = read_tfda_json(source_path)
+    types: dict[str, dict[str, set[str]]] = {}
+    for row in rows:
         identifier = customs_license_id(row)
+        match = re.fullmatch(r"(.+第)([0-9]{6}|R[0-9]{5})號", clean(row.get("許可證字號")))
+        if identifier and match:
+            types.setdefault(match[1], {}).setdefault(identifier[:2], set()).add(match[2])
+    type_codes = {kind: next(iter(codes)) for kind, codes in types.items()
+                  if len(codes) == 1 and len(next(iter(codes.values()))) >= 2}
+    by_id: dict[str, set[str]] = {}
+    methods: dict[tuple[str, str], str] = {}
+    for row in rows:
+        license_no = clean(row.get("許可證字號"))
+        identifier = customs_license_id(row)
+        method = "customs_id"
+        # Fill missing customs fields from the unique encoding observed in this same source.
+        # Nonempty inconsistent customs fields remain unresolved for manual checking.
+        if not identifier and not clean(row.get("通關簽審文件編號")):
+            match = re.fullmatch(r"(.+第)([0-9]{6}|R[0-9]{5})號", license_no)
+            if match and match[1] in type_codes:
+                identifier = type_codes[match[1]] + match[2]
+                method = "license_type_normalization"
         if identifier:
-            by_id.setdefault(identifier, set()).add(clean(row.get("許可證字號")))
+            by_id.setdefault(identifier, set()).add(license_no)
+            key = (identifier, license_no)
+            if key not in methods or method == "customs_id":
+                methods[key] = method
     active = {label["license"] for label in labels}
     counts = Counter(total=len(records))
     for record in records:
@@ -277,9 +299,14 @@ def link_nhi_licenses(records: list[dict], labels: list[dict], source_path: Path
                   "unresolved" if not candidates else
                   "ambiguous" if len(candidates) > 1 else
                   "inactive" if candidates[0] not in active else "matched")
+        method = methods.get((identifier, candidates[0]), "") if len(candidates) == 1 else ""
         record.update(licenseId=identifier, licenseCandidates=candidates,
-                      licenses=candidates if status == "matched" else [], licenseStatus=status)
+                      licenses=candidates if status == "matched" else [], licenseStatus=status,
+                      licenseMethod=method)
         counts[status] += 1
+        if status in ("matched", "inactive"):
+            counts["confirmed"] += 1
+            counts["method_" + method] += 1
     return dict(counts)
 
 
@@ -479,7 +506,7 @@ def build(args: argparse.Namespace) -> dict[str, object]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--csv", type=Path, required=True, help="健保署藥品品項 CSV")
-    parser.add_argument("--tfda-licenses", type=Path, required=True, help="TFDA 第 37 號許可證 JSON 或官方 ZIP")
+    parser.add_argument("--tfda-licenses", type=Path, required=True, help="TFDA 第 36 號許可證 JSON 或官方 ZIP")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--rules-pdf", type=Path, help="健保署最新版藥品給付規定 PDF")
     source.add_argument("--rules-docx", type=Path, help="健保署最新版藥品給付規定 Word")
