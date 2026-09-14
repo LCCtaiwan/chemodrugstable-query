@@ -33,7 +33,7 @@ footer{color:var(--muted);font-size:12px;line-height:1.7;padding:3px 2px}footer 
       <input id="q" type="search" placeholder="輸入成分、中文／英文品名、健保碼、許可證或 ATC 碼" autocomplete="off" spellcheck="false">
       <button id="searchBtn" type="button">查詢</button>
     </div>
-    <div class="help">至少輸入 2 個字元；網址中的 <code>?q=</code> 可由化療藥品頁自動帶入。</div>
+    <div class="help">日期篩選不代表藥證仍有效或藥品仍供應。至少輸入 2 個字元；網址中的 <code>?q=</code> 可由化療藥品頁自動帶入。</div>
     <div class="meta" id="meta"></div>
   </section>
   <div id="summary"></div>
@@ -119,7 +119,7 @@ function renderGroup(chapter,items){
 function renderLabels(labels,total){
   const note=total>labels.length?`找到 ${total} 張，先顯示前 ${labels.length} 張。`:`找到 ${total} 張。`;
   const rows=labels.map(item=>`<div class="label-row"><div class="label-name"><b>${esc(item.zh||'—')}</b><span>${esc(item.en||'—')}</span><div class="label-meta">${esc(item.license)}${item.form?` · ${esc(item.form)}`:''}</div><p>TFDA 核准適應症：${esc(item.indications||'來源未提供')}</p></div><a class="insert-link" href="${esc(safeTfdaUrl(item.url))}" target="_blank" rel="noopener">官方仿單入口</a></div>`).join('');
-  return `<article class="labels"><div class="labels-head"><div><h2>TFDA 藥證／仿單入口</h2><p>依實際品項與許可證開啟食藥署官方頁面</p></div><span class="source-tag">TFDA</span></div><div class="label-body"><p class="source-note">${esc(note)}核准適應症與健保給付條件不同，請分別查看。入口不代表已取得電子仿單全文。</p>${rows?`<div class="label-list">${rows}</div>`:'<div class="empty"><h2>查無對應電子仿單品項</h2><p>可改用完整學名、中文或英文商品名重試。</p></div>'}</div></article>`;
+  return `<article class="labels"><div class="labels-head"><div><h2>TFDA 藥證／仿單入口</h2><p>依實際品項與許可證開啟食藥署官方頁面</p></div><span class="source-tag">TFDA</span></div><div class="label-body"><p class="source-note">${esc(note)}核准適應症與健保給付條件不同，請分別查看。入口不代表已取得電子仿單全文。</p>${rows?`<div class="label-list">${rows}</div>`:'<div class="empty"><h2>查無對應未註銷藥證</h2><p>可改用完整學名、中文或英文商品名重試。</p></div>'}</div></article>`;
 }
 
 function search(){
@@ -140,13 +140,13 @@ function search(){
     const keys=chapters.length?chapters:[''];
     keys.forEach(key=>{if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item);});
   });
-  $('summary').textContent=`健保目前有效品項 ${matched.length} 筆${matched.length>300?'（先顯示前 300 筆）':''}、給付章節 ${groups.size} 個；TFDA 藥證／仿單入口品項 ${matchedLabels.length} 張。`;
+  $('summary').textContent=`符合健保日期條件品項 ${matched.length} 筆${matched.length>300?'（先顯示前 300 筆）':''}、給付章節 ${groups.size} 個；TFDA 藥證／仿單入口品項 ${matchedLabels.length} 張。`;
   const nhiHtml=groups.size?[...groups.entries()].map(([chapter,items])=>renderGroup(chapter,items)).join(''):'<div class="panel empty"><h2>查無健保給付品項</h2><p>仍可查看下方 TFDA 藥證／仿單入口，或改用英文成分、商品名或健保碼重試。</p></div>';
   results.innerHTML=nhiHtml+renderLabels(shownLabels,matchedLabels.length);
   const url=new URL(location.href);url.searchParams.set('q',raw);history.replaceState(null,'',url);
 }
 
-$('meta').innerHTML=[`健保目前有效 ${META.recordCount.toLocaleString()} 筆`,`TFDA 許可證 ${META.tfdaRecordCount.toLocaleString()} 張`,`規定版本 ${META.rulesVersion}`,`有效基準 ${META.asOf}`,`已解析 ${META.chapterCount} 章`,`健保碼對應未註銷藥證 ${META.linkageStats?.matched||0} 筆`,`對應已註銷／廢止藥證 ${META.linkageStats?.inactive||0} 筆`].map(x=>`<span class="pill">${esc(x)}</span>`).join('');
+$('meta').innerHTML=[`符合健保日期條件 ${META.recordCount.toLocaleString()} 筆`,`TFDA 許可證 ${META.tfdaRecordCount.toLocaleString()} 張`,`規定版本 ${META.rulesVersion}`,`有效基準 ${META.asOf}`,`已解析 ${META.chapterCount} 章`,`健保碼對應未註銷藥證 ${META.linkageStats?.matched||0} 筆`,`對應已註銷／廢止藥證 ${META.linkageStats?.inactive||0} 筆`].map(x=>`<span class="pill">${esc(x)}</span>`).join('');
 $('footer').innerHTML=`資料來源：<a href="${esc(META.officialRulesPage)}" target="_blank" rel="noopener">衛生福利部中央健康保險署藥品給付規定</a>、<a href="${esc(META.officialItemsUrl)}" target="_blank" rel="noopener">健保用藥品項開放資料</a>及<a href="${esc(META.officialTfdaLicensesUrl)}" target="_blank" rel="noopener">TFDA 藥品許可證資料集（含註銷狀態）</a>。資料建置時間 ${esc(META.generatedAt)}。本頁未經院內人工核對，不取代最新公告、醫師判斷、申報規範或院內簽核。`;
 $('searchBtn').onclick=search;$('q').addEventListener('keydown',event=>{if(event.key==='Enter')search();});
 const initial=new URLSearchParams(location.search).get('q')||'';$('q').value=initial;if(initial)search();else $('q').focus();
