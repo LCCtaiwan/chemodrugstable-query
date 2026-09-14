@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>電子仿單全文查詢｜試行版</title>
+<style>
+body{font:16px/1.7 system-ui,sans-serif;color:#152b40;background:#f5f8fa;margin:0}main{max-width:980px;margin:auto;padding:32px 20px}h1{font-size:30px;line-height:1.3}a{color:#075f99}label{display:block;font-weight:600}input{box-sizing:border-box;width:100%;padding:14px;border:1px solid #698398;border-radius:7px;font:inherit}button{font:inherit;padding:8px 16px;margin:12px 0;border:1px solid #698398;background:white;border-radius:5px;cursor:pointer}button:disabled{opacity:.5}article{background:white;padding:20px;margin:20px 0;border:1px solid #d8e2e9;border-radius:8px}h2{font-size:20px;margin:0}p{overflow-wrap:anywhere}.meta{color:#536778;font-size:14px}.warning{color:#934716}pre{white-space:pre-wrap;font:inherit;max-height:400px;overflow:auto}summary{cursor:pointer}#status{min-height:28px}
+</style>
+<main>
+<a href="../nhi/">健保給付與藥品查詢</a>
+<h1>電子仿單全文查詢</h1>
+<p>不限化療藥。試行版追蹤最多 100 份仿單：可抽取文字者可全文搜尋；其他文件可依藥名或許可證查找官方連結。</p>
+<p id="coverage" class="meta">正在讀取收錄資料…</p>
+<form id="search"><label for="mode">查詢方式</label><select id="mode" style="font:inherit;padding:10px;margin-bottom:12px"><option value="text">仿單全文</option><option value="name">藥名／許可證（含無可搜尋文字者）</option></select><label for="q">輸入查詢字詞</label><input id="q" placeholder="例如：腎功能不全" disabled><button id="submit" disabled>查詢</button></form>
+<p id="status" role="status" aria-live="polite"></p>
+<button id="export" disabled>匯出符合藥品 CSV</button>
+<div id="results"></div>
+<button id="more" hidden>顯示更多</button>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let documents=[], matches=[], shown=0;
+let searchMode='text';
+const normalized=s=>s.normalize('NFKC').replace(/\s+/g,'').toLocaleLowerCase();
+const el=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n};
+function safeSource(url){try{const u=new URL(url);return u.protocol==='https:'&&u.hostname==='mcp.fda.gov.tw'&&!u.username&&!u.password?u.href:null}catch{return null}}
+function renderMore(){
+ for(const group of matches.slice(shown,shown+20)){
+  const a=el('article','');a.append(el('h2',group.name),el('p',group.license,'meta'));
+  for(const hit of group.hits){
+   const d=hit.document;
+   if(d.last_check_status==='error')a.append(el('p',d.pages.length?'最近一次檢查失敗：以下為保留的舊版原文。':'下載或解析未成功；官方連結是否可開啟仍需確認。','warning'));
+   if(d.status==='needs_review_no_ocr')a.append(el('p','PDF 已取得，但文字未達收錄門檻（可能是掃描或混合格式）。請開啟官方仿單查看。','warning'));
+   a.append(el('p',`檢查：${d.last_checked}｜文字更新：${d.text_updated_at || '尚無'}`,'meta'));
+   const url=safeSource(d.source_url);
+   if(url){const link=el('a','查看官方仿單');link.href=url;link.target='_blank';link.rel='noopener noreferrer';a.append(link)}
+   for(const p of hit.pages){const details=el('details','');details.append(el('summary',`第 ${p.page_no} 頁：查看命中頁原文`),el('pre',p.text));a.append(details)}
+  }
+  $('results').append(a);
+ }
+ shown=Math.min(shown+20,matches.length);$('more').hidden=shown>=matches.length;
+}
+$('search').addEventListener('submit',e=>{
+ e.preventDefault();const q=normalized($('q').value.trim());matches=[];shown=0;$('results').replaceChildren();$('more').hidden=true;$('export').disabled=true;
+ if(!q){$('status').textContent='請輸入查詢字詞。';return}
+ const groups=new Map();searchMode=$('mode').value;
+ for(const d of documents){const pages=searchMode==='text'&&d.status==='text_available'?d.pages.filter(p=>normalized(p.text).includes(q)):[];
+ const nameMatch=normalized((d.drug_name||'')+' '+d.license_no).includes(q);
+ if(searchMode==='text'?!pages.length:!nameMatch)continue;
+ if(!groups.has(d.license_no))groups.set(d.license_no,{license:d.license_no,name:d.drug_name,hits:[]});groups.get(d.license_no).hits.push({document:d,pages});}
+ matches=[...groups.values()];$('status').textContent=`已收錄範圍內找到 ${matches.length} 個藥證。${searchMode==='text'?'只搜尋可用原文；掃描或未取得文字者不納入。':'依藥名／許可證比對；不代表仿單內文符合條件。'}`;$('export').disabled=!matches.length;renderMore();
+});
+$('more').addEventListener('click',renderMore);
+$('export').addEventListener('click',()=>{
+ const cell=s=>'"'+(/^[=+\-@\t\r]/.test(String(s))?"'":"")+String(s).replaceAll('"','""')+'"';
+ const rows=[['品名','許可證','頁碼','原文','來源','最後檢查','文字更新','檢查狀態','收錄狀態','查詢方式']];
+ for(const g of matches)for(const h of g.hits)for(const p of (h.pages.length?h.pages:[{page_no:'',text:''}]))rows.push([g.name,g.license,p.page_no,p.text,h.document.source_url,h.document.last_checked,h.document.text_updated_at||'',h.document.last_check_status,h.document.status,searchMode]);
+ const url=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=el('a','');a.href=url;a.download='electronic-inserts.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+(async()=>{try{
+ const response=await fetch('./documents.json',{cache:'no-store'});if(!response.ok)throw Error('not_ready');const data=await response.json();if(!Array.isArray(data.documents))throw Error('invalid');
+ documents=data.documents.map(d=>({...d,pages:Array.isArray(d.pages)?d.pages:[]}));
+ const searchable=documents.filter(d=>d.status==='text_available').length;
+ const stale=documents.filter(d=>d.last_check_status==='error').length;
+ $('coverage').textContent=`追蹤 ${data.documents.length} 份文件｜可全文搜尋 ${searchable} 份｜其中 ${stale} 份最近檢查失敗、保留舊版｜資料檢查：${data.checked_at}`;
+ $('q').disabled=$('submit').disabled=documents.length===0;$('status').textContent=documents.length?'輸入字詞以整理符合的藥品；無文字者請切換藥名／許可證查詢。':'目前尚無可搜尋原文，不能解讀成沒有符合藥品。';
+ }catch{$('coverage').textContent='尚未取得可用的電子仿單資料。';$('status').textContent='請先確認 GitHub Actions 的電子仿單下載結果。';}})();
+</script>
+</html>
