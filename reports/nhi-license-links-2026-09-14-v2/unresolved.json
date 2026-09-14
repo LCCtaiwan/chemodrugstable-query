@@ -1,0 +1,2816 @@
+[
+  {
+    "code": "A002031209",
+    "zh": "",
+    "licenseId": "01002031",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01002031"
+  },
+  {
+    "code": "A002089209",
+    "zh": "",
+    "licenseId": "01002089",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01002089"
+  },
+  {
+    "code": "A003033212",
+    "zh": "",
+    "licenseId": "01003033",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01003033"
+  },
+  {
+    "code": "A003160238",
+    "zh": "汎可寧注射液",
+    "licenseId": "01003160",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01003160"
+  },
+  {
+    "code": "A003684100",
+    "zh": "新維王５０公絲糖衣錠",
+    "licenseId": "01003684",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01003684"
+  },
+  {
+    "code": "A006514277",
+    "zh": "葡萄糖食鹽水注射液",
+    "licenseId": "01006514",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01006514"
+  },
+  {
+    "code": "A007801499",
+    "zh": "鎂佳胃液",
+    "licenseId": "01007801",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01007801"
+  },
+  {
+    "code": "A008977100",
+    "zh": "",
+    "licenseId": "01008977",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01008977"
+  },
+  {
+    "code": "A009499100",
+    "zh": "",
+    "licenseId": "01009499",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01009499"
+  },
+  {
+    "code": "A011631100",
+    "zh": "",
+    "licenseId": "01011631",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01011631"
+  },
+  {
+    "code": "A013262421",
+    "zh": "目施妥眼藥液",
+    "licenseId": "01013262",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01013262"
+  },
+  {
+    "code": "A013399100",
+    "zh": "",
+    "licenseId": "01013399",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01013399"
+  },
+  {
+    "code": "A013699277",
+    "zh": "克維糖注射液",
+    "licenseId": "01013699",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01013699"
+  },
+  {
+    "code": "A015367177",
+    "zh": "小兒培得賴維持液",
+    "licenseId": "01015367",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01015367"
+  },
+  {
+    "code": "A015789100",
+    "zh": "",
+    "licenseId": "01015789",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01015789"
+  },
+  {
+    "code": "A015933238",
+    "zh": "",
+    "licenseId": "01015933",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01015933"
+  },
+  {
+    "code": "A016376212",
+    "zh": "",
+    "licenseId": "01016376",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01016376"
+  },
+  {
+    "code": "A020996100",
+    "zh": "複方鴉片甘草合劑錠",
+    "licenseId": "01020996",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01020996"
+  },
+  {
+    "code": "A021362100",
+    "zh": "",
+    "licenseId": "01021362",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01021362"
+  },
+  {
+    "code": "A021648100",
+    "zh": "那普洛辛錠２５０公絲",
+    "licenseId": "01021648",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01021648"
+  },
+  {
+    "code": "A030376100",
+    "zh": "",
+    "licenseId": "01030376",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01030376"
+  },
+  {
+    "code": "A035254100",
+    "zh": "\"永勝\" 糖泰錠５公絲（格力本）",
+    "licenseId": "01035254",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01035254"
+  },
+  {
+    "code": "A035633930",
+    "zh": "",
+    "licenseId": "01035633",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01035633"
+  },
+  {
+    "code": "A036676100",
+    "zh": "莫痢止膠囊２公絲（欒必寧）",
+    "licenseId": "01036676",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01036676"
+  },
+  {
+    "code": "A038966100",
+    "zh": "",
+    "licenseId": "01038966",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01038966"
+  },
+  {
+    "code": "A040143100",
+    "zh": "特有利片",
+    "licenseId": "01040143",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01040143"
+  },
+  {
+    "code": "A042389100",
+    "zh": "樂伏脂錠２０公絲（樂瓦司他汀）〝汎生〞",
+    "licenseId": "01042389",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01042389"
+  },
+  {
+    "code": "A043044100",
+    "zh": "\"汎生\" 汎克壓錠25公絲(卡特普)",
+    "licenseId": "01043044",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01043044"
+  },
+  {
+    "code": "A049445143",
+    "zh": "\"內外\"思悅通內服液劑1毫克/毫升",
+    "licenseId": "01049445",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01049445"
+  },
+  {
+    "code": "AC04017510",
+    "zh": "\"福元\" 來縮酵素錠９０毫克",
+    "licenseId": "01004017",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01004017"
+  },
+  {
+    "code": "AC139131G0",
+    "zh": "\"瑞士\"鹽酸四環黴素膠囊250毫克",
+    "licenseId": "01013913",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01013913"
+  },
+  {
+    "code": "AC375211G0",
+    "zh": "\"美時\"鈣臨錠667公絲（醋酸鈣）",
+    "licenseId": "01037521",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=01037521"
+  },
+  {
+    "code": "B000371221",
+    "zh": "愛替治注射液",
+    "licenseId": "02000371",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=02000371"
+  },
+  {
+    "code": "B000371229",
+    "zh": "愛替治注射液",
+    "licenseId": "02000371",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=02000371"
+  },
+  {
+    "code": "B020239100",
+    "zh": "脈妥膜衣錠５０公絲",
+    "licenseId": "02020239",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=02020239"
+  },
+  {
+    "code": "B040833157",
+    "zh": "",
+    "licenseId": "52040833",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=52040833"
+  },
+  {
+    "code": "BC25808221",
+    "zh": "多受祿注射劑2毫克/毫升",
+    "licenseId": "02025808",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=02025808"
+  },
+  {
+    "code": "BC25808229",
+    "zh": "多受祿注射劑2毫克/毫升",
+    "licenseId": "02025808",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=02025808"
+  },
+  {
+    "code": "BC25808240",
+    "zh": "多受祿注射劑2毫克/毫升",
+    "licenseId": "02025808",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=02025808"
+  },
+  {
+    "code": "C001621100",
+    "zh": "溫刻痛錠１００公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=001621"
+  },
+  {
+    "code": "HCVDAA0001",
+    "zh": "DAKLINZA + SUNVEPRA治療基因型1B型24週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0002",
+    "zh": "VIEKIRAX + EXVIERA治療基因型1B型，無肝硬化或具代償性肝硬化12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0003",
+    "zh": "VIEKIRAX + EXVIERA + RIBAVIRIN治療基因型1A型，無肝硬化12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0004",
+    "zh": "VIEKIRAX + EXVIERA + RIBAVIRIN治療基因型1A型，代償性肝硬化24週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0005",
+    "zh": "ZEPATIER +/- RIBAVIRIN治療基因型1A型，無抗藥性病毒株，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0006",
+    "zh": "Zepatier + ribavirin治療基因型1a型，有抗藥性病毒株，16週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0007",
+    "zh": "Zepatier +/- ribavirin治療基因型1b型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0008",
+    "zh": "Zepatier治療基因型第4型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0009",
+    "zh": "Zepatier + ribavirin治療基因型第4型，16週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0010",
+    "zh": "HARVONI +/- RIBAVIRIN治療基因型第1、2、4、5或6型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0011",
+    "zh": "SOVALDI + RIBAVIRIN治療基因型第2型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0012",
+    "zh": "MAVIRET治療基因型第1、2、3、4、5或6型，8週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0013",
+    "zh": "MAVIRET治療基因型第1、2、3、4、5或6型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0014",
+    "zh": "MAVIRET治療基因型第1或3型，16週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0015",
+    "zh": "EPCLUSA治療基因型第1、2、3、4、5或6型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0016",
+    "zh": "EPCLUSA + RIBAVIRIN治療基因型第1、2、3、4、5或6型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0017",
+    "zh": "VOSEVI治療基因型第1、2、3、4、5或6型，12週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "HCVDAA0018",
+    "zh": "EPCLUSA + RIBAVIRIN治療基因型第1、2、3、4、5或6型，24週療程",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=0VDAA0"
+  },
+  {
+    "code": "KC27718221",
+    "zh": "必治癲注射液 10毫克/毫升",
+    "licenseId": "60027718",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=60027718"
+  },
+  {
+    "code": "N000900340",
+    "zh": "",
+    "licenseId": "12000900",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=12000900"
+  },
+  {
+    "code": "N015317100",
+    "zh": "",
+    "licenseId": "12015317",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=12015317"
+  },
+  {
+    "code": "N017799100",
+    "zh": "鹽酸罌粟鹼錠３０公絲",
+    "licenseId": "12017799",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=12017799"
+  },
+  {
+    "code": "N019870333",
+    "zh": "抹必立淨乳膏",
+    "licenseId": "12019870",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=12019870"
+  },
+  {
+    "code": "N026114100",
+    "zh": "痢邁寧膠囊２公絲（樂必寧）",
+    "licenseId": "12026114",
+    "licenseStatus": "unresolved",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=12026114"
+  },
+  {
+    "code": "X000002155",
+    "zh": "UCEPHAN ORAL SOLUTION (10％ SODIUM BENZONATE + 10％ SODIUM PHENYLLACETATE)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000002"
+  },
+  {
+    "code": "X000003110",
+    "zh": "PROGLYCEM 50MG/ML 30ML/BTL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000003"
+  },
+  {
+    "code": "X000004100",
+    "zh": "LYSODREN 500MG TAB.(MITOTANE 500MG/TAB)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000004"
+  },
+  {
+    "code": "X000006255",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000006"
+  },
+  {
+    "code": "X000007100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000007"
+  },
+  {
+    "code": "X000008100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000008"
+  },
+  {
+    "code": "X000009100",
+    "zh": "BUPHENYL TAB. 500MG (SOD. PHENYLBUTYRATE 500MG)(UCYCLYD PHARMA INC.)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000009"
+  },
+  {
+    "code": "X000010266",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000010"
+  },
+  {
+    "code": "X000011100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000011"
+  },
+  {
+    "code": "X000012100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000012"
+  },
+  {
+    "code": "X000013100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000013"
+  },
+  {
+    "code": "X000014238",
+    "zh": "DANTROLENE 20MG IV",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000014"
+  },
+  {
+    "code": "X000015100",
+    "zh": "DILANTIN 30MG CAP.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000015"
+  },
+  {
+    "code": "X000017255",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000017"
+  },
+  {
+    "code": "X000019263",
+    "zh": "雪瑞素 200UNITS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000019"
+  },
+  {
+    "code": "X000023248",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000023"
+  },
+  {
+    "code": "X0000262D2",
+    "zh": "適諾進凍晶注射劑 1.1MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000026"
+  },
+  {
+    "code": "X000028156",
+    "zh": "SUCRAID ORAL SOLUTION (SACROSIDASE ORAL SOLUTION 8500I.U./ML 118ML/BTL.)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000028"
+  },
+  {
+    "code": "X000029277",
+    "zh": "FLOLAN INJ.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000029"
+  },
+  {
+    "code": "X000032255",
+    "zh": "IMUKIN(INTERFERON GAMMA 1B)100UG(3MIU)/0.5ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000032"
+  },
+  {
+    "code": "X000033100",
+    "zh": "SYPRINE 250MG CAP.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000033"
+  },
+  {
+    "code": "X000035100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000035"
+  },
+  {
+    "code": "X000036229",
+    "zh": "賽默芬注射劑",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000036"
+  },
+  {
+    "code": "X000037100",
+    "zh": "CYSTAGON CAP. 150MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000037"
+  },
+  {
+    "code": "X000040100",
+    "zh": "TETRAHYDROBIOPTERIN TABLETS 10MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000040"
+  },
+  {
+    "code": "X000042255",
+    "zh": "必先優注射劑",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000042"
+  },
+  {
+    "code": "X000043100",
+    "zh": "1",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000043"
+  },
+  {
+    "code": "X000045100",
+    "zh": "康寧藥業有限公司",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000045"
+  },
+  {
+    "code": "X000047129",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000047"
+  },
+  {
+    "code": "X000049100",
+    "zh": "&#31185;&#25035;",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000049"
+  },
+  {
+    "code": "X000050100",
+    "zh": "&#31185;&#25035;",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000050"
+  },
+  {
+    "code": "X000051243",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000051"
+  },
+  {
+    "code": "X000053229",
+    "zh": "NORMOSANG 25MG/ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000053"
+  },
+  {
+    "code": "X000056100",
+    "zh": "普衛醒錠 200公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000056"
+  },
+  {
+    "code": "X000060292",
+    "zh": "ZADAXIN INJ.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000060"
+  },
+  {
+    "code": "X000061209",
+    "zh": "加力體能注射劑1克/5毫升",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000061"
+  },
+  {
+    "code": "X000063100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000063"
+  },
+  {
+    "code": "X000065172",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000065"
+  },
+  {
+    "code": "X000066221",
+    "zh": "艾德酉每靜脈注射用溶液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000066"
+  },
+  {
+    "code": "X000067162",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000067"
+  },
+  {
+    "code": "X000068100",
+    "zh": "TRACLEER 62.5MG FILM-COATED TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000068"
+  },
+  {
+    "code": "X000069100",
+    "zh": "TRACLEER 125MG FILM-COATED TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000069"
+  },
+  {
+    "code": "X000070138",
+    "zh": "非塔敏斯",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000070"
+  },
+  {
+    "code": "X000071110",
+    "zh": "艾維斯口服懸液劑",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000071"
+  },
+  {
+    "code": "X000072100",
+    "zh": "TETRAHYDROBIOPTERIN TABLETS 50MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000072"
+  },
+  {
+    "code": "X000074100",
+    "zh": "ZAVESCA CAPSULES 100MG (MIGLUSTAT) GALEN LIMITED",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000074"
+  },
+  {
+    "code": "X000075248",
+    "zh": "MYOZYME 50MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000075"
+  },
+  {
+    "code": "X000076221",
+    "zh": "NAGLAZYME INJ",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000076"
+  },
+  {
+    "code": "X000077100",
+    "zh": "ORFADIN CAP 2MG(NITISINONE) SWEDISH ORPHAN INTERNATIONAL AB",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000077"
+  },
+  {
+    "code": "X000078238",
+    "zh": "REMODULIN INJ. 1.0MG/ML 20ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000078"
+  },
+  {
+    "code": "X000079209",
+    "zh": "解麻注射液 0.4公克/公撮",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000079"
+  },
+  {
+    "code": "X000080219",
+    "zh": "INCRELEX 10MG/ML 4ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000080"
+  },
+  {
+    "code": "X000081216",
+    "zh": "ELAPRASE (IDURSULFASE) SOLUTION FOR I.V. 2MG/ML 6MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000081"
+  },
+  {
+    "code": "X000083121",
+    "zh": "111",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000083"
+  },
+  {
+    "code": "X000084100",
+    "zh": "康鐵寧 膠囊500公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000084"
+  },
+  {
+    "code": "X000085100",
+    "zh": "TRIENTINE DIHYDROCHLORIDE 300MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000085"
+  },
+  {
+    "code": "X000086100",
+    "zh": "NITOMAN 25MG TABLET",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000086"
+  },
+  {
+    "code": "X000086263",
+    "zh": "達卡巴仁注射劑２００公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000086"
+  },
+  {
+    "code": "X000087100",
+    "zh": "\"達克\" 美克多能錠５０公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000087"
+  },
+  {
+    "code": "X000087229",
+    "zh": "管立疏注射液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000087"
+  },
+  {
+    "code": "X000088219",
+    "zh": "力復非他注射液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000088"
+  },
+  {
+    "code": "X000093100",
+    "zh": "VOLIBRIS F.C. TABLET 5MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000093"
+  },
+  {
+    "code": "X000094100",
+    "zh": "VOLIBRIS F.C. TABLET 10MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000094"
+  },
+  {
+    "code": "X000095100",
+    "zh": "KUVAN TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000095"
+  },
+  {
+    "code": "X000096248",
+    "zh": "1",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000096"
+  },
+  {
+    "code": "X000097238",
+    "zh": "1",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000097"
+  },
+  {
+    "code": "X000098209",
+    "zh": "VINCRISTINE SULPHATE LYOPHILIZED POWDER FOR INJECTION 1MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000098"
+  },
+  {
+    "code": "X000099235",
+    "zh": "TYSABRI(NATALIZUMAB) CONCENTRATE FOR SOLUTION FOR INFUSION 300MG/15ML/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000099"
+  },
+  {
+    "code": "X000100229",
+    "zh": "VINBLASTINE TEVA 1MG/ML SOLUTION FOR INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000100"
+  },
+  {
+    "code": "X000101210",
+    "zh": "法舒克注射劑1.5公絲/毫升",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000101"
+  },
+  {
+    "code": "X000102271",
+    "zh": "CEREZYME 400 UNITS (IMIGLUCERASE)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000102"
+  },
+  {
+    "code": "X000103100",
+    "zh": "LYSODREN TAB.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000103"
+  },
+  {
+    "code": "X000105229",
+    "zh": "BUSULFEX (BUSULFAN) INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000105"
+  },
+  {
+    "code": "X000106243",
+    "zh": "SOLIRIS INJECTION（ECULIZUMAB)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000106"
+  },
+  {
+    "code": "X000107226",
+    "zh": "LEUSTATIN (CLADRIBINE) 8MG/8ML/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000107"
+  },
+  {
+    "code": "X000108100",
+    "zh": "GILENYA HARD CAP 0.5MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000108"
+  },
+  {
+    "code": "X000109139",
+    "zh": "MYCOSTATINE (NYSTATINE) SUSPENSION BUVABLE 100,000IU/ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000109"
+  },
+  {
+    "code": "X000110213",
+    "zh": "BICILLIN L-A DISPOSABLE SYRINGE (PENICILLIN G BENZATHINE INJECTABLE SUSPENSION) 2,400,000IU/4ML/SYRINGE)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000110"
+  },
+  {
+    "code": "X000111229",
+    "zh": "FOLCASIN（CALCIUM FOLINATE）10MG/ML, 100MG/10ML SOLUTION FOR INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000111"
+  },
+  {
+    "code": "X000112229",
+    "zh": "RESCUVOLIN 10MG/ML, 100MG/10ML SOLUTION FOR INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000112"
+  },
+  {
+    "code": "X000113255",
+    "zh": "BW-FOLIN 10MG/ML, 1000MG/100ML, SOLUTION FOR INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000113"
+  },
+  {
+    "code": "X000114229",
+    "zh": "CALCIUMFOLINAT-EBEWE INJECTION 10MG/ML (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000114"
+  },
+  {
+    "code": "X000115221",
+    "zh": "METHOTREXAT \"EBEWE\" 500MG/5ML（專案進口）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000115"
+  },
+  {
+    "code": "X000116248",
+    "zh": "ONCOTICE (CONTAINING 2-8╳10︿8 CFU TICE BCG)(專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000116"
+  },
+  {
+    "code": "X000117229",
+    "zh": "BW-FOLIN 10MG/ML, 100MG/10ML, SOLUTION FOR INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000117"
+  },
+  {
+    "code": "X000118221",
+    "zh": "BW-FOLIN 10MG/ML, 50MG/5ML, SOLUTION FOR INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000118"
+  },
+  {
+    "code": "X000119238",
+    "zh": "METHOTREXATE 25MG/ML, 500MG/20ML, SOLUTION FOR INJECTION (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000119"
+  },
+  {
+    "code": "X000120238",
+    "zh": "REMODULIN INJ. 5.0MG/ML 20ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000120"
+  },
+  {
+    "code": "X000121238",
+    "zh": "GLATIRAMER ACETATE(COPAXONE) 20MG SOLUTION FOR INJECTION, PRE-FILLED SYRINGE",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000121"
+  },
+  {
+    "code": "X000122248",
+    "zh": "脂黴素微脂粒凍晶乾粉注射劑 (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000122"
+  },
+  {
+    "code": "X000123100",
+    "zh": "CARBAGLU TABLETS 200MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000123"
+  },
+  {
+    "code": "X000124255",
+    "zh": "BW-FLUCIL（FLUOROURACIL）5000MG/100ML/VIAL（專案進口）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000124"
+  },
+  {
+    "code": "X000125100",
+    "zh": "BH4 (TETRAHYDRO-BIOPTERIN TABLETS) 10MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000125"
+  },
+  {
+    "code": "X000126214",
+    "zh": "狂犬病疫苗",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000126"
+  },
+  {
+    "code": "X000127266",
+    "zh": "人用狂犬病免疫球蛋白",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000127"
+  },
+  {
+    "code": "X000128210",
+    "zh": "人用狂犬病免疫球蛋白",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000128"
+  },
+  {
+    "code": "X000129209",
+    "zh": "人用馬血清免疫球蛋白",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000129"
+  },
+  {
+    "code": "X000130216",
+    "zh": "ROFERON-A (INTERFERON ALFA-2A, 3MIU/0.5ML) (專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000130"
+  },
+  {
+    "code": "X000132100",
+    "zh": "OPSUMIT FILM COATED TABLETS 10MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000132"
+  },
+  {
+    "code": "X000133248",
+    "zh": "MYOZYME 50MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000133"
+  },
+  {
+    "code": "X000134209",
+    "zh": "LH-RH INJECTION TANABE(GONADORELIN ACETATE) 0.1ML/ML/AMP, 5AMP/BOX",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000134"
+  },
+  {
+    "code": "X000135237",
+    "zh": "PROLEUKIN FOR INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000135"
+  },
+  {
+    "code": "X000136209",
+    "zh": "COLOMYCIN （COLISITIN 1000000 IU）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000136"
+  },
+  {
+    "code": "X000137212",
+    "zh": "COLOMYCIN （COLISITIN 2000000 IU）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000137"
+  },
+  {
+    "code": "X000138100",
+    "zh": "PROVIGIL TABLETS 200MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000138"
+  },
+  {
+    "code": "X000139209",
+    "zh": "PROTERNOL-L INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000139"
+  },
+  {
+    "code": "X000140100",
+    "zh": "COUMADIN TABLETS 1MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000140"
+  },
+  {
+    "code": "X000141100",
+    "zh": "MERCAPTOPURINE TABLETS USP",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000141"
+  },
+  {
+    "code": "X000142100",
+    "zh": "PURI-NETHOL TABLETS(MERCAPTOPURINE)50MG/TAB.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000142"
+  },
+  {
+    "code": "X000143229",
+    "zh": "ADDAMEL N CONCENTRATE FOR SOLUTION FOR INFUSION (10ML/AMP)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000143"
+  },
+  {
+    "code": "X000144229",
+    "zh": "PEDITRACE CONCENTRATE FOR INFUSION SOLUTION (10ML/VIAL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000144"
+  },
+  {
+    "code": "X000145229",
+    "zh": "ADDAVEN CONCENTRATE FOR SOLUTION FOR INFUSION (10ML/AMP)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000145"
+  },
+  {
+    "code": "X000146229",
+    "zh": "MITOXANTRONE INJECTION 20MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000146"
+  },
+  {
+    "code": "X000147421",
+    "zh": "1％ PREDNISOLONE OPHTHALMIC SUSPENSION 5ML/BOT.",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000147"
+  },
+  {
+    "code": "X000148100",
+    "zh": "METALITE 250 CAPSULES",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000148"
+  },
+  {
+    "code": "X000149209",
+    "zh": "促甲狀腺激素釋放荷爾蒙注射液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000149"
+  },
+  {
+    "code": "X000150209",
+    "zh": "CINETOL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000150"
+  },
+  {
+    "code": "X000151100",
+    "zh": "傳恩律膠囊300毫克",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000151"
+  },
+  {
+    "code": "X000152100",
+    "zh": "SLOW-K TABLETS 600MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000152"
+  },
+  {
+    "code": "X000161100",
+    "zh": "",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000161"
+  },
+  {
+    "code": "X000162343",
+    "zh": "PERMETHRIN 5％ W/W CREAM 30GM",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000162"
+  },
+  {
+    "code": "X000163255",
+    "zh": "CARMUTHER 100",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000163"
+  },
+  {
+    "code": "X000167206",
+    "zh": "IMMUKIN (INTERFERON GAMMA 1B) 0.1MG/0.5ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000167"
+  },
+  {
+    "code": "X000168277",
+    "zh": "DACTILON ( DACTINOMYCIN ) 0.5MG / VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000168"
+  },
+  {
+    "code": "X000171100",
+    "zh": "VEPESID(ETOPOSIDE)50MG SOFT CAPSULES",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000171"
+  },
+  {
+    "code": "X000176206",
+    "zh": "TETANUS VACCINE ADSORBED SUSPENSION FOR INJECTION 0.5ML/AMP",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000176"
+  },
+  {
+    "code": "X000177206",
+    "zh": "ADSORBED TETANUS VACCINE B.P. 0.5ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000177"
+  },
+  {
+    "code": "X000178163",
+    "zh": "含磷口服液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000178"
+  },
+  {
+    "code": "X000179100",
+    "zh": "HARVONI TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000179"
+  },
+  {
+    "code": "X000179123",
+    "zh": "KONSYL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000179"
+  },
+  {
+    "code": "X000181548",
+    "zh": "BCG-medac,powder and solvent for Suspension(專案進口)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000181"
+  },
+  {
+    "code": "X000182229",
+    "zh": "Cytarabine Injection 1000mg/10mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000182"
+  },
+  {
+    "code": "X000183100",
+    "zh": "ZEPATIER (ELBASVIR AND GRAZOPREVIR) TABLET",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000183"
+  },
+  {
+    "code": "X000184229",
+    "zh": "Daunorubicin Inj 20mg /10mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000184"
+  },
+  {
+    "code": "X000185100",
+    "zh": "心寧美２５/１００錠",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000185"
+  },
+  {
+    "code": "X0001864E6",
+    "zh": "TYVASO SOLUTION FOR ORAL INHALATION 0.6MG/ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000186"
+  },
+  {
+    "code": "X000187229",
+    "zh": "克癌 10mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000187"
+  },
+  {
+    "code": "X000188100",
+    "zh": "Florinef Acetaat 0.1mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000188"
+  },
+  {
+    "code": "X000189229",
+    "zh": "VESIMYCIN 10 ( MITOMYCIN FOR INJECTION USP 10MG) 10MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000189"
+  },
+  {
+    "code": "X000190263",
+    "zh": "VFEND 200MG FOR SOLUTION FOR INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000190"
+  },
+  {
+    "code": "X000191248",
+    "zh": "Melphalan for injection BP 50mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000191"
+  },
+  {
+    "code": "X000192100",
+    "zh": "ZITHROMAX 250MG TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000192"
+  },
+  {
+    "code": "X000194100",
+    "zh": "Digosin tab 0.25mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000194"
+  },
+  {
+    "code": "X000196223",
+    "zh": "Xofigo solution for injection",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000196"
+  },
+  {
+    "code": "X000204100",
+    "zh": "Chloraminophene Capsules 2mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000204"
+  },
+  {
+    "code": "X000205235",
+    "zh": "VISUDYNE POWDER FOR SOLUTION FOR INFUSION 15MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000205"
+  },
+  {
+    "code": "X000210100",
+    "zh": "Trolovol 300mg film-coated tablet",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000210"
+  },
+  {
+    "code": "X000211100",
+    "zh": "愛治膠囊５００公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000211"
+  },
+  {
+    "code": "X000212216",
+    "zh": "扶良速注射劑",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000212"
+  },
+  {
+    "code": "X000213248",
+    "zh": "ALKERAN INJECTION MELPHALAN 50MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000213"
+  },
+  {
+    "code": "X000214545",
+    "zh": "SII-ONCO-BCG CONTAINING 1-19.2X10^8 CFU(BACILLUS CALMETTE-GUERIN)40MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000214"
+  },
+  {
+    "code": "X000215219",
+    "zh": "Actemra 80 mg Solution for Infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000215"
+  },
+  {
+    "code": "X000216238",
+    "zh": "Actemra 400 mg Solution for Infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000216"
+  },
+  {
+    "code": "X000217209",
+    "zh": "Vinorel solution for injection（vinorelbine 10mg/vial）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000217"
+  },
+  {
+    "code": "X000218100",
+    "zh": "Navelbine oral 20mg(vinorelbine tartrate)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000218"
+  },
+  {
+    "code": "X000219280",
+    "zh": "ENOXAPARIN SODIUM INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000219"
+  },
+  {
+    "code": "X000220206",
+    "zh": "破傷風類毒素疫苗注射用懸浮劑",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000220"
+  },
+  {
+    "code": "X000221255",
+    "zh": "ABRAXANE(PACLITAXEL 100MG/VIAL）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000221"
+  },
+  {
+    "code": "X000222206",
+    "zh": "SYNAGIS 100MG/ML SOLUTION FOR INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000222"
+  },
+  {
+    "code": "X000222255",
+    "zh": "Abraxane powder for suspension for infusion (Paclitaxel 100mg/vial)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000222"
+  },
+  {
+    "code": "X000223235",
+    "zh": "Visudyne (Verteporfin for infusion)15mg/Vial",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000223"
+  },
+  {
+    "code": "X000224138",
+    "zh": "含磷口服液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000224"
+  },
+  {
+    "code": "X000225209",
+    "zh": "VINKEBIR INJECTABLE SOLUTION（VINORELBINE 10MG/1ML/VIAL）",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000225"
+  },
+  {
+    "code": "X000226351",
+    "zh": "PERMETHRIN CREAM 5％ W/W；60G/TUBE",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000226"
+  },
+  {
+    "code": "X000227209",
+    "zh": "PLEGISOL INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000227"
+  },
+  {
+    "code": "X000228100",
+    "zh": "PROVIGIL TABLETS 200MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000228"
+  },
+  {
+    "code": "X000229255",
+    "zh": "ABRAXANE FOR INJECTABLE SUSPENSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000229"
+  },
+  {
+    "code": "X000230221",
+    "zh": "CISATRACURIUM-HAMELN 2MG/ML SOLUTION FOR INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000230"
+  },
+  {
+    "code": "X000231100",
+    "zh": "\"國嘉\" 佳醇膠囊 250毫克",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000231"
+  },
+  {
+    "code": "X000232100",
+    "zh": "Caprelsa Film-coated Tablets 100mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000232"
+  },
+  {
+    "code": "X000233214",
+    "zh": "ZAVICEFTA 2 G/0.5 G POWDER FOR CONCENTRATE FOR SOLUTION FOR INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000233"
+  },
+  {
+    "code": "X000234238",
+    "zh": "FRESOFOL 1％ MCT/LCT EMULSION FOR INJECTION OR INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000234"
+  },
+  {
+    "code": "X000235209",
+    "zh": "VINCRISTINE SULPHATE INJECTION USP 1MG/1ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000235"
+  },
+  {
+    "code": "X000236212",
+    "zh": "METHOTREXATE 25MG/ML INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000236"
+  },
+  {
+    "code": "X000237238",
+    "zh": "宜保安濃縮輸注液1毫克/毫升",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000237"
+  },
+  {
+    "code": "X000238100",
+    "zh": "帕定平錠劑10毫克",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000238"
+  },
+  {
+    "code": "X000239265",
+    "zh": "Tetanus Immune Globulin(Human),HyperTET",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000239"
+  },
+  {
+    "code": "X000240221",
+    "zh": "NIMBEX INJECTION OF CISATRACURIUM BESYLATE 2MG/ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000240"
+  },
+  {
+    "code": "X000241229",
+    "zh": "\"DBL\" VINBLASTINE INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000241"
+  },
+  {
+    "code": "X000242229",
+    "zh": "ONCOGINASE(L-ASPARAGINASE FOR INJECTION, 10,000 IU)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000242"
+  },
+  {
+    "code": "X000243100",
+    "zh": "MODAVIGIL MODAFINIL 100MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000243"
+  },
+  {
+    "code": "X000244229",
+    "zh": "CLAD SPAL10 CLADRIBINE INJECTION USP 10MG/10ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000244"
+  },
+  {
+    "code": "X000245238",
+    "zh": "VIMPAT 10MG/ML SOLUTION FOR INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000245"
+  },
+  {
+    "code": "X000246219",
+    "zh": "Actemra for Intravenous infusion 80mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000246"
+  },
+  {
+    "code": "X000247229",
+    "zh": "Actemra for Intravenous infusion 200mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000247"
+  },
+  {
+    "code": "X000248343",
+    "zh": "Permethrin 5％ w/w Cream",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000248"
+  },
+  {
+    "code": "X000250100",
+    "zh": "MAGNESIUM OXIDE TABLETS \"SYNMOSA\"",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000250"
+  },
+  {
+    "code": "X000251277",
+    "zh": "\"永豐\"葡萄糖50％注射液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000251"
+  },
+  {
+    "code": "X000252251",
+    "zh": "UROKINASE FOR INJECTION, 60,000 IU",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000252"
+  },
+  {
+    "code": "X000253100",
+    "zh": "MIDIL(MINOXIDIL 5MG TABLET)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000253"
+  },
+  {
+    "code": "X000254277",
+    "zh": "DESFERRIOXAMINE MESILATE 500MG POWDER FOR SOLUTION FOR INJECTION OR INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000254"
+  },
+  {
+    "code": "X000255100",
+    "zh": "PHOSADD TAB",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000255"
+  },
+  {
+    "code": "X000256265",
+    "zh": "Mikrobiel 400mg/250Ml Solution For Infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000256"
+  },
+  {
+    "code": "X000257221",
+    "zh": "Nimbium 10mg/5mL Besilato De Cisatracurio",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000257"
+  },
+  {
+    "code": "X000258221",
+    "zh": "Cisatracurium 2mg/mL solution for Injection/infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000258"
+  },
+  {
+    "code": "X000259100",
+    "zh": "ROZLYTREK（ENTRECTINIB）CAPSULES 200MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000259"
+  },
+  {
+    "code": "X000260100",
+    "zh": "Hydralazine Hydrochloride Tablets USP 25mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000260"
+  },
+  {
+    "code": "X000261297",
+    "zh": "CLAVUXAN CV 1.2G/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000261"
+  },
+  {
+    "code": "X000262100",
+    "zh": "Hydralazine Hydrochloride Tablets USP 50mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000262"
+  },
+  {
+    "code": "X000263221",
+    "zh": "PROTAMINE SULPHATE LEO PHARMA 1400 ANTI-HEPARIN IU/ML(CORRESPONDS TO 10 MG/ML) SOLUTION FOR INJECTION AND INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000263"
+  },
+  {
+    "code": "X000264100",
+    "zh": "Lithium Carbonate Capsules USP 300mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000264"
+  },
+  {
+    "code": "X000265212",
+    "zh": "Adenocor(Adenosine/Adenosien 6 mg/2 mL rapid i.v. injection)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000265"
+  },
+  {
+    "code": "X000266235",
+    "zh": "IXEMPRA（IXABEPILONE）FOR INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000266"
+  },
+  {
+    "code": "X000267212",
+    "zh": "CADEN SOLUTION FOR INJECTION ADENOSINE 6MG/2ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000267"
+  },
+  {
+    "code": "X000268100",
+    "zh": "Metalcaptase 300mg(D-Penicillamine 300mg) enteric coated tablets",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000268"
+  },
+  {
+    "code": "X000269343",
+    "zh": "Permetriin LMP,50 mg/g geel",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000269"
+  },
+  {
+    "code": "X000270212",
+    "zh": "TACHYBAN Adenosine injection USP 2mL Ampoule",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000270"
+  },
+  {
+    "code": "X000271221",
+    "zh": "CISATRAL 2MG/ML SOLUTION FOR INJECTION/INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000271"
+  },
+  {
+    "code": "X000272221",
+    "zh": "Protaminsulfat LEO Phama 1400 anti-heparin IU/mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000272"
+  },
+  {
+    "code": "X000273221",
+    "zh": "Protamine Sulphate LEO Phama 1400 Anti-Heparin IU/mL Solution For Injection and Infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000273"
+  },
+  {
+    "code": "X000274177",
+    "zh": "VIGABATRIN FOR ORAL SOLUTION USP,500MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000274"
+  },
+  {
+    "code": "X000275100",
+    "zh": "Hirsutin Tab1et 5mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000275"
+  },
+  {
+    "code": "X000276221",
+    "zh": "FLUMAZENIL 100UG/ML SOLUTION FOR INJECTION/INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000276"
+  },
+  {
+    "code": "X000277265",
+    "zh": "ASIMPLEX 250mg Lyophilized powder for solution for infusion(acyclovir)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000277"
+  },
+  {
+    "code": "X000279212",
+    "zh": "Adenocor 3mg/mL solution for injection adenosine",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000279"
+  },
+  {
+    "code": "X000280212",
+    "zh": "Adenocor 6mg/2mL solucion inyectable Adenosina",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000280"
+  },
+  {
+    "code": "X000281229",
+    "zh": "Milrinone Lactate Injection PRIMACOR",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000281"
+  },
+  {
+    "code": "X000282221",
+    "zh": "Dimaval 250mg DMPS-Na/5mL solution for Injection",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000282"
+  },
+  {
+    "code": "X000283238",
+    "zh": "\"優良\" 磷酸鉀注射液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000283"
+  },
+  {
+    "code": "X000284110",
+    "zh": "Axcel Cefaclor-125 Suspension",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000284"
+  },
+  {
+    "code": "X000285151",
+    "zh": "Amoxigran 250mg/5mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000285"
+  },
+  {
+    "code": "X000286277",
+    "zh": "Deferoxamine Mesylate for Injection, USP (500mg pervial)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000286"
+  },
+  {
+    "code": "X000287151",
+    "zh": "Dyna Amoxycillin 250mg/5mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000287"
+  },
+  {
+    "code": "X000288248",
+    "zh": "NovoSeven",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000288"
+  },
+  {
+    "code": "X000289100",
+    "zh": "Hydrine Caps. 500mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000289"
+  },
+  {
+    "code": "X000290265",
+    "zh": "ACTAVIR 250(POWDER FOR SOLUTION FOR INFUSION)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000290"
+  },
+  {
+    "code": "X000291209",
+    "zh": "HyperRHO S/D Full Dose",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000291"
+  },
+  {
+    "code": "X000292229",
+    "zh": "Ganciclovir Injection 500 mg per 10mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000292"
+  },
+  {
+    "code": "X000293248",
+    "zh": "Melphadn 50(Melphalan For Injection BP 50mg/vial",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000293"
+  },
+  {
+    "code": "X000294209",
+    "zh": "FLUANXOL DEPOT INJECTION(FLUPENTIXOL DECANOATE 20MG/1ML)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000294"
+  },
+  {
+    "code": "X000295209",
+    "zh": "ATIXOL DEPOT (FLUPENTIXOL INJECTION BP 20MG/ML)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000295"
+  },
+  {
+    "code": "X000296100",
+    "zh": "ALUNBRIG FILM COATED TABLETS (BRIGATINIB)30MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000296"
+  },
+  {
+    "code": "X000297100",
+    "zh": "ALUNBRIG FILM COATED TABLETS (BRIGATINIB)90MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000297"
+  },
+  {
+    "code": "X000298100",
+    "zh": "ALUNBRIG FILM COATED TABLETS (BRIGATINIB)180MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000298"
+  },
+  {
+    "code": "X000299421",
+    "zh": "NATACIN EYE DROPS (NATAMYCIN OPHTHALMIC SUSPENSION 5％)5ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000299"
+  },
+  {
+    "code": "X000300229",
+    "zh": "MITOXANTRON EBEWE INJECTION 2MG/ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000300"
+  },
+  {
+    "code": "X000301210",
+    "zh": "Igamad 750 ⅠU/mL (Human Anti-D Immunoglobulin Solution for injection in pre-filled syringe)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000301"
+  },
+  {
+    "code": "X000302277",
+    "zh": "Otsuka Normal Saline (sodium chloride 0.9％) 500mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000302"
+  },
+  {
+    "code": "X000303209",
+    "zh": "Otsuka Normal Saline (sodium chloride 0.9％) 1,000mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000303"
+  },
+  {
+    "code": "X000304209",
+    "zh": "ISOTONIC-SODIUM CHLORIDE SOLUTION BAG \"FUSO\" 1,000ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000304"
+  },
+  {
+    "code": "X000305277",
+    "zh": "B. Braun 0.9％ sodium Chloride Intravenous Infusion B.P 500mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000305"
+  },
+  {
+    "code": "X000306277",
+    "zh": "Sodium Chloride Solution for infusion 0·9％ 500mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000306"
+  },
+  {
+    "code": "X000307277",
+    "zh": "ISOTONIC-SODIUM CHLORIDE SOLUTION PL \"FUSO\" 500ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000307"
+  },
+  {
+    "code": "X000308316",
+    "zh": "RINS NS (Sodium Chloride 0.9％W/V Irrigation solution BP) 3,000mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000308"
+  },
+  {
+    "code": "X000309377",
+    "zh": "RINSCAP NS 500mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000309"
+  },
+  {
+    "code": "X000310209",
+    "zh": "INFUSOL NS 1000ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000310"
+  },
+  {
+    "code": "X000311209",
+    "zh": "Sodium Chloride Intravenous Infusion BP 0.9％(1000mL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000311"
+  },
+  {
+    "code": "X000312277",
+    "zh": "Sodium chloride 0.9％(500mL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000312"
+  },
+  {
+    "code": "X000313277",
+    "zh": "Sodium Chloride,0.9％,Solution for Infusion (500mL/bot)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000313"
+  },
+  {
+    "code": "X000314209",
+    "zh": "Sodium Chloride Solution for Intravenous Infusion 0.9％ W/V(1000mL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000314"
+  },
+  {
+    "code": "X000315221",
+    "zh": "BENZYLPENICILLIN(PENICILLIN G)注射劑型",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000315"
+  },
+  {
+    "code": "X000316277",
+    "zh": "STERILE AMPICILLIN SODIUM",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000316"
+  },
+  {
+    "code": "X000317155",
+    "zh": "Amoxicillin Sandoz amoxicillin trihydrate 250mg/5mL powder for Oral suspension",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000317"
+  },
+  {
+    "code": "X000318155",
+    "zh": "MAXAMOX amoxicillin trihydrate 500mg/5mL powder for Oral suspension",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000318"
+  },
+  {
+    "code": "X000319277",
+    "zh": "Flolan epoprostenol sodium 500 micrograms powder for injection",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000319"
+  },
+  {
+    "code": "X000320277",
+    "zh": "Sterile Ampicillin Sodium 500mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000320"
+  },
+  {
+    "code": "X000321277",
+    "zh": "Flolan for injection",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000321"
+  },
+  {
+    "code": "X000322277",
+    "zh": "Salina Fisiologica Grifols 0,9％ solucion para perfusion Cloruro de Sodio (0.9％ Sodium Chloride Injection,USP)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000322"
+  },
+  {
+    "code": "X000323209",
+    "zh": "Choong Wae Normal Saline Injection 1000mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000323"
+  },
+  {
+    "code": "X000324277",
+    "zh": "50％ Dextrose injection (500mL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000324"
+  },
+  {
+    "code": "X000325209",
+    "zh": "Salina Fisiologica Grifols 0.9％ solucion para perfusion Cloruro de Sodio (0.9％ Sodium Chloride Injection,USP)(1000mL/bag)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000325"
+  },
+  {
+    "code": "X000326209",
+    "zh": "Normal Saline Injection (1000mL/bag)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000326"
+  },
+  {
+    "code": "X000327209",
+    "zh": "Sodium Chloride,0.9％,Solution for Infusion (1000mL/bot)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000327"
+  },
+  {
+    "code": "X000328277",
+    "zh": "Isotonic Sodium Chloride Solution \"AY\" (500mL/Bag)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000328"
+  },
+  {
+    "code": "X000329209",
+    "zh": "NSS Normal Saline 0.9％ 1,000mL/Bag",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000329"
+  },
+  {
+    "code": "X000330277",
+    "zh": "Isotonic Sodium Chloride Solution",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000330"
+  },
+  {
+    "code": "X000331238",
+    "zh": "Remodulin (Treprostinil) Injection(5mg/mL)20 mL/vial",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000331"
+  },
+  {
+    "code": "X000332209",
+    "zh": "(113/11/01以後專案輸入)CHOONG WAE NORMAL SALINE INJECTION 1000ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000332"
+  },
+  {
+    "code": "X000333229",
+    "zh": "Calcium Gluconate injeksi intravena 10％",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000333"
+  },
+  {
+    "code": "X000334229",
+    "zh": "Calcium Gluconate Larutan injeksi IM/IV 10％",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000334"
+  },
+  {
+    "code": "X000335277",
+    "zh": "0.9％ Sodium chloride in water for injection (500mL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000335"
+  },
+  {
+    "code": "X000336277",
+    "zh": "Sodium Chloride infusion bottle 500mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000336"
+  },
+  {
+    "code": "X000337277",
+    "zh": "Otsuka Glucose injection 50％（Glucose 50％）500mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000337"
+  },
+  {
+    "code": "X000338277",
+    "zh": "Normal Saline Injection (500mL/bag)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000338"
+  },
+  {
+    "code": "X000339277",
+    "zh": "(113/11/01以後專案輸入)0.9％ SODIUM CHLORIDE IN WATER FOR INJECTION (500mL)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000339"
+  },
+  {
+    "code": "X000340229",
+    "zh": "Mitoxantrone Injection USP 20mg/10mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000340"
+  },
+  {
+    "code": "X000341229",
+    "zh": "Elfabrio 2mg/mL concentrate for solution for infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000341"
+  },
+  {
+    "code": "X000342121",
+    "zh": "TOBLAIR 300mg/5mL Nebuliser Solution",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000342"
+  },
+  {
+    "code": "X000343177",
+    "zh": "Vigabatrin powder for oral solution 500 mg/packet",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000343"
+  },
+  {
+    "code": "X000343238",
+    "zh": "Calcium Gluconate Inj.,20mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000343"
+  },
+  {
+    "code": "X000345221",
+    "zh": "阿雷彼阿慶注射液",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000345"
+  },
+  {
+    "code": "X000346219",
+    "zh": "EXTENCILLINE 2.4 MIU POUDRE ET SOLVENT POUR SUSPENSION INJECTABLE IM",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000346"
+  },
+  {
+    "code": "X000347248",
+    "zh": "CALCITONIN (SALMON) INJECTION BP SYNTHETIC 50 I.U./ML SOLUTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000347"
+  },
+  {
+    "code": "X000348255",
+    "zh": "CALCITONIN (SALMON) INJECTION BP SYNTHETIC 100 I.U./ML SOLUTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000348"
+  },
+  {
+    "code": "X000348277",
+    "zh": "Erythrocin -I.V.(Erythromycin Lactobionate for Injection)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000348"
+  },
+  {
+    "code": "X000349100",
+    "zh": "RAXONE 150MG FILM-COATED TABLET",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000349"
+  },
+  {
+    "code": "X000349257",
+    "zh": "AGILUS(Dantrolene sodium hemiheptahydrate)powder for solution for injection 120mg/vial",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000349"
+  },
+  {
+    "code": "X000350100",
+    "zh": "Florinef Tablets 0.1mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000350"
+  },
+  {
+    "code": "X000350421",
+    "zh": "CYSTADROPS 3.8MG/ML EYE DROPS SOLUTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000350"
+  },
+  {
+    "code": "X000351221",
+    "zh": "Nimbex 2 mg/mL soluzione iniettabile/per infusione (Cisatracurium)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000351"
+  },
+  {
+    "code": "X000352265",
+    "zh": "Actavir 250 (powder for solution for infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000352"
+  },
+  {
+    "code": "X000353100",
+    "zh": "Mycobutin 150 mg capsules",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000353"
+  },
+  {
+    "code": "X000354410",
+    "zh": "Curosurf Endotracheobronchial Suspension 80mg/mL,1.5mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000354"
+  },
+  {
+    "code": "X000355100",
+    "zh": "Pacrea 25000 IU Hard Capsules",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000355"
+  },
+  {
+    "code": "X000356209",
+    "zh": "Rho (D) Immune Globulin (Human) HyperRHO Full Dose",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000356"
+  },
+  {
+    "code": "X000357148",
+    "zh": "Bromhexine Hydrochloride solution 2 mg/mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000357"
+  },
+  {
+    "code": "X000358100",
+    "zh": "Dicloxacillin Sodium Capsules USP 250mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000358"
+  },
+  {
+    "code": "X000359219",
+    "zh": "Penicillin G Benzathine for Injectable Suspension 2.4MIU",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000359"
+  },
+  {
+    "code": "X000360500",
+    "zh": "Prostin E2 (Dinoprostone) 3mg vaginal tablets",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000360"
+  },
+  {
+    "code": "X000361109",
+    "zh": "Cortair inhalation suspension for nebulization, budesonide 0.5mg/ml, 2ml/vial",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000361"
+  },
+  {
+    "code": "X000362100",
+    "zh": "Lixiana 30mg Film-coated Tablets",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000362"
+  },
+  {
+    "code": "X000363100",
+    "zh": "Lixiana 60mg Film-coated Tablets",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000363"
+  },
+  {
+    "code": "X000364209",
+    "zh": "Cyclosporine Injection USP 50mg/ml",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000364"
+  },
+  {
+    "code": "X000365100",
+    "zh": "LIXIANA OD TABLETS 15 MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000365"
+  },
+  {
+    "code": "X000366100",
+    "zh": "LIXIANA OD TABLETS 30MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000366"
+  },
+  {
+    "code": "X000367100",
+    "zh": "Lixiana OD Tablets 60 mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000367"
+  },
+  {
+    "code": "X000369158",
+    "zh": "Acyclovir 200mg/5ml Suspension",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000369"
+  },
+  {
+    "code": "X000370265",
+    "zh": "VAXCEL ACYCLOVIR 250MG I.V. FOR INFUSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000370"
+  },
+  {
+    "code": "X000370500",
+    "zh": "Glandin-E2 Vaginal Tablet 3mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000370"
+  },
+  {
+    "code": "X000371238",
+    "zh": "GABLOFEN SOLUTION FOR INTRATHECAL INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000371"
+  },
+  {
+    "code": "X000372209",
+    "zh": "GENSULIN R INSULINUM HUMANUM 100 IU/ML SOLUTION FOR INJECTION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000372"
+  },
+  {
+    "code": "X000373212",
+    "zh": "Caden 6mg/2mL solution for injection (Adenosine)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000373"
+  },
+  {
+    "code": "X000374100",
+    "zh": "VEPESID CAPSULES 50MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000374"
+  },
+  {
+    "code": "X000375100",
+    "zh": "\"瑩碩\"欣晴錠10毫克(甲基芬尼特)",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000375"
+  },
+  {
+    "code": "X000376255",
+    "zh": "NEXVIAZYME",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000376"
+  },
+  {
+    "code": "X000377100",
+    "zh": "Linzid 600mg Tablet",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000377"
+  },
+  {
+    "code": "X000378405",
+    "zh": "IKERVIS Eye drops, Emulsion 1mg/mL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000378"
+  },
+  {
+    "code": "X0003792A5",
+    "zh": "RECARBRIO powder for solution for infusion",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000379"
+  },
+  {
+    "code": "X000380100",
+    "zh": "LINEZOLID TABLETS 600MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000380"
+  },
+  {
+    "code": "X000381235",
+    "zh": "VISUDYNE POWDER FOR SOLUTION FOR INFUSION 15MG/VIAL",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000381"
+  },
+  {
+    "code": "X000382100",
+    "zh": "ZYVOXID COMPRESSE RIVESTITE CON FILM DA 600 MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000382"
+  },
+  {
+    "code": "XC00084100",
+    "zh": "康鐵寧 膠囊500公絲",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000084"
+  },
+  {
+    "code": "XC00166265",
+    "zh": "Fibrogammin 250IU",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000166"
+  },
+  {
+    "code": "XC00169266",
+    "zh": "HYPERRAB 300IU/ML 1ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000169"
+  },
+  {
+    "code": "XC00172100",
+    "zh": "METALCAPTASE 300",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000172"
+  },
+  {
+    "code": "XC00173129",
+    "zh": "L一CARNITINE ORAL SOLUTION 2G /10 ML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000173"
+  },
+  {
+    "code": "XC00174214",
+    "zh": "ATRACURIUM,25MG/2.5ML/AML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000174"
+  },
+  {
+    "code": "XC00175221",
+    "zh": "CISATRACURIUM,10MG/5ML/AML",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000175"
+  },
+  {
+    "code": "XC00180100",
+    "zh": "心寧美２５／２５０錠",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000180"
+  },
+  {
+    "code": "XC00195100",
+    "zh": "Xarelto film-coated tablets 10mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000195"
+  },
+  {
+    "code": "XC00197435",
+    "zh": "NATACYN 5％ OPHTHALMIC SUSPENSION",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000197"
+  },
+  {
+    "code": "XC00198243",
+    "zh": "Firazyr 30mg",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000198"
+  },
+  {
+    "code": "XC00199100",
+    "zh": "VIMPAT (LACOSAMIDE) 100MG FILM-COATED TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000199"
+  },
+  {
+    "code": "XC00200100",
+    "zh": "VIMPAT (LACOSAMIDE) 200MG FILM-COATED TABLETS",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000200"
+  },
+  {
+    "code": "XC00201209",
+    "zh": "解麻注射液0.4毫克/毫升",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000201"
+  },
+  {
+    "code": "XC00202100",
+    "zh": "LORBRENA FILM-COATED TABLETS 25MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000202"
+  },
+  {
+    "code": "XC00203100",
+    "zh": "SABRIL FILM-COATED TABLETS 500MG",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000203"
+  },
+  {
+    "code": "XC00208123",
+    "zh": "康纖散劑",
+    "licenseId": "",
+    "licenseStatus": "missing_official_id",
+    "drugUrl": "https://lmspiq.fda.gov.tw/web/DRPIQ/DRPIQ1000Result?licId=000208"
+  }
+]
