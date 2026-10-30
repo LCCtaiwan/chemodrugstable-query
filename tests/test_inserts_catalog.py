@@ -1,5 +1,8 @@
 import unittest
-from tools.inserts.catalog import build_catalog, read_licenses
+from tools.inserts.catalog import build_catalog, read_licenses, fetch_catalog
+from unittest.mock import patch
+from urllib.error import HTTPError
+import zipfile
 
 class CatalogueTests(unittest.TestCase):
     def test_full_union_no_link_rows_and_duplicate_manufacturers(self):
@@ -38,5 +41,31 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(d['license_count'],1)
         self.assertEqual(d['items'][0]['aliases'],['One','Two'])
         self.assertEqual(len(d['items'][0]['source_urls']),2)
+
+class CatalogueTransferTests(unittest.TestCase):
+    def test_retry_corrupt_zip_once(self):
+        calls=[]
+        def fetch(url,timeout):calls.append(url);return b'PKbroken' if len(calls)==1 else b'good'
+        def parse(raw):
+            if raw.startswith(b'PK'):raise zipfile.BadZipFile('truncated')
+            return ['verified']
+        with patch('tools.inserts.catalog.time.sleep'):
+            self.assertEqual(fetch_catalog('https://data.fda.gov.tw/data/opendata/export/36/json',parse,fetch=fetch),(b'good',['verified']))
+        self.assertEqual(len(calls),2)
+        self.assertEqual(calls[0],calls[1])
+
+    def test_no_retry_denied_http(self):
+        calls=[]
+        def fetch(url,timeout):calls.append(url);raise HTTPError(url,403,'Forbidden',{},None)
+        with self.assertRaises(HTTPError):fetch_catalog('https://data.fda.gov.tw/a',lambda x:[],fetch=fetch)
+        self.assertEqual(len(calls),1)
+
+    def test_fail_after_second_corrupt_response(self):
+        calls=[]
+        def fetch(url,timeout):calls.append(url);return b'PKbroken'
+        def parse(raw):raise zipfile.BadZipFile('truncated')
+        with patch('tools.inserts.catalog.time.sleep'):
+            with self.assertRaisesRegex(ValueError,'after two reads'):fetch_catalog('https://data.fda.gov.tw/a',parse,fetch=fetch)
+        self.assertEqual(len(calls),2)
 
 if __name__=='__main__':unittest.main()

@@ -4,6 +4,7 @@ import hashlib
 import io
 import json
 import zipfile
+import time
 from collections import OrderedDict
 from pathlib import Path
 from tools.inserts.update import CATALOG, validate_url, read_catalog, download, write_json
@@ -113,9 +114,25 @@ def read_appearance(data):
     return rows
 
 
+def fetch_catalog(url, parser, fetch=download):
+    # A successful HTTP response can still contain a truncated ZIP. Never publish it.
+    # Retry parse/transfer corruption once at the same public URL; HTTP403 is not retried here.
+    for attempt in range(2):
+        raw=fetch(url, timeout=90)
+        try:
+            rows=parser(raw)
+            return raw, rows
+        except (zipfile.BadZipFile, EOFError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+            if attempt:raise ValueError(f'Invalid catalogue after two reads: {url}; bytes={len(raw)}; {type(exc).__name__}') from exc
+            print(f'Incomplete catalogue response; retrying same official URL once: {url}; bytes={len(raw)}',flush=True)
+            time.sleep(2)
+
+
 def refresh(output):
-    raw=download(CATALOG, timeout=90);license_raw=download(LICENSE_CATALOG, timeout=90);appearance_raw=download(APPEARANCE_CATALOG, timeout=90)
-    data=build_catalog(read_catalog(raw),datetime.now(timezone.utc).isoformat(),hashlib.sha256(raw).hexdigest(),read_licenses(license_raw),hashlib.sha256(license_raw).hexdigest(),read_appearance(appearance_raw),hashlib.sha256(appearance_raw).hexdigest())
+    raw,rows=fetch_catalog(CATALOG,read_catalog)
+    license_raw,licenses=fetch_catalog(LICENSE_CATALOG,read_licenses)
+    appearance_raw,appearance=fetch_catalog(APPEARANCE_CATALOG,read_appearance)
+    data=build_catalog(rows,datetime.now(timezone.utc).isoformat(),hashlib.sha256(raw).hexdigest(),licenses,hashlib.sha256(license_raw).hexdigest(),appearance,hashlib.sha256(appearance_raw).hexdigest())
     # A major unexplained drop requires review; retain the prior usable catalogue.
     if output.exists():
         old=json.loads(output.read_text())
