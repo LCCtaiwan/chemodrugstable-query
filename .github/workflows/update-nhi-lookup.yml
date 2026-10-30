@@ -6,6 +6,8 @@ on:
     paths:
       - ".github/workflows/update-nhi-lookup.yml"
       - "tools/nhi/**"
+      - "tools/inserts/**"
+      - "tests/test_inserts*"
       - "tests/test_nhi*.py"
       - "inserts/**"
       - "data/inserts/**"
@@ -107,7 +109,15 @@ jobs:
         if: steps.source.outputs.ready == 'true'
         run: |
           mkdir -p _site/inserts
-          cp inserts/index.html _site/inserts/index.html
+          cp inserts/index.html inserts/search.js _site/inserts/
+          python3 -m pip install -r tools/inserts/requirements.txt
+          python3 -m unittest discover -s tests -p 'test_inserts*.py'
+          if [ ! -f data/inserts/catalog.json ]; then
+            python3 -m tools.inserts.catalog
+          fi
+          cp data/inserts/catalog.json _site/inserts/catalog.json
+          cp -R data/inserts/details _site/inserts/details
+          node tests/test_inserts_search.cjs
           if [ -f data/inserts/documents.json ]; then
             cp data/inserts/documents.json _site/inserts/documents.json
           fi
@@ -129,3 +139,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+

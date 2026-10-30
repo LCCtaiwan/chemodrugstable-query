@@ -31,12 +31,12 @@ class OfficialRedirect(HTTPRedirectHandler):
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
-def download(url):
+def download(url, timeout=30):
     validate_url(url)
     for attempt in range(2):
         try:
             req = Request(quote(url, safe=':/?=&%'), headers={'User-Agent': 'TFDA-electronic-insert-pilot/1.0'})
-            with build_opener(OfficialRedirect()).open(req, timeout=30) as response:
+            with build_opener(OfficialRedirect()).open(req, timeout=timeout) as response:
                 data = response.read(LIMIT + 1)
             if len(data) > LIMIT:
                 raise ValueError('Download exceeds 32 MiB')
@@ -159,3 +159,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

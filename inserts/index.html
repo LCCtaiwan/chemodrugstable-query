@@ -1,70 +1,75 @@
 <!doctype html>
 <html lang="zh-Hant">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>電子仿單全文查詢｜試行版</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>藥品與電子仿單查詢</title>
 <style>
-body{font:16px/1.7 system-ui,sans-serif;color:#152b40;background:#f5f8fa;margin:0}main{max-width:980px;margin:auto;padding:32px 20px}h1{font-size:30px;line-height:1.3}a{color:#075f99}label{display:block;font-weight:600}input{box-sizing:border-box;width:100%;padding:14px;border:1px solid #698398;border-radius:7px;font:inherit}button{font:inherit;padding:8px 16px;margin:12px 0;border:1px solid #698398;background:white;border-radius:5px;cursor:pointer}button:disabled{opacity:.5}article{background:white;padding:20px;margin:20px 0;border:1px solid #d8e2e9;border-radius:8px}h2{font-size:20px;margin:0}p{overflow-wrap:anywhere}.meta{color:#536778;font-size:14px}.warning{color:#934716}pre{white-space:pre-wrap;font:inherit;max-height:400px;overflow:auto}summary{cursor:pointer}#status{min-height:28px}
-</style>
-<main>
-<a href="../nhi/">健保給付與藥品查詢</a>
-<h1>電子仿單全文查詢</h1>
-<p>不限化療藥。試行版追蹤最多 100 份仿單：可抽取文字者可全文搜尋；其他文件可依藥名或許可證查找官方連結。</p>
-<p id="coverage" class="meta">正在讀取收錄資料…</p>
-<form id="search"><label for="mode">查詢方式</label><select id="mode" style="font:inherit;padding:10px;margin-bottom:12px"><option value="text">仿單全文</option><option value="name">藥名／許可證（含無可搜尋文字者）</option></select><label for="q">輸入查詢字詞</label><input id="q" placeholder="例如：腎功能不全" disabled><button id="submit" disabled>查詢</button></form>
-<p id="status" role="status" aria-live="polite"></p>
-<button id="export" disabled>匯出符合藥品 CSV</button>
-<div id="results"></div>
-<button id="more" hidden>顯示更多</button>
-</main>
-<script>
+*{box-sizing:border-box}body{font:16px/1.7 system-ui,sans-serif;color:#203747;background:#f4f7f8;margin:0}main{max-width:1020px;margin:auto;padding:28px 20px 64px}h1{font-size:30px;margin:18px 0 8px;line-height:1.35}a{color:#086485}label{display:block;font-weight:650;margin-bottom:5px}input,select,button{font:inherit;border:1px solid #9caeb7;border-radius:8px;padding:11px;background:white;color:inherit}input,select{width:100%}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}#submit{background:#155d6b;color:white;border-color:#155d6b}.panel,article{background:white;padding:22px;margin:18px 0;border:1px solid #d9e3e7;border-radius:12px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:16px}.searchline{display:flex;gap:10px;margin-top:14px}.searchline input{flex:1;min-width:0}.meta{font-size:14px;color:#5b6f7a}h2{font-size:20px;margin:0;line-height:1.5}p{overflow-wrap:anywhere}.warning{color:#86531a;background:#fff8e8;padding:9px 12px;border-radius:5px}.badge{display:inline-block;font-size:13px;background:#eaf3f4;padding:2px 8px;border-radius:5px;margin:4px 8px 4px 0}pre{white-space:pre-wrap;font:inherit;max-height:420px;overflow:auto;border-left:3px solid #b8d4dc;padding:10px}summary{cursor:pointer}#status{min-height:28px}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center}.source{display:block;margin:7px 0}.muted{color:#536b78}.drugTitle{display:block;list-style:none;font-weight:700;font-size:19px;cursor:pointer}.drugTitle>.meta{display:block;font-weight:400;font-size:14px}.drugTitle::after{content:"查看藥品資料 ＋";display:block;font-size:13px;font-weight:500;color:#176c87;margin-top:8px}.drugCard[open]>.drugTitle::after{content:"收合資料 −"}.actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.actions a{display:inline-block;border:1px solid #b8cdd7;border-radius:6px;padding:6px 12px;text-decoration:none;background:#f5fafd}.field{padding:10px 0;border-top:1px solid #e5edf1}.field h3{font-size:15px;margin:0;color:#446477}.field p{margin:4px 0;white-space:pre-wrap}.searchhint{font-size:13px;color:#627783}@media(max-width:560px){main{padding:18px 14px 40px}.controls{grid-template-columns:1fr;gap:10px}.panel,article{padding:16px}.toolbar{display:block}h1{font-size:26px}}
+</style></head>
+<body><main>
+<a href="../nhi/">健保給付與藥品查詢</a><h1>藥品與電子仿單查詢</h1>
+<p>查藥名、成分與許可證，展開藥品卡查看官方資料和仿單。仿單內文搜尋另外標示收錄範圍。</p>
+<div class="panel"><p id="coverage" class="meta" aria-live="polite">正在讀取官方清冊…</p><p id="textCoverage" class="meta">正在讀取全文收錄狀態…</p><p class="meta">同時收錄藥品許可證全資料集與仿單清冊，包含已註銷／廢止與狀態未明項目。註銷與有效日期照官方原值顯示，不據此判定仍在販售或符合給付。未找到文字，也不代表藥品沒有該項風險或用途。</p>
+<form id="search"><div class="controls"><div><label for="mode">查詢範圍</label><select id="mode"><option value="name">全部清冊：中英文藥名／成分／許可證</option><option value="text">已有文字的仿單：全文搜尋</option></select></div><div><label for="filter">收錄狀態</label><select id="filter"><option value="all">全部</option><option value="text">已有可搜尋文字</option><option value="no_text">尚無可搜尋文字</option><option value="no_link">官方清冊未列仿單連結</option><option value="failed">最近下載／解析失敗</option></select></div></div>
+<label for="licenseFilter" style="margin-top:14px">藥證標示</label><select id="licenseFilter"><option value="all">全部（包含已註銷／廢止）</option><option value="marked">官方標示已註銷／廢止</option><option value="unmarked" selected>全藥證來源未標註銷／廢止（不等於有效或在售）</option></select><p class="searchhint">預設未標註銷／廢止；可切換「全部」查歷史與來源未對應項目。ATC 與精確健保品項請至既有健保查詢核對。</p><label for="q" style="margin-top:14px">查詢字詞</label><div class="searchline"><input id="q" placeholder="例如：中文品名、amoxicillin、許可證號" list="drugHints" autocomplete="off" disabled><button id="submit" disabled>查詢</button></div><datalist id="drugHints"></datalist></form></div>
+<div class="toolbar"><p id="status" role="status" aria-live="polite"></p><button id="export" disabled>匯出結果 CSV</button></div><div id="results"></div><button id="more" hidden>顯示更多</button>
+<p class="meta">來源：<a href="https://data.gov.tw/dataset/9117" target="_blank" rel="noopener noreferrer">TFDA 藥品仿單或外盒資料集</a>、<a href="https://data.gov.tw/dataset/9122" target="_blank" rel="noopener noreferrer">藥品許可證資料集</a>、<a href="https://data.gov.tw/dataset/9120" target="_blank" rel="noopener noreferrer">藥品外觀資料集</a>。請以官方原文件核對；本工具不作個別病人的用藥判斷。</p>
+</main><script src="./search.js"></script><script>
 'use strict';
-const $=id=>document.getElementById(id);
-let documents=[], matches=[], shown=0;
-let searchMode='text';
-const normalized=s=>s.normalize('NFKC').replace(/\s+/g,'').toLocaleLowerCase();
+const $=id=>document.getElementById(id), S=window.InsertSearch;
+let items=[],documents=[],matches=[],shown=0,searchMode='name',catalogReady=false,textReady=false,catalogVersion='';
 const el=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n};
-function safeSource(url){try{const u=new URL(url);return u.protocol==='https:'&&u.hostname==='mcp.fda.gov.tw'&&!u.username&&!u.password?u.href:null}catch{return null}}
-function renderMore(){
- for(const group of matches.slice(shown,shown+20)){
-  const a=el('article','');a.append(el('h2',group.name),el('p',group.license,'meta'));
-  for(const hit of group.hits){
-   const d=hit.document;
-   if(d.last_check_status==='error')a.append(el('p',d.pages.length?'最近一次檢查失敗：以下為保留的舊版原文。':'下載或解析未成功；官方連結是否可開啟仍需確認。','warning'));
-   if(d.status==='needs_review_no_ocr')a.append(el('p','PDF 已取得，但文字未達收錄門檻（可能是掃描或混合格式）。請開啟官方仿單查看。','warning'));
-   a.append(el('p',`檢查：${d.last_checked}｜文字更新：${d.text_updated_at || '尚無'}`,'meta'));
-   const url=safeSource(d.source_url);
-   if(url){const link=el('a','查看官方仿單');link.href=url;link.target='_blank';link.rel='noopener noreferrer';a.append(link)}
-   for(const p of hit.pages){const details=el('details','');details.append(el('summary',`第 ${p.page_no} 頁：查看命中頁原文`),el('pre',p.text));a.append(details)}
+function resetResults(){matches=[];shown=0;$('results').replaceChildren();$('more').hidden=true;$('export').disabled=true}
+function clearChanged(){resetResults();$('status').textContent='查詢條件已變更，請重新查詢。'}
+const shardCache=new Map();
+async function loadDetails(group,box){
+ if(!/^[a-f0-9]{2}$/.test(group.detail_shard||'')){box.textContent='官方詳細欄位未收錄。';return}
+ box.textContent='正在讀取官方藥品資料…';
+ try{
+  const key=group.detail_shard;
+  if(!shardCache.has(key))shardCache.set(key,fetch('./details/'+key+'.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).catch(e=>{shardCache.delete(key);throw e}));
+  const data=await shardCache.get(key),d=S.validateDetails(data,group.license,catalogVersion);
+  box.replaceChildren();
+  for(const [key,label] of [['indications','適應症'],['dosage','用法用量'],['dosage_forms','劑型'],['categories','藥品類別'],['applicants','許可證持有者'],['manufacturers','製造商']]){
+   const section=el('div','','field');section.append(el('h3',label+'（官方原值）'));
+   const vals=Array.isArray(d[key])?d[key].filter(v=>typeof v==='string'):[];section.append(el('p',vals.length?vals.join('\n'):'此資料集未提供，請查官方仿單。'));box.append(section);
   }
-  $('results').append(a);
- }
- shown=Math.min(shown+20,matches.length);$('more').hidden=shown>=matches.length;
+  for(const [key,label] of [['image_urls','官方外盒圖片'],['appearance_urls','官方藥品外觀圖片']])for(const [n,u] of (Array.isArray(d[key])?d[key]:[]).entries()){const url=S.safeSource(u);if(url){const a=el('a',label+' '+(n+1),'source');a.href=url;a.target='_blank';a.rel='noopener noreferrer';box.append(a)}}
+  if(Array.isArray(d.appearance))for(const a of d.appearance){const section=el('div','','field');section.append(el('h3','藥品外觀（官方原值）'));for(const [key,value] of Object.entries(a))if(typeof value==='string'&&value)section.append(el('p',key+'：'+value));box.append(section)}
+  box.append(el('p','以上是公開資料集原文，不能取代最新仿單與個別病人的專業評估。','meta'));
+ }catch(error){shardCache.delete(group.detail_shard);if(error.message==='version_changed'){box.replaceChildren(el('p','資料版本已更新，請重新整理頁面後查詢，避免混用不同版本。','warning'));return}box.replaceChildren(el('p','詳細資料讀取失敗，請重試或開啟官方仿單。','warning'));const retry=el('button','重新讀取');retry.type='button';retry.addEventListener('click',()=>loadDetails(group,box));box.append(retry)}
 }
-$('search').addEventListener('submit',e=>{
- e.preventDefault();const q=normalized($('q').value.trim());matches=[];shown=0;$('results').replaceChildren();$('more').hidden=true;$('export').disabled=true;
- if(!q){$('status').textContent='請輸入查詢字詞。';return}
- const groups=new Map();searchMode=$('mode').value;
- for(const d of documents){const pages=searchMode==='text'&&d.status==='text_available'?d.pages.filter(p=>normalized(p.text).includes(q)):[];
- const nameMatch=normalized((d.drug_name||'')+' '+d.license_no).includes(q);
- if(searchMode==='text'?!pages.length:!nameMatch)continue;
- if(!groups.has(d.license_no))groups.set(d.license_no,{license:d.license_no,name:d.drug_name,hits:[]});groups.get(d.license_no).hits.push({document:d,pages});}
- matches=[...groups.values()];$('status').textContent=`已收錄範圍內找到 ${matches.length} 個藥證。${searchMode==='text'?'只搜尋可用原文；掃描或未取得文字者不納入。':'依藥名／許可證比對；不代表仿單內文符合條件。'}`;$('export').disabled=!matches.length;renderMore();
-});
+function renderMore(){for(const group of matches.slice(shown,shown+20)){
+ const a=el('article',''),card=el('details','','drugCard'),title=el('summary','','drugTitle');title.append(el('span',group.name||'官方未提供中文品名'),el('span',group.english||'','meta'));card.append(title);
+ const content=el('div','');content.append(el('p',group.license,'meta'));
+ const rawStatus=group.in_license_catalog?(group.license_statuses.map(v=>v||'未標註銷／廢止').join('；')||'未知'):'全藥證來源未對應，狀態未知';
+ title.append(el('span',rawStatus,'badge'));
+ content.append(el('p',`有效日期原值：${group.expiry_dates.join('；')||'未提供'}（不代表目前在售）`,'meta'));
+ if(group.ingredients.length)content.append(el('p','主成分（官方原值）：'+group.ingredients.join('；'),'meta'));
+ content.append(el('span',!textReady?'原文索引未就緒':group.hasText?'已有可搜尋文字':'尚無可搜尋文字','badge'));
+ const actions=el('div','','actions');
+ for(const [n,source] of group.source_urls.entries()){const url=S.safeSource(source);if(url){const link=el('a',`官方仿單${group.source_urls.length>1?' '+(n+1):''}`);link.href=url;link.target='_blank';link.rel='noopener noreferrer';actions.append(link)}}
+ const nhi=el('a','健保給付查詢（關鍵字）');nhi.href='../nhi/?q='+encodeURIComponent(group.name||group.english||group.license);nhi.target='_blank';nhi.rel='noopener noreferrer';actions.append(nhi);content.append(actions);
+ if(!group.source_urls.length)content.append(el('p','官方清冊未列仿單連結；不能解讀為沒有仿單。','warning'));
+ if(!group.hits.length)content.append(el('p',textReady?'已收錄清冊；尚無已處理的仿單原文，連結可用性未逐一驗證。':'原文索引讀取失敗，文字收錄狀態未知。','meta'));
+ for(const hit of group.hits){const d=hit.document;
+  if(!group.source_urls.includes(d.source_url)){content.append(el('p','以下文字的來源已不在本次官方清冊連結中，請核對最新文件。','warning'));const prior=S.safeSource(d.source_url);if(prior){const link=el('a','這段文字的來源文件','source');link.href=prior;link.target='_blank';link.rel='noopener noreferrer';content.append(link)}}
+  if(d.last_check_status==='error')content.append(el('p',S.errorLabel(d)+(d.pages?.length?'；保留的較早文字可能不是最新版。':''),'warning'));
+  if(d.status==='needs_review_no_ocr')content.append(el('p','PDF 沒有足夠可用文字；請查看官方原檔。','warning'));
+  if(d.status==='partial_text')content.append(el('p','只收錄部分頁面，不能視為完整全文。','warning'));
+  content.append(el('p',`文件檢查：${d.last_checked||'未知'}｜文字更新：${d.text_updated_at||'尚無'}`,'meta'));
+  for(const p of hit.pages){const details=el('details','');details.append(el('summary',`第 ${p.page_no} 頁：查看命中頁原文`),el('pre',p.text));content.append(details)}
+ }
+ const extra=el('div','');content.append(extra);let loaded=false;card.addEventListener('toggle',()=>{if(card.open&&!loaded){loaded=true;loadDetails(group,extra)}});card.append(content);a.append(card);if(searchMode==='text')card.open=true;$('results').append(a);
+}shown=Math.min(shown+20,matches.length);$('more').hidden=shown>=matches.length}
+$('search').addEventListener('submit',e=>{e.preventDefault();resetResults();const q=$('q').value.trim();searchMode=$('mode').value;if(!q){$('status').textContent='請輸入查詢字詞。';return}if(!catalogReady||searchMode==='text'&&!textReady){$('status').textContent='所需資料尚未就緒，不能把查詢失敗解讀為沒有結果。';return}matches=S.search(items,documents,q,searchMode,$('filter').value,$('licenseFilter').value);$('status').textContent=`依目前篩選找到 ${matches.length} 個藥證。${searchMode==='text'?'僅比對已收錄文字，不涵蓋全部清冊。':'比對官方清冊品名、成分與許可證，不代表內文符合條件。'}`;$('export').disabled=!matches.length;renderMore()});
+for(const id of ['q','mode','filter','licenseFilter'])$(id).addEventListener(id==='q'?'input':'change',()=>{clearChanged();if(id==='mode')$('q').placeholder=$('mode').value==='text'?'例如：腎功能不全':'例如：中文品名、amoxicillin、許可證號'});
+let hintTimer; $('q').addEventListener('input',()=>{clearTimeout(hintTimer);$('drugHints').replaceChildren();if($('mode').value!=='name')return;hintTimer=setTimeout(()=>{const q=S.normalized($('q').value);if(q.length<2)return;for(const i of S.search(items,documents,q,'name',$('filter').value,$('licenseFilter').value).slice(0,8)){const o=document.createElement('option');o.value=i.license;o.label=(i.name||i.english)+' · '+i.license;$('drugHints').append(o)}},180)});
 $('more').addEventListener('click',renderMore);
-$('export').addEventListener('click',()=>{
- const cell=s=>'"'+(/^[=+\-@\t\r]/.test(String(s))?"'":"")+String(s).replaceAll('"','""')+'"';
- const rows=[['品名','許可證','頁碼','原文','來源','最後檢查','文字更新','檢查狀態','收錄狀態','查詢方式']];
- for(const g of matches)for(const h of g.hits)for(const p of (h.pages.length?h.pages:[{page_no:'',text:''}]))rows.push([g.name,g.license,p.page_no,p.text,h.document.source_url,h.document.last_checked,h.document.text_updated_at||'',h.document.last_check_status,h.document.status,searchMode]);
- const url=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=el('a','');a.href=url;a.download='electronic-inserts.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-});
-(async()=>{try{
- const response=await fetch('./documents.json',{cache:'no-store'});if(!response.ok)throw Error('not_ready');const data=await response.json();if(!Array.isArray(data.documents))throw Error('invalid');
- documents=data.documents.map(d=>({...d,pages:Array.isArray(d.pages)?d.pages:[]}));
- const searchable=documents.filter(d=>d.status==='text_available').length;
- const stale=documents.filter(d=>d.last_check_status==='error').length;
- $('coverage').textContent=`追蹤 ${data.documents.length} 份文件｜可全文搜尋 ${searchable} 份｜其中 ${stale} 份最近檢查失敗｜資料檢查：${data.checked_at}`;
- $('q').disabled=$('submit').disabled=documents.length===0;$('status').textContent=documents.length?'輸入字詞以整理符合的藥品；無文字者請切換藥名／許可證查詢。':'目前尚無可搜尋原文，不能解讀成沒有符合藥品。';
- }catch{$('coverage').textContent='尚未取得可用的電子仿單資料。';$('status').textContent='請先確認 GitHub Actions 的電子仿單下載結果。';}})();
-</script>
-</html>
+$('export').addEventListener('click',()=>{const cell=s=>'"'+(/^[\s]*[=+\-@]/.test(String(s))?"'":"")+String(s).replaceAll('"','""')+'"';const rows=[['中文品名','英文品名','許可證','來源','查詢方式','可搜尋文字','命中頁碼','命中原文','最後文件檢查','檢查狀態','官方註銷標示原值','有效日期原值']];for(const g of matches){if(searchMode==='text'){for(const h of g.hits)for(const p of h.pages)rows.push([g.name,g.english,g.license,h.document.source_url,searchMode,'是',p.page_no,p.text,h.document.last_checked,h.document.last_check_status,g.license_statuses.join(';'),g.expiry_dates.join(';')])}else rows.push([g.name,g.english,g.license,g.source_urls.join('\n'),searchMode,!textReady?'未知（原文索引未就緒）':g.hasText?'是':'否','','',g.hits.map(h=>h.document.last_checked||'').join(';'),g.failed?'有下載／解析失敗':'未逐一驗證所有連結',g.license_statuses.join(';'),g.expiry_dates.join(';')])}const url=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=el('a','');a.href=url;a.download='electronic-inserts.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+(async()=>{
+ const outcomes=await Promise.allSettled([fetch('./catalog.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}),fetch('./documents.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()})]);
+ try{if(outcomes[0].status!=='fulfilled')throw Error();const c=outcomes[0].value;items=S.validateCatalog(c);catalogVersion=c.catalog_version;catalogReady=true;$('coverage').textContent=`合併全目錄 ${c.license_count.toLocaleString()} 個藥證（全藥證來源 ${c.drug_catalog_license_count.toLocaleString()}；仿單清冊 ${c.insert_catalog_license_count.toLocaleString()}；外觀清冊 ${c.appearance_catalog_license_count.toLocaleString()}）｜${c.with_link_count.toLocaleString()} 項有仿單連結｜${c.without_link_count.toLocaleString()} 項未列連結｜清冊更新：${c.checked_at}`}catch{$('coverage').textContent='完整清冊讀取失敗，暫不提供不完整的全項目查詢。'}
+ try{if(outcomes[1].status!=='fulfilled')throw Error();const d=outcomes[1].value;if(!Array.isArray(d.documents))throw Error();documents=d.documents.map(x=>({...x,pages:Array.isArray(x.pages)?x.pages:[]}));textReady=true;const full=documents.filter(x=>x.status==='text_available').length,partial=documents.filter(x=>x.status==='partial_text').length,review=documents.filter(x=>x.status==='needs_review_no_ocr').length,unavailable=documents.filter(x=>x.status==='unavailable').length;$('textCoverage').textContent=`原文處理 ${documents.length} 份文件：${full} 份可全文搜尋、${partial} 份部分頁面、${review} 份待文字檢查、${unavailable} 份未取得｜文件檢查：${d.checked_at}`}catch{$('textCoverage').textContent='原文索引讀取失敗；仍可查官方清冊與來源連結。';$('mode').querySelector('option[value="text"]').disabled=true;for(const o of $('filter').options)if(['text','no_text','failed'].includes(o.value))o.disabled=true}
+ $('q').disabled=$('submit').disabled=!catalogReady;$('status').textContent=catalogReady?'輸入中英文藥名、成分或許可證，查詢全部清冊。':'請稍後重試；目前無法確認全清冊結果。';
+ const params=new URLSearchParams(location.search);if(params.get('q')&&catalogReady){$('q').value=params.get('q');if(params.get('mode')==='text'&&textReady)$('mode').value='text';$('search').requestSubmit()}
+})();
+</script></body></html>

@@ -1,31 +1,42 @@
-# 電子仿單資料試行版
+# 藥品與電子仿單查詢
 
-每週日台灣時間 02:43，從 TFDA 官方 InfoId 39 取得清冊，固定追蹤最多 100 個「藥證＋URL」文件。這是電子 PDF 收錄試行，不是全國完整仿單庫，也尚未接入結構化仿單 HTML 正文介面。
+## 查詢範圍
 
-## 產出
+以官方藥品許可證資料集 InfoId 36 為主，與 InfoId 39 仿單／外盒清冊按完整許可證字號精確合併。三個來源未對應者仍保留，不拿藥名猜測配對。多製造廠列合併為同一藥證，保留不同名稱、成分、註銷原值、有效日期。InfoId 42 的獨有藥證也納入目錄，提供外觀原值及官方圖片連結；外盒圖片與藥品外觀圖片明確分開。
 
-- `data/inserts/documents.json`：品名、許可證、來源、PDF 檔案 SHA-256、每頁原文、最後檢查時間與文字更新時間。
-- `data/inserts/last_run.json`：每份下載與解析的狀態，包括 HTTP 錯誤。
-- `data/inserts/failure.json`：整批失敗原因。此檔可能是歷史紀錄，請看 checked_at。
+這是**官方公開資料集的合併全目錄**，不是全部上市藥、全部有效藥證，也不是全部仿單全文。官方註銷欄空白不推論為有效或仍販售。預設未標註銷／廢止，選「全部」可查歷史與未對應項目。
 
-無 OCR、不推論章節或臨床意義。每頁至少 50 個非空白字元且低替代字元比例才納入；這只是文字層篩選，仍須人工確認抽取品質。混合掃描或稀疏文字暫不收錄。頁碼是 PDF 實際頁序。
+查詢名稱、英文、成分、許可證不受 100 份 PDF 試行上限限制。每頁顯示 20 筆，可繼續顯示更多。卡片展開顯示官方適應症、用法用量等原值，不能取代仿單與專業評估。健保入口是既有頁面的關鍵字查詢，**不是精確健保碼配對**；不以缺少條文推論沒有給付限制。沒有未驗證的 ATC 搜尋或臆造 ATC。
 
-每次下載既有 URL 的內容並比較 Hash；網址未變也會檢查。個別失敗保留舊原文並標記 error；新版本無可用文字時清除舊原文避免當成新版。全部失敗不覆寫 documents.json；catalog 缺漏不視為藥證註銷。試行清單退出或更換 URL 只影響收錄範圍，不代表停藥或下架。
+## 資料與更新
 
-## GitHub Actions
+- `data/inserts/catalog.json`：完整合併索引、官方來源 SHA-256、來源列數與唯一藥證數、連結覆蓋率。
+- `data/inserts/details/*.json`：依藥證固定分片的原始詳細欄位。點開卡片才讀取，降低初始載入量。
+- `data/inserts/documents.json`：既有最多 100 份 PDF 的每頁原文及最後檢查時間，與目錄獨立。
+- `last_run.json`／`failure.json`：PDF 更新成功或失敗紀錄；請看其時間，不把歷史失敗當作今日結果。
 
-PR 會跑單元測試及 100 份下載測試，結果在 workflow 的 `electronic-insert-results` artifact。下載全失敗會顯示失敗，不能當成已驗證上線。
+沿用既有每週電子仿單 Actions，先刷新 36／39／42 全目錄，再執行最多 100 份 PDF 下載。PDF 全失敗不清空舊全文；完整目錄仍可持久保存，但 workflow 會明確顯示 PDF 失敗。每週 commit 使用 GITHUB_TOKEN，不會再觸發 push 部署；由既有每日 Pages 排程發布，並非即時更新。
 
-合併 main 後才啟用每週排程；可由 Actions → Electronic insert pilot → Run workflow 手動啟動。成功的 main 執行將 JSON commit 回 repo，提供持久版本紀錄；artifact 只保留 30 日，不作主資料庫。若分支保護禁止 bot 寫入，push 會失敗，該次結果仍保留在 artifact，需改採資料 PR 流程。
+既有 NHI Pages 工作發布此頁。首次尚無 `catalog.json` 時，從相同官方來源建置全目錄；官方來源失敗則部署失敗，保留原站。之後沿用已保存快照。正式發布前執行目錄與搜尋驗證。沒有新增獨立排程、金鑰、代理服務或資料庫。
 
-搜尋頁位於 `/inserts/`，依許可證整理命中的頁面原文，可匯出 CSV。既有 Pages 工作會在健保來源驗證成功時一併發布電子仿單頁；健保來源失敗時整站保留上一版。每週資料 commit 使用 GITHUB_TOKEN 不會再次觸發 push workflow，網頁由下一次每日 Pages 排程發布，並非即時更新。原始 PDF 不寫進 Git。
+官方來源：
+- https://data.gov.tw/dataset/9122 （許可證，含歷史／註銷）
+- https://data.gov.tw/dataset/9117 （仿單／外盒連結）
+- https://data.gov.tw/dataset/9120 （藥品外觀）
 
-## 本機
+以上是批次開放資料 API，不代表已取得結構化電子仿單全文介面。來源回應 403 時不繞過或偽造文字。來源目錄缺漏不視為藥證註銷。
+
+## 全文限制
+
+既有 PDF 試行文字篩選保留：每頁至少 50 非空白字元、低替代字元比例；尚未新增 OCR。不把未下載、掃描頁、拒絕存取或過大文件算成可全文搜尋。官方 URL 未變仍會檢查內容 hash；個別下載失敗保留較早文字並顯示過期風險。新 PDF 無可用文字時清除舊原文，不冒充新版。
+
+## 驗證
 
 ```sh
 python3 -m pip install -r tools/inserts/requirements.txt
-python3 -m unittest discover -s tests -p test_inserts.py
-python3 tools/inserts/update.py --limit 100
+python3 -m unittest discover -s tests -p 'test_inserts*.py'
+python3 -m tools.inserts.catalog
+node tests/test_inserts_search.cjs
 ```
 
-官方來源：https://data.gov.tw/dataset/9117
+外部參考僅作使用流程參考；本段程式與介面為原創實作，未複製參考專案程式或圖片。
