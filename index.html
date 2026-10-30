@@ -183,7 +183,7 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
   <h1>化療調配核對查詢</h1>
   <span class="meta" id="topmeta"></span>
   <span class="spacer"></span>
-  <a class="nhi-entry" data-nhi-general href="https://lcctaiwan.github.io/chemodrugstable-query/nhi/" target="_blank" rel="noopener noreferrer">健保給付查詢</a>
+  <a class="nhi-entry" id="nhi-query" data-nhi-query href="https://lcctaiwan.github.io/chemodrugstable-query/nhi/" target="_blank" rel="noopener noreferrer">健保給付查詢</a>
   <button onclick="window.print()"><span class="lbl-full">列印完整調配稀釋表格</span><span class="lbl-min">列印</span></button>
 </div>
 
@@ -352,6 +352,12 @@ function nhiLookupUrl(value){
 
 function card(){
   const p=document.getElementById('pane');
+  const nhiLink=document.getElementById('nhi-query');
+  const nhiDrug=view[cur];
+  const nhiTerm=nhiLookupTerm(nhiDrug && nhiDrug.gen);
+  nhiLink.href=nhiLookupUrl(nhiTerm);
+  nhiLink.textContent=nhiTerm?'查此藥健保給付':'健保給付查詢';
+  nhiLink.title=nhiTerm?'以 '+nhiTerm+' 搜尋；請核對廠牌、規格及給付條件':'開啟健保給付查詢（需網路）';
   if(!view.length){ p.innerHTML=`<div class="backbar"><button onclick="backToList()">&#8249;&nbsp;藥品清單</button></div><div class="empty"><h2>沒有符合的藥品</h2><p>清掉篩選條件，或改用學名的前幾個字母搜尋。</p></div>`; return; }
   const d=view[cur];
   const risky=d._f.some(f=>f[0]==='red');
@@ -424,14 +430,9 @@ function card(){
         <div class="box eviq"><h4>eviq Extravasation</h4>${evq}</div>
       </div>
     </div>
-
-    <div class="sec nhi-section">
-      <div class="sech"><span class="num">6</span><h3>健保給付</h3><span class="sub">線上查詢 · 需要網路</span></div>
-      <a class="nhi-entry" data-nhi-drug href="${nhiLookupUrl(d.gen)}" target="_blank" rel="noopener noreferrer">${nhiLookupTerm(d.gen)?'以學名查詢健保給付':'開啟健保給付查詢'}</a>
-      <div class="sub2" style="margin-top:8px">以學名關鍵字帶入既有查詢頁；不是院內品項與健保碼的精確配對，請核對廠牌、規格及給付條件。</div>
-    </div>
   </div>
   <div class="foot">
+    健保入口以學名關鍵字搜尋，不是院內品項與健保碼的精確配對；請核對廠牌、規格及給付條件。<br>
     資料來源：化療稀釋表格 <code>1150914</code>、化療藥品安定性對照表 <code>1150914</code>、化療藥品用藥注意事項表 <code>1150914</code>、監控參數表、外滲處理表、eviq Extravasation。<br>
     原表以字體顏色標示出處（黑＝仿單／MicroMedex，紅＝Drug Information Handbook for Oncology，藍＝Handbook on Injectable Drugs，綠＝廠商資料，粉＝globalrph）；此處未保留顏色，需追出處請回查原檔。<br>
     室溫 15–25℃、冷藏 2–8℃。代謝 L＝由肝代謝、K＝由腎代謝。<br>

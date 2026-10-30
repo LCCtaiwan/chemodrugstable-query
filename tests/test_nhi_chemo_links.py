@@ -28,8 +28,12 @@ class ChemoNhiLinks(unittest.TestCase):
 
     def test_both_query_and_template_have_only_nhi_entries(self):
         for page in (self.page, self.template):
-            self.assertEqual(page.count('data-nhi-general'), 1)
-            self.assertEqual(page.count('data-nhi-drug'), 1)
+            self.assertEqual(page.count('data-nhi-query'), 1)
+            self.assertNotIn('data-nhi-general', page)
+            self.assertNotIn('data-nhi-drug', page)
+            self.assertNotIn('nhi-section', page)
+            self.assertIn("nhiLink.href=nhiLookupUrl(nhiTerm)", page)
+            self.assertIn("nhiTerm?'查此藥健保給付':'健保給付查詢'", page)
             self.assertIn("const NHI_LOOKUP_URL = '" + URL + "';", page)
             self.assertIn("'?q=' + encodeURIComponent(term)", page)
             self.assertIn("return NHI_LOOKUP_URL + (term ?", page)
@@ -55,3 +59,4 @@ class ChemoNhiLinks(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
