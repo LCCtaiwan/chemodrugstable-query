@@ -18,6 +18,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+import zlib
+from typing import Callable
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
@@ -39,6 +41,10 @@ MIN_RULES_DOCX_BYTES = 2_000_000
 
 class TransientDownloadError(RuntimeError):
     """官方來源暫時無法下載；可安全跳過本次發布。"""
+
+
+class DownloadIntegrityError(RuntimeError):
+    """下載內容不完整；重試同一官方來源，不放寬資料驗證。"""
 
 
 class LinkParser(HTMLParser):
@@ -79,31 +85,67 @@ def is_transient_download_error(exc: BaseException) -> bool:
     return True
 
 
-def download(url: str, target: Path, timeout: int = 240, attempts: int = 5) -> tuple[str, str]:
+def download(
+    url: str,
+    target: Path,
+    timeout: int = 240,
+    attempts: int = 5,
+    *,
+    validator: Callable[[Path], object] | None = None,
+) -> tuple[str, str]:
     checked = checked_url(url)
+    if attempts < 1:
+        raise ValueError("attempts must be at least 1")
     for attempt in range(1, attempts + 1):
-        request = urllib.request.Request(checked, headers={"User-Agent": USER_AGENT})
+        request = urllib.request.Request(
+            checked, headers={"User-Agent": USER_AGENT, "Accept-Encoding": "identity"}
+        )
+        partial: Path | None = None
+        received = 0
         try:
-            with urllib.request.urlopen(request, timeout=timeout) as response:
-                final_url = checked_url(response.geturl())
-                content_disposition = response.headers.get("Content-Disposition", "")
-                with target.open("wb") as handle:
+            # Publish only complete, validated bytes; never overwrite a usable target
+            # with a failed attempt. Keep the temporary file on the same filesystem.
+            with tempfile.NamedTemporaryFile(dir=target.parent, suffix=".part", delete=False) as handle:
+                partial = Path(handle.name)
+                with urllib.request.urlopen(request, timeout=timeout) as response:
+                    final_url = checked_url(response.geturl())
+                    content_disposition = response.headers.get("Content-Disposition", "")
+                    length = response.headers.get("Content-Length")
+                    if length is not None and not re.fullmatch(r"[0-9]+", length.strip()):
+                        raise DownloadIntegrityError("Content-Length 格式不正確")
                     while chunk := response.read(1024 * 1024):
                         handle.write(chunk)
-            if not target.stat().st_size:
-                raise RuntimeError(f"下載結果為空：{final_url}")
+                        received += len(chunk)
+            if not received:
+                raise DownloadIntegrityError("下載結果為空")
+            if length is not None and received != int(length):
+                raise DownloadIntegrityError(
+                    f"下載長度不符：預期 {length} bytes，收到 {received} bytes"
+                )
+            if validator is not None:
+                validator(partial)
+            partial.replace(target)
             return final_url, content_disposition
-        except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException) as exc:
-            target.unlink(missing_ok=True)
+        except (
+            urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException,
+            DownloadIntegrityError, zipfile.BadZipFile, EOFError, zlib.error,
+            UnicodeDecodeError, json.JSONDecodeError,
+        ) as exc:
             if not is_transient_download_error(exc):
                 raise
+            detail = f"{type(exc).__name__}: {exc}; bytes={received}"
+            if partial is not None and partial.exists():
+                detail += f"; sha256={hashlib.sha256(partial.read_bytes()).hexdigest()}"
             if attempt == attempts:
                 raise TransientDownloadError(
-                    f"官方來源下載失敗（已重試 {attempts} 次）：{checked}；{exc}"
+                    f"官方來源下載或完整性檢查失敗（共嘗試 {attempts} 次）：{checked}；{detail}"
                 ) from exc
             delay = min(5 * (2 ** (attempt - 1)), 60)
-            print(f"下載中斷，第 {attempt}/{attempts} 次；{delay} 秒後重試：{exc}", file=sys.stderr)
+            print(f"下載中斷，第 {attempt}/{attempts} 次；{delay} 秒後重試：{detail}", file=sys.stderr)
             time.sleep(delay)
+        finally:
+            if partial is not None:
+                partial.unlink(missing_ok=True)
     raise RuntimeError(f"下載失敗：{checked}")
 
 
@@ -389,7 +431,7 @@ def run_update(args: argparse.Namespace) -> None:
         elif page_version:
             raise RuntimeError("自動尋找最新版時必須提供 --previous-version-url")
         download(items_url, csv_path)
-        download(tfda_licenses_url, tfda_path)
+        download(tfda_licenses_url, tfda_path, validator=builder.read_tfda_json)
         build_args = argparse.Namespace(
             csv=csv_path,
             tfda_licenses=tfda_path,

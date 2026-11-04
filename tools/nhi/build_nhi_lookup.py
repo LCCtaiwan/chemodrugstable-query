@@ -170,7 +170,10 @@ def load_current_records(csv_path: Path, as_of: date) -> tuple[list[dict[str, st
 
 
 def read_tfda_json(source_path: Path) -> list[dict[str, object]]:
-    if zipfile.is_zipfile(source_path):
+    # A truncated ZIP may lack its central directory. Do not decode it as text.
+    with source_path.open("rb") as handle:
+        zip_signature = handle.read(2) == b"PK"
+    if zip_signature or zipfile.is_zipfile(source_path):
         with zipfile.ZipFile(source_path) as archive:
             candidates = [
                 info for info in archive.infolist()
